@@ -490,6 +490,7 @@
 				06BF4AD51BFD19E500BCA228 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		06BF4AD61BFD19E500BCA228 /* Build configuration list for PBXNativeTarget "RateMyMeetingsTests" */ = {
 			isa = XCConfigurationList;
@@ -498,6 +499,7 @@
 				06BF4AD81BFD19E500BCA228 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		06BF4AD91BFD19E500BCA228 /* Build configuration list for PBXNativeTarget "RateMyMeetingsUITests" */ = {
 			isa = XCConfigurationList;
@@ -506,6 +508,7 @@
 				06BF4ADB1BFD19E500BCA228 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
