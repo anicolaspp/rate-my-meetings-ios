@@ -1,3 +1,3 @@
 language: objective-c
-
-script: xctool -workspace RateMyMeetings.xcodeproj -scheme RateMyMeetings test
+xcode_project: RateMyMeetings.xcodeproj
+script: xctool -scheme RateMyMeetings test
