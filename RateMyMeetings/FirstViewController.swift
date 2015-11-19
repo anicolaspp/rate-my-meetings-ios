@@ -48,7 +48,7 @@ class FirstViewController: UIViewController {
                 
                 let firstTittle = events[0].title
                 
-                
+            
 
                 let alertAction = UIAlertAction(title: "OK", style: UIAlertActionStyle.Default, handler: nil)
                 let alertController = UIAlertController(title: "Alert", message: firstTittle, preferredStyle: UIAlertControllerStyle.Alert)
