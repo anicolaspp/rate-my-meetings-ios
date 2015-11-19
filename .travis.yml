@@ -1,3 +1,7 @@
 language: objective-c
-xcode_project: RateMyMeetings.xcodeproj # path to your xcodeproj folder
-xcode_scheme: RateMyMeetingsTests
+
+before_install:
+    - brew update
+    - brew install xctool
+
+script: xctool -workspace RateMyMeetings.xcworkspace -scheme RateMyMeetings test
