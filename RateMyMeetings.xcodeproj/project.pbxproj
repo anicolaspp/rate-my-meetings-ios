@@ -15,6 +15,7 @@
 		06BF4AB91BFD19E500BCA228 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 06BF4AB71BFD19E500BCA228 /* LaunchScreen.storyboard */; };
 		06BF4AC41BFD19E500BCA228 /* RateMyMeetingsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06BF4AC31BFD19E500BCA228 /* RateMyMeetingsTests.swift */; };
 		06BF4ACF1BFD19E500BCA228 /* RateMyMeetingsUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06BF4ACE1BFD19E500BCA228 /* RateMyMeetingsUITests.swift */; };
+		06BF4ADD1BFD1A9C00BCA228 /* EventKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 06BF4ADC1BFD1A9C00BCA228 /* EventKit.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -49,6 +50,7 @@
 		06BF4ACA1BFD19E500BCA228 /* RateMyMeetingsUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = RateMyMeetingsUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		06BF4ACE1BFD19E500BCA228 /* RateMyMeetingsUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RateMyMeetingsUITests.swift; sourceTree = "<group>"; };
 		06BF4AD01BFD19E500BCA228 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		06BF4ADC1BFD1A9C00BCA228 /* EventKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = EventKit.framework; path = System/Library/Frameworks/EventKit.framework; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -56,6 +58,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				06BF4ADD1BFD1A9C00BCA228 /* EventKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -79,6 +82,7 @@
 		06BF4AA01BFD19E500BCA228 = {
 			isa = PBXGroup;
 			children = (
+				06BF4ADC1BFD1A9C00BCA228 /* EventKit.framework */,
 				06BF4AAB1BFD19E500BCA228 /* RateMyMeetings */,
 				06BF4AC21BFD19E500BCA228 /* RateMyMeetingsTests */,
 				06BF4ACD1BFD19E500BCA228 /* RateMyMeetingsUITests */,
