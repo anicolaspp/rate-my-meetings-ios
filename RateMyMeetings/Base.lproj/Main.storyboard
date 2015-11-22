@@ -4,7 +4,6 @@
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9051"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
-        <capability name="Segues with Peek and Pop" minToolsVersion="7.1"/>
     </dependencies>
     <scenes>
         <!--First-->
@@ -135,10 +134,7 @@
                                 <state key="normal" title="Register"/>
                                 <connections>
                                     <action selector="registerNewUser:" destination="ZtA-f4-rOZ" eventType="touchUpInside" id="IgQ-ba-8Z6"/>
-                                    <segue destination="TJl-5u-dQh" kind="presentation" modalTransitionStyle="flipHorizontal" id="L5Q-hc-I4y">
-                                        <segue key="commit" inheritsFrom="parent" id="0BR-fg-eFl"/>
-                                        <segue key="preview" inheritsFrom="commit" id="Beg-af-QL8"/>
-                                    </segue>
+                                    <segue destination="BXs-LU-4Nc" kind="presentation" id="eDn-5b-O9z"/>
                                 </connections>
                             </button>
                         </subviews>
@@ -180,6 +176,9 @@
                                 <animations/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
+                                <connections>
+                                    <outlet property="delegate" destination="TJl-5u-dQh" id="Vao-qO-MrC"/>
+                                </connections>
                             </textField>
                             <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ewR-dr-obt">
                                 <rect key="frame" x="20" y="608" width="335" height="30"/>
@@ -220,24 +219,98 @@
                             <outletCollection property="gestureRecognizers" destination="yf9-AW-p6K" appends="YES" id="8Gc-bo-x9G"/>
                         </connections>
                     </view>
+                    <navigationItem key="navigationItem" id="w6d-My-MKE"/>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
                     <connections>
                         <outlet property="companyNameField" destination="GdX-Aq-AIV" id="GYr-6B-MkT"/>
                         <outlet property="domainNameField" destination="KMk-OX-M0N" id="aDR-ye-eap"/>
                         <outlet property="tabRecognizer" destination="yf9-AW-p6K" id="qLR-2B-EcP"/>
+                        <segue destination="lU9-kS-yKv" kind="show" identifier="registreationStep2Segue" id="bfy-EZ-L3X"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Opz-WH-BJ2" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <tapGestureRecognizer id="yf9-AW-p6K"/>
             </objects>
-            <point key="canvasLocation" x="-9.5" y="1696.5"/>
+            <point key="canvasLocation" x="507.5" y="1743.5"/>
+        </scene>
+        <!--Step2 View Controller-->
+        <scene sceneID="C4O-Ed-8pI">
+            <objects>
+                <viewController id="lU9-kS-yKv" customClass="Step2ViewController" customModule="RateMyMeetings" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="cYn-Ih-ubh"/>
+                        <viewControllerLayoutGuide type="bottom" id="FPE-zi-gxF"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="zox-x4-gJx">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Email Address (unique)" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="tZl-Id-uev">
+                                <rect key="frame" x="20" y="158" width="167" height="30"/>
+                                <animations/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits" autocapitalizationType="words" enablesReturnKeyAutomatically="YES"/>
+                                <connections>
+                                    <outlet property="delegate" destination="TJl-5u-dQh" id="c9h-yG-Koa"/>
+                                </connections>
+                            </textField>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Password" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="FLB-ts-ZEC">
+                                <rect key="frame" x="20" y="220" width="167" height="30"/>
+                                <animations/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits" autocapitalizationType="words" enablesReturnKeyAutomatically="YES" secureTextEntry="YES"/>
+                                <connections>
+                                    <outlet property="delegate" destination="TJl-5u-dQh" id="mnD-FW-701"/>
+                                </connections>
+                            </textField>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Domain Name" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Idp-ZS-jNB">
+                                <rect key="frame" x="195" y="161" width="160" height="26.5"/>
+                                <animations/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Company Name" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="BLL-V9-I60">
+                                <rect key="frame" x="20" y="91" width="335" height="21"/>
+                                <animations/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <animations/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                    <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
+                    <connections>
+                        <outlet property="companyLabel" destination="BLL-V9-I60" id="3YJ-Gg-LBm"/>
+                        <outlet property="domainLabel" destination="Idp-ZS-jNB" id="Jod-so-fvu"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="5pw-oq-MJB" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1014.5" y="1743.5"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="MDD-DP-nst">
+            <objects>
+                <navigationController id="BXs-LU-4Nc" sceneMemberID="viewController">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="sbT-QP-3gv">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                        <animations/>
+                    </navigationBar>
+                    <connections>
+                        <segue destination="TJl-5u-dQh" kind="relationship" relationship="rootViewController" id="VjQ-Bw-5yg"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="yDH-2h-un2" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-9.5" y="1743.5"/>
         </scene>
     </scenes>
     <resources>
         <image name="first" width="30" height="30"/>
         <image name="second" width="30" height="30"/>
     </resources>
-    <inferredMetricsTieBreakers>
-        <segue reference="L5Q-hc-I4y"/>
-    </inferredMetricsTieBreakers>
 </document>

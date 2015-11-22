@@ -25,6 +25,9 @@
 		06BF4AC41BFD19E500BCA228 /* RateMyMeetingsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06BF4AC31BFD19E500BCA228 /* RateMyMeetingsTests.swift */; };
 		06BF4ACF1BFD19E500BCA228 /* RateMyMeetingsUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06BF4ACE1BFD19E500BCA228 /* RateMyMeetingsUITests.swift */; };
 		06BF4ADD1BFD1A9C00BCA228 /* EventKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 06BF4ADC1BFD1A9C00BCA228 /* EventKit.framework */; };
+		06F42DD81C026422006CEE67 /* Step2ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06F42DD71C026422006CEE67 /* Step2ViewController.swift */; };
+		06F42DD91C026422006CEE67 /* Step2ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06F42DD71C026422006CEE67 /* Step2ViewController.swift */; };
+		06F42DDA1C026422006CEE67 /* Step2ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06F42DD71C026422006CEE67 /* Step2ViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -63,6 +66,7 @@
 		06BF4ACE1BFD19E500BCA228 /* RateMyMeetingsUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RateMyMeetingsUITests.swift; sourceTree = "<group>"; };
 		06BF4AD01BFD19E500BCA228 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		06BF4ADC1BFD1A9C00BCA228 /* EventKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = EventKit.framework; path = System/Library/Frameworks/EventKit.framework; sourceTree = SDKROOT; };
+		06F42DD71C026422006CEE67 /* Step2ViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Step2ViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -125,6 +129,7 @@
 				06BF4ABA1BFD19E500BCA228 /* Info.plist */,
 				0679E79A1C0163090003BABC /* UserRepository.swift */,
 				0679E7A21C017BDA0003BABC /* RegistrationViewController.swift */,
+				06F42DD71C026422006CEE67 /* Step2ViewController.swift */,
 			);
 			path = RateMyMeetings;
 			sourceTree = "<group>";
@@ -278,6 +283,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				06F42DD81C026422006CEE67 /* Step2ViewController.swift in Sources */,
 				0679E7A31C017BDA0003BABC /* RegistrationViewController.swift in Sources */,
 				0679E7971C015EDB0003BABC /* LoginViewController.swift in Sources */,
 				06BF4AB11BFD19E500BCA228 /* SecondViewController.swift in Sources */,
@@ -292,6 +298,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				0679E7981C015EDB0003BABC /* LoginViewController.swift in Sources */,
+				06F42DD91C026422006CEE67 /* Step2ViewController.swift in Sources */,
 				06BF4AC41BFD19E500BCA228 /* RateMyMeetingsTests.swift in Sources */,
 				0679E7A41C017BDA0003BABC /* RegistrationViewController.swift in Sources */,
 				0679E79C1C0163090003BABC /* UserRepository.swift in Sources */,
@@ -303,6 +310,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				0679E7991C015EDB0003BABC /* LoginViewController.swift in Sources */,
+				06F42DDA1C026422006CEE67 /* Step2ViewController.swift in Sources */,
 				06BF4ACF1BFD19E500BCA228 /* RateMyMeetingsUITests.swift in Sources */,
 				0679E7A51C017BDA0003BABC /* RegistrationViewController.swift in Sources */,
 				0679E79D1C0163090003BABC /* UserRepository.swift in Sources */,

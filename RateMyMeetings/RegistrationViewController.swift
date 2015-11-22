@@ -8,6 +8,8 @@
 
 import UIKit
 
+
+
 class RegistrationViewController: UIViewController {
     
     @IBOutlet weak var companyNameField: UITextField!
@@ -15,11 +17,12 @@ class RegistrationViewController: UIViewController {
     
     @IBOutlet var tabRecognizer: UITapGestureRecognizer!
     
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
         companyNameField.returnKeyType = .Next
-        domainNameField.returnKeyType = .Go
+        domainNameField.returnKeyType = .Next
         
         tabRecognizer.cancelsTouchesInView = false
         tabRecognizer.addTarget(self, action: Selector("dismissKeyBoard"))
@@ -52,16 +55,16 @@ class RegistrationViewController: UIViewController {
         domainNameField.resignFirstResponder()
     }
     
-    
-    /*
-    // MARK: - Navigation
 
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
+        
+        let step2 = segue.destinationViewController as! Step2ViewController
+        
+        step2.companyName = self.companyNameField.text
+        step2.domainName = self.domainNameField.text
+        
     }
-    */
+
 
 }
 
@@ -76,13 +79,10 @@ extension RegistrationViewController : UITextFieldDelegate {
             domainNameField.becomeFirstResponder()
         }
         else if (textField == domainNameField) {
-            textField.resignFirstResponder()
             
-            //attenpt to register company here
+            self.performSegueWithIdentifier("registreationStep2Segue", sender: self)
         }
         
         return true
     }
-    
-   
 }
