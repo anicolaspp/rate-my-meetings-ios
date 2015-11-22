@@ -163,29 +163,55 @@
             </objects>
             <point key="canvasLocation" x="-9.5" y="900.5"/>
         </scene>
-        <!--View Controller-->
+        <!--Registration View Controller-->
         <scene sceneID="U14-T4-1SW">
             <objects>
-                <viewController id="TJl-5u-dQh" sceneMemberID="viewController">
+                <viewController id="TJl-5u-dQh" customClass="RegistrationViewController" customModule="RateMyMeetings" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="xKL-SB-Mtd"/>
                         <viewControllerLayoutGuide type="bottom" id="SJf-Mc-wAV"/>
                     </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="gt6-A2-1f5">
+                    <view key="view" contentMode="scaleToFill" id="gt6-A2-1f5" customClass="R">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <segmentedControl opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="4WO-6B-lLk">
-                                <rect key="frame" x="127" y="260" width="121" height="29"/>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Company Name (unique)" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="GdX-Aq-AIV">
+                                <rect key="frame" x="20" y="100" width="335" height="30"/>
                                 <animations/>
-                                <segments>
-                                    <segment title="First"/>
-                                    <segment title="Second"/>
-                                </segments>
-                            </segmentedControl>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Domain (eg: mycompany.com)" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="KMk-OX-M0N">
+                                <rect key="frame" x="20" y="170" width="335" height="30"/>
+                                <animations/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
+                            <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ewR-dr-obt">
+                                <rect key="frame" x="20" y="608" width="335" height="30"/>
+                                <animations/>
+                                <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="15"/>
+                                <state key="normal" title="Cancel">
+                                    <color key="titleColor" red="1" green="0.041046944600000003" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                </state>
+                                <connections>
+                                    <action selector="cancelButton:" destination="TJl-5u-dQh" eventType="touchUpInside" id="xfe-ym-hAa"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <animations/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="ewR-dr-obt" firstAttribute="trailing" secondItem="gt6-A2-1f5" secondAttribute="trailingMargin" id="2Iv-No-eKZ"/>
+                            <constraint firstItem="GdX-Aq-AIV" firstAttribute="leading" secondItem="gt6-A2-1f5" secondAttribute="leadingMargin" id="HrL-Bs-iF7"/>
+                            <constraint firstItem="GdX-Aq-AIV" firstAttribute="top" secondItem="xKL-SB-Mtd" secondAttribute="bottom" constant="80" id="SC3-JR-1tY"/>
+                            <constraint firstItem="KMk-OX-M0N" firstAttribute="leading" secondItem="gt6-A2-1f5" secondAttribute="leadingMargin" id="bgq-Fd-2L7"/>
+                            <constraint firstItem="ewR-dr-obt" firstAttribute="leading" secondItem="gt6-A2-1f5" secondAttribute="leadingMargin" id="d1Q-4I-8bf"/>
+                            <constraint firstItem="SJf-Mc-wAV" firstAttribute="top" secondItem="ewR-dr-obt" secondAttribute="bottom" constant="29" id="dRW-O8-YJS"/>
+                            <constraint firstItem="KMk-OX-M0N" firstAttribute="top" secondItem="GdX-Aq-AIV" secondAttribute="bottom" constant="40" id="hRx-z4-RPk"/>
+                            <constraint firstItem="KMk-OX-M0N" firstAttribute="trailing" secondItem="gt6-A2-1f5" secondAttribute="trailingMargin" id="hUS-oI-CaF"/>
+                            <constraint firstItem="GdX-Aq-AIV" firstAttribute="trailing" secondItem="gt6-A2-1f5" secondAttribute="trailingMargin" id="suO-5w-jyT"/>
+                        </constraints>
                     </view>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
                 </viewController>
