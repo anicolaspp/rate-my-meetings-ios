@@ -25,11 +25,7 @@ class LoginViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
     
-    @IBAction func registerNewUser(sender: UIButton) {
-       
-    }
-
-    @IBAction func loginUser(sender: AnyObject) {
+    func getLogingForm() -> UIAlertController {
         
         let login = UIAlertController(title: "Login", message: "Enter Credentials", preferredStyle: .Alert)
         
@@ -60,7 +56,17 @@ class LoginViewController: UIViewController {
         
         login.addAction(ok)
         
-        self.presentViewController(login, animated: true, completion: nil)
+        return login
+    }
+    
+    @IBAction func registerNewUser(sender: UIButton) {
+       
+    }
+
+    @IBAction func loginUser(sender: AnyObject) {
+       
+        let loginForm = getLogingForm()
+        self.presentViewController(loginForm, animated: true, completion: nil)
     }
 
 
