@@ -10,15 +10,26 @@ import UIKit
 
 class RegistrationViewController: UIViewController {
     
+    @IBOutlet weak var companyNameField: UITextField!
+    @IBOutlet weak var domainNameField: UITextField!
+    
+    @IBOutlet var tabRecognizer: UITapGestureRecognizer!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        companyNameField.returnKeyType = .Next
+        domainNameField.returnKeyType = .Go
+        
+        tabRecognizer.cancelsTouchesInView = false
+        tabRecognizer.addTarget(self, action: Selector("dismissKeyBoard"))
     }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
+    
     
 
     @IBAction func cancelButton(sender: AnyObject) {
@@ -34,6 +45,11 @@ class RegistrationViewController: UIViewController {
         self.presentViewController(confirmation, animated: true, completion: nil)
     }
     
+    func dismissKeyBoard() {
+        companyNameField.resignFirstResponder()
+        domainNameField.resignFirstResponder()
+    }
+    
     
     /*
     // MARK: - Navigation
@@ -45,4 +61,26 @@ class RegistrationViewController: UIViewController {
     }
     */
 
+}
+
+extension RegistrationViewController : UITextFieldDelegate {
+    
+     func textFieldShouldReturn(textField: UITextField) -> Bool {
+        
+        textField.resignFirstResponder()
+        
+        if (textField == companyNameField) {
+
+            domainNameField.becomeFirstResponder()
+        }
+        else if (textField == domainNameField) {
+            textField.resignFirstResponder()
+            
+            //attenpt to register company here
+        }
+        
+        return true
+    }
+    
+   
 }

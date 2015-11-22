@@ -175,12 +175,6 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Company Name (unique)" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="GdX-Aq-AIV">
-                                <rect key="frame" x="20" y="100" width="335" height="30"/>
-                                <animations/>
-                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits"/>
-                            </textField>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Domain (eg: mycompany.com)" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="KMk-OX-M0N">
                                 <rect key="frame" x="20" y="170" width="335" height="30"/>
                                 <animations/>
@@ -198,9 +192,19 @@
                                     <action selector="cancelButton:" destination="TJl-5u-dQh" eventType="touchUpInside" id="xfe-ym-hAa"/>
                                 </connections>
                             </button>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Company Name (unique)" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="GdX-Aq-AIV">
+                                <rect key="frame" x="20" y="100" width="335" height="30"/>
+                                <animations/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits" autocapitalizationType="words"/>
+                                <connections>
+                                    <outlet property="delegate" destination="TJl-5u-dQh" id="U4T-cx-WQ9"/>
+                                </connections>
+                            </textField>
                         </subviews>
                         <animations/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <gestureRecognizers/>
                         <constraints>
                             <constraint firstItem="ewR-dr-obt" firstAttribute="trailing" secondItem="gt6-A2-1f5" secondAttribute="trailingMargin" id="2Iv-No-eKZ"/>
                             <constraint firstItem="GdX-Aq-AIV" firstAttribute="leading" secondItem="gt6-A2-1f5" secondAttribute="leadingMargin" id="HrL-Bs-iF7"/>
@@ -212,10 +216,19 @@
                             <constraint firstItem="KMk-OX-M0N" firstAttribute="trailing" secondItem="gt6-A2-1f5" secondAttribute="trailingMargin" id="hUS-oI-CaF"/>
                             <constraint firstItem="GdX-Aq-AIV" firstAttribute="trailing" secondItem="gt6-A2-1f5" secondAttribute="trailingMargin" id="suO-5w-jyT"/>
                         </constraints>
+                        <connections>
+                            <outletCollection property="gestureRecognizers" destination="yf9-AW-p6K" appends="YES" id="8Gc-bo-x9G"/>
+                        </connections>
                     </view>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
+                    <connections>
+                        <outlet property="companyNameField" destination="GdX-Aq-AIV" id="GYr-6B-MkT"/>
+                        <outlet property="domainNameField" destination="KMk-OX-M0N" id="aDR-ye-eap"/>
+                        <outlet property="tabRecognizer" destination="yf9-AW-p6K" id="qLR-2B-EcP"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Opz-WH-BJ2" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <tapGestureRecognizer id="yf9-AW-p6K"/>
             </objects>
             <point key="canvasLocation" x="-9.5" y="1696.5"/>
         </scene>
