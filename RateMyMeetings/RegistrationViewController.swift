@@ -29,10 +29,12 @@ class RegistrationViewController: UIViewController {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-    
-    
 
     @IBAction func cancelButton(sender: AnyObject) {
+        
+        if (companyNameField.text?.isEmpty == true && domainNameField.text?.isEmpty == true){
+            self.dismissViewControllerAnimated(true, completion: nil)
+        }
         
         let confirmation = UIAlertController(title: "Confirm", message: "Are you sure you want to cancel? Your info will be lost.", preferredStyle: .Alert)
         

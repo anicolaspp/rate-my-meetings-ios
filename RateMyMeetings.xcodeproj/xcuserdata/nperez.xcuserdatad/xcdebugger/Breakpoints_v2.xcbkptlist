@@ -10,11 +10,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "RateMyMeetings/RegistrationViewController.swift"
-            timestampString = "469862947.126971"
+            timestampString = "469915031.077751"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "49"
-            endingLineNumber = "49"
+            startingLineNumber = "53"
+            endingLineNumber = "53"
             landmarkName = "dismissKeyBoard()"
             landmarkType = "5">
          </BreakpointContent>
