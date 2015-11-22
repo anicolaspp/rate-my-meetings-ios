@@ -22,7 +22,16 @@ class RegistrationViewController: UIViewController {
     
 
     @IBAction func cancelButton(sender: AnyObject) {
-        self.dismissViewControllerAnimated(true, completion: nil)
+        
+        let confirmation = UIAlertController(title: "Confirm", message: "Are you sure you want to cancel? Your info will be lost.", preferredStyle: .Alert)
+        
+        confirmation.addAction(UIAlertAction(title: "Yes", style: .Destructive, handler: { (action) -> Void in
+            self.dismissViewControllerAnimated(true, completion: nil)
+        }))
+        
+        confirmation.addAction(UIAlertAction(title: "No", style: .Cancel, handler: nil))
+
+        self.presentViewController(confirmation, animated: true, completion: nil)
     }
     
     
