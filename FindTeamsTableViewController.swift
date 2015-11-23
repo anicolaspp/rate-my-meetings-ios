@@ -34,7 +34,8 @@ class FindTeamsTableViewController: UITableViewController {
 
         // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
         // self.navigationItem.rightBarButtonItem = self.editButtonItem()
-        
+     
+        self.navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .Add, target: self, action: Selector("addNewTeam"))
     }
 
     override func didReceiveMemoryWarning() {
@@ -115,5 +116,9 @@ class FindTeamsTableViewController: UITableViewController {
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         let teamMembersTable = segue.destinationViewController as! TeamMembersTableViewController
         teamMembersTable.teamMembers = self.teams[self.tableView.indexPathForSelectedRow!.row].members
+    }
+    
+    func addNewTeam() -> Void {
+        
     }
 }
