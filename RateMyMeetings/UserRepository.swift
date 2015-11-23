@@ -17,6 +17,15 @@ class User  {
     }
 }
 
+class Team {
+    let name: String?
+    var members: [User]?
+    
+    init(name: String) {
+        self.name = name
+    }
+}
+
 protocol UserRegistrationCompleteDelegate {
     func registrationComplete(user: User?) -> Void
 }
@@ -26,6 +35,21 @@ protocol IUserRepository {
     func register(companyName: String, email: String, password: String) -> User?
 }
 
+protocol ICompanyRepository {
+    func getTeamsWithDomain(domain: String) -> [Team]
+}
+
+class CompanyRepositoryStub : ICompanyRepository {
+    func getTeamsWithDomain(domain: String) -> [Team] {
+        let team1 = Team(name: "Fusion")
+        team1.members = [User(email: "nperez@ipcoop.com")]
+        
+        let team2 = Team(name: "BI")
+        team2.members = [User(email: "ctriana@gmail.com"), User(email: "nperez@ipcoop.com")]
+        
+        return [team1, team2]
+    }
+}
 
 
 class UserRepositoryStub: IUserRepository {
@@ -45,13 +69,13 @@ class UserRepositoryStub: IUserRepository {
 
 
 
-class UserRepository: IUserRepository {
-    
-    func longin(username: String!, password: String!) -> User? {
-        return nil
-    }
-    
-    func register(companyName: String, email: String, password: String) -> User? {
-        return nil
-    }
-}
+//class UserRepository: IUserRepository {
+//    
+//    func longin(username: String!, password: String!) -> User? {
+//        return nil
+//    }
+//    
+//    func register(companyName: String, email: String, password: String) -> User? {
+//        return nil
+//    }
+//}

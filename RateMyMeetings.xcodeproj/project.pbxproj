@@ -17,6 +17,7 @@
 		0679E7A41C017BDA0003BABC /* RegistrationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0679E7A21C017BDA0003BABC /* RegistrationViewController.swift */; };
 		0679E7A51C017BDA0003BABC /* RegistrationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0679E7A21C017BDA0003BABC /* RegistrationViewController.swift */; };
 		067EC3F61C0364D4003F420A /* FindTeamsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 067EC3F51C0364D4003F420A /* FindTeamsTableViewController.swift */; };
+		067EC3F81C038C7C003F420A /* TeamMembersTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 067EC3F71C038C7C003F420A /* TeamMembersTableViewController.swift */; };
 		06BF4AAD1BFD19E500BCA228 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06BF4AAC1BFD19E500BCA228 /* AppDelegate.swift */; };
 		06BF4AAF1BFD19E500BCA228 /* FirstViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06BF4AAE1BFD19E500BCA228 /* FirstViewController.swift */; };
 		06BF4AB11BFD19E500BCA228 /* SecondViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06BF4AB01BFD19E500BCA228 /* SecondViewController.swift */; };
@@ -50,6 +51,7 @@
 		0679E79A1C0163090003BABC /* UserRepository.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserRepository.swift; sourceTree = "<group>"; };
 		0679E7A21C017BDA0003BABC /* RegistrationViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RegistrationViewController.swift; sourceTree = "<group>"; };
 		067EC3F51C0364D4003F420A /* FindTeamsTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = FindTeamsTableViewController.swift; path = ../FindTeamsTableViewController.swift; sourceTree = "<group>"; };
+		067EC3F71C038C7C003F420A /* TeamMembersTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TeamMembersTableViewController.swift; sourceTree = "<group>"; };
 		06BF4AA91BFD19E500BCA228 /* RateMyMeetings.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = RateMyMeetings.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		06BF4AAC1BFD19E500BCA228 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		06BF4AAE1BFD19E500BCA228 /* FirstViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirstViewController.swift; sourceTree = "<group>"; };
@@ -128,6 +130,7 @@
 				0679E79A1C0163090003BABC /* UserRepository.swift */,
 				0679E7A21C017BDA0003BABC /* RegistrationViewController.swift */,
 				067EC3F51C0364D4003F420A /* FindTeamsTableViewController.swift */,
+				067EC3F71C038C7C003F420A /* TeamMembersTableViewController.swift */,
 			);
 			path = RateMyMeetings;
 			sourceTree = "<group>";
@@ -281,6 +284,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				067EC3F81C038C7C003F420A /* TeamMembersTableViewController.swift in Sources */,
 				0679E7A31C017BDA0003BABC /* RegistrationViewController.swift in Sources */,
 				0679E7971C015EDB0003BABC /* LoginViewController.swift in Sources */,
 				06BF4AB11BFD19E500BCA228 /* SecondViewController.swift in Sources */,

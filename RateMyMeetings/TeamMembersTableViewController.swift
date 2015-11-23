@@ -1,5 +1,5 @@
 //
-//  FindTeamsTableViewController.swift
+//  TeamMembersTableViewController.swift
 //  RateMyMeetings
 //
 //  Created by Nicolas Perez on 11/23/15.
@@ -8,33 +8,22 @@
 
 import UIKit
 
-class FindTeamsTableViewController: UITableViewController {
+class TeamMembersTableViewController: UITableViewController {
 
-    
     var teamName: String?
-    var companyRepository: ICompanyRepository? = CompanyRepositoryStub()
-    var teams: [Team]!
-    
+    var teamMembers: [User]!
     
     override func viewDidLoad() {
         super.viewDidLoad()
 
-
-        let domain = teamName?.characters.split(isSeparator: { (Character) -> Bool in
-            return Character == "@"
-        })[1]
         
-        title = String(domain!)
-        
-        teams = companyRepository?.getTeamsWithDomain(title!)
-        // Load team for domain
+        title = teamName
         
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false
 
         // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
         // self.navigationItem.rightBarButtonItem = self.editButtonItem()
-        
     }
 
     override func didReceiveMemoryWarning() {
@@ -45,26 +34,27 @@ class FindTeamsTableViewController: UITableViewController {
     // MARK: - Table view data source
 
     override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
-        // #warning Incomplete implementation, return the number of sections
+    
         return 1
     }
 
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-
-        return teams.count
+       
+        return teamMembers.count
     }
 
     
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell: UITableViewCell = tableView.dequeueReusableCellWithIdentifier("teamCell", forIndexPath: indexPath)
+        let cell = tableView.dequeueReusableCellWithIdentifier("teamMemberCell", forIndexPath: indexPath)
 
         // Configure the cell...
-
-        cell.textLabel?.text = teams[indexPath.row].name
         
+        cell.textLabel?.text = teamMembers[indexPath.row].email
+
         return cell
     }
-   
+
+
     /*
     // Override to support conditional editing of the table view.
     override func tableView(tableView: UITableView, canEditRowAtIndexPath indexPath: NSIndexPath) -> Bool {
@@ -100,20 +90,14 @@ class FindTeamsTableViewController: UITableViewController {
     }
     */
 
-    override func shouldPerformSegueWithIdentifier(identifier: String, sender: AnyObject?) -> Bool {
-        if (identifier == "showTeamMembersSegue") {
-            if let _ = self.tableView.indexPathForSelectedRow?.row {
-                return true
-            }
-            else {
-                return false
-            }
-        }
-         return true
-    }
-   
+    /*
+    // MARK: - Navigation
+
+    // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        let teamMembersTable = segue.destinationViewController as! TeamMembersTableViewController
-        teamMembersTable.teamMembers = self.teams[self.tableView.indexPathForSelectedRow!.row].members
+        // Get the new view controller using segue.destinationViewController.
+        // Pass the selected object to the new view controller.
     }
+    */
+
 }
