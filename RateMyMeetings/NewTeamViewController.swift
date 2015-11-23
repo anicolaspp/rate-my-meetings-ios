@@ -24,4 +24,26 @@ class NewTeamViewController: UIViewController {
     @IBAction func cancelButton(sender: AnyObject) {
         self.dismissViewControllerAnimated(true, completion: nil)
     }
+    
+    @IBAction func createNewTeamButton(sender: AnyObject) {
+        //create new team and login
+        
+        
+    }
+}
+
+extension NewTeamViewController : UITextFieldDelegate {
+    
+    func textField(textField: UITextField, shouldChangeCharactersInRange range: NSRange, replacementString string: String) -> Bool {
+        
+        if (string.containsString("@")) {
+            return false
+        }
+        
+        if (textField.text!.characters.count + string.characters.count > 15) {
+            return false
+        }
+        
+        return true
+    }
 }
