@@ -101,35 +101,13 @@ class RegistrationViewController: UIViewController {
 
 }
 
-//extension RegistrationViewController : UserRegistrationCompleteDelegate {
-//    func registrationComplete(user: User?) -> Void {
-//        self.dismissViewControllerAnimated(true) { () -> Void in
-//            self.delegate?.registrationComplete(user)
-//        }
-//        
-//    }
-//}
-
 extension RegistrationViewController : UITextFieldDelegate {
     
      func textFieldShouldReturn(textField: UITextField) -> Bool {
         
-//        textField.resignFirstResponder()
-//        
-//        if (textField == self.companyNameField) {
-//            
-//            if (companyNameField.text?.isEmpty == true) {
-//                
-//                let alert = UIAlertController(title: "Error", message: "Fill required information", preferredStyle: .Alert)
-//                alert.addAction(UIAlertAction(title: "OK", style: .Default, handler: nil))
-//                    
-//                self.presentViewController(alert, animated: true, completion: nil)
-//            }
-//            else {
-//                self.performSegueWithIdentifier("registreationStep2Segue", sender: self)
-//            }
-//
-//        }
+        if (self.shouldPerformSegueWithIdentifier("findTeamsSegue", sender: self)) {
+            self.performSegueWithIdentifier("findTeamsSegue", sender: self)
+        }
         
         return true
     }
