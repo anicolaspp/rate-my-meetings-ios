@@ -13,10 +13,7 @@ import UIKit
 class RegistrationViewController: UIViewController {
     
     @IBOutlet weak var companyNameField: UITextField!
-    @IBOutlet weak var domainNameField: UITextField!
-    
     @IBOutlet var tabRecognizer: UITapGestureRecognizer!
-    
     @IBOutlet weak var cancelButton: UIButton!
     
     var userRepository: IUserRepository?
@@ -25,8 +22,7 @@ class RegistrationViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        companyNameField.returnKeyType = .Next
-        domainNameField.returnKeyType = .Next
+        companyNameField.returnKeyType = .Search
         
         tabRecognizer.cancelsTouchesInView = false
         tabRecognizer.addTarget(self, action: Selector("dismissKeyBoard"))
@@ -43,7 +39,7 @@ class RegistrationViewController: UIViewController {
 
     @IBAction func cancelButton(sender: AnyObject) {
         
-        if (companyNameField.text?.isEmpty == true && domainNameField.text?.isEmpty == true){
+        if (companyNameField.text?.isEmpty == true) {
             self.dismissViewControllerAnimated(true, completion: nil)
         }
         
@@ -60,57 +56,45 @@ class RegistrationViewController: UIViewController {
     
     func dismissKeyBoard() {
         companyNameField.resignFirstResponder()
-        domainNameField.resignFirstResponder()
     }
     
 
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        
-        let step2 = segue.destinationViewController as! Step2ViewController
-        step2.userRepository = self.userRepository
-        step2.delegate = self
-        
-        step2.companyName = self.companyNameField.text
-        step2.domainName = self.domainNameField.text
-        
+             
     }
 
 
 }
 
-extension RegistrationViewController : UserRegistrationCompleteDelegate {
-    func registrationComplete(user: User?) -> Void {
-        self.dismissViewControllerAnimated(true) { () -> Void in
-            self.delegate?.registrationComplete(user)
-        }
-        
-    }
-}
+//extension RegistrationViewController : UserRegistrationCompleteDelegate {
+//    func registrationComplete(user: User?) -> Void {
+//        self.dismissViewControllerAnimated(true) { () -> Void in
+//            self.delegate?.registrationComplete(user)
+//        }
+//        
+//    }
+//}
 
 extension RegistrationViewController : UITextFieldDelegate {
     
      func textFieldShouldReturn(textField: UITextField) -> Bool {
         
-        textField.resignFirstResponder()
-        
-        if (textField == companyNameField) {
-
-            domainNameField.becomeFirstResponder()
-        }
-        else if (textField == domainNameField) {
-            
-            if (companyNameField.text?.isEmpty == true || domainNameField.text?.isEmpty == true) {
-                
-                let alert = UIAlertController(title: "Error", message: "Fill required information", preferredStyle: .Alert)
-                alert.addAction(UIAlertAction(title: "OK", style: .Default, handler: nil))
-                    
-                self.presentViewController(alert, animated: true, completion: nil)
-            }
-            else {
-                self.performSegueWithIdentifier("registreationStep2Segue", sender: self)
-            }
-
-        }
+//        textField.resignFirstResponder()
+//        
+//        if (textField == self.companyNameField) {
+//            
+//            if (companyNameField.text?.isEmpty == true) {
+//                
+//                let alert = UIAlertController(title: "Error", message: "Fill required information", preferredStyle: .Alert)
+//                alert.addAction(UIAlertAction(title: "OK", style: .Default, handler: nil))
+//                    
+//                self.presentViewController(alert, animated: true, completion: nil)
+//            }
+//            else {
+//                self.performSegueWithIdentifier("registreationStep2Segue", sender: self)
+//            }
+//
+//        }
         
         return true
     }
