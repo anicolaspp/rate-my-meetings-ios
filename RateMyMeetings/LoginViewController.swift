@@ -59,11 +59,6 @@ class LoginViewController: UIViewController {
         
         return login
     }
-    
-    @IBAction func registerNewUser(sender: UIButton) {
-       
-    }
-
     @IBAction func loginUser(sender: AnyObject) {
        
         let loginForm = getLogingForm()
@@ -75,11 +70,24 @@ class LoginViewController: UIViewController {
 //         Get the new view controller using segue.destinationViewController.
 //         Pass the selected object to the new view controller.
         
-        print("here\n")
+        if (segue.identifier == "registrationSegue") {
+            let target = segue.destinationViewController as! UINavigationController
+            let registrationController = target.viewControllers.first as! RegistrationViewController
+            registrationController.userRepository = self.userRepository
+            registrationController.delegate = self
+        
+            print("here\n")
+        }
         
     }
 
 
+}
+
+extension LoginViewController : UserRegistrationCompleteDelegate {
+    func registrationComplete(user: User?) -> Void {
+        self.performSegueWithIdentifier("loginSegue", sender: self)
+    }
 }
 
 extension UIViewController {

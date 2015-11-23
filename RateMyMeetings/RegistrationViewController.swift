@@ -19,6 +19,9 @@ class RegistrationViewController: UIViewController {
     
     @IBOutlet weak var cancelButton: UIButton!
     
+    var userRepository: IUserRepository?
+    var delegate: UserRegistrationCompleteDelegate?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -64,6 +67,8 @@ class RegistrationViewController: UIViewController {
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         
         let step2 = segue.destinationViewController as! Step2ViewController
+        step2.userRepository = self.userRepository
+        step2.delegate = self
         
         step2.companyName = self.companyNameField.text
         step2.domainName = self.domainNameField.text
@@ -71,6 +76,15 @@ class RegistrationViewController: UIViewController {
     }
 
 
+}
+
+extension RegistrationViewController : UserRegistrationCompleteDelegate {
+    func registrationComplete(user: User?) -> Void {
+        self.dismissViewControllerAnimated(true) { () -> Void in
+            self.delegate?.registrationComplete(user)
+        }
+        
+    }
 }
 
 extension RegistrationViewController : UITextFieldDelegate {

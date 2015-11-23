@@ -8,13 +8,24 @@
 
 import Foundation
 
-protocol IUserRepository {
-    func longin(username: String!, password: String!) -> Int
+class User  {
+    
+    let email: String!
+    
+    init(email: String) {
+        self.email = email
+    }
 }
 
-protocol UIAlertPresenter {
-    
+protocol UserRegistrationCompleteDelegate {
+    func registrationComplete(user: User?) -> Void
 }
+
+protocol IUserRepository {
+    func longin(username: String!, password: String!) -> Int
+    func register(companyName: String, email: String, password: String) -> User?
+}
+
 
 
 class UserRepositoryStub: IUserRepository {
@@ -26,6 +37,10 @@ class UserRepositoryStub: IUserRepository {
         
         return 0
     }
+    
+    func register(companyName: String, email: String, password: String) -> User? {
+        return User(email: email)
+    }
 }
 
 
@@ -34,5 +49,9 @@ class UserRepository: IUserRepository {
     
     func longin(username: String!, password: String!) -> Int {
         return 0
+    }
+    
+    func register(companyName: String, email: String, password: String) -> User? {
+        return nil
     }
 }

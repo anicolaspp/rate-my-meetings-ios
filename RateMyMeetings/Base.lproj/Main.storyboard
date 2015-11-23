@@ -133,8 +133,7 @@
                                 </constraints>
                                 <state key="normal" title="Register"/>
                                 <connections>
-                                    <action selector="registerNewUser:" destination="ZtA-f4-rOZ" eventType="touchUpInside" id="IgQ-ba-8Z6"/>
-                                    <segue destination="BXs-LU-4Nc" kind="presentation" id="eDn-5b-O9z"/>
+                                    <segue destination="BXs-LU-4Nc" kind="show" identifier="registrationSegue" id="eDn-5b-O9z"/>
                                 </connections>
                             </button>
                         </subviews>

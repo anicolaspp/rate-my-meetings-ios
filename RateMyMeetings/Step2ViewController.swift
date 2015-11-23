@@ -13,6 +13,8 @@ class Step2ViewController: UIViewController {
     
     var companyName: String?
     var domainName: String?
+    
+    var userRepository: IUserRepository?
 
 
     @IBOutlet weak var domainLabel: UILabel!
@@ -20,6 +22,9 @@ class Step2ViewController: UIViewController {
     @IBOutlet weak var emailLabel: UITextField!
     @IBOutlet weak var passwordLabel: UITextField!
     @IBOutlet weak var registerButton: UIButton!
+    
+    var delegate: UserRegistrationCompleteDelegate?
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -37,11 +42,21 @@ class Step2ViewController: UIViewController {
         self.registerButton.layer.borderColor = UIColor.blueColor().CGColor
         
         self.emailLabel.becomeFirstResponder()
+        
+        
     }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
+    }
+    
+    func registerUser() -> Void {
+        
+        let user = userRepository?.register(companyName!, email: self.emailLabel.text! + self.domainLabel.text!, password: self.passwordLabel.text!)
+        
+        self.removeFromParentViewController()
+        self.delegate?.registrationComplete(user)
     }
     
 
@@ -69,6 +84,8 @@ extension Step2ViewController : UITextFieldDelegate {
         }
         else if (textField == passwordLabel) {
          // register here
+            
+            registerUser()
         }
         
         return true
