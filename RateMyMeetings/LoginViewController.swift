@@ -53,7 +53,8 @@ class LoginViewController: UIViewController {
                 self.showAlert("Error", message: "Invalid user or password", handler: nil)
             }
         }
-        
+
+        login.addAction(UIAlertAction(title: "Cancel", style: .Cancel, handler: nil))
         login.addAction(ok)
         
         return login
