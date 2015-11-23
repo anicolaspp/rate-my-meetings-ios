@@ -24,6 +24,8 @@ class TeamMembersTableViewController: UITableViewController {
 
         // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
         // self.navigationItem.rightBarButtonItem = self.editButtonItem()
+        
+         self.navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .Add, target: self, action: Selector("joinToThisTeam"))
     }
 
     override func didReceiveMemoryWarning() {
@@ -52,6 +54,17 @@ class TeamMembersTableViewController: UITableViewController {
         cell.textLabel?.text = teamMembers[indexPath.row].email
 
         return cell
+    }
+    
+    func joinToThisTeam() -> Void {
+        
+        let joinConfirmationAlert = UIAlertController(title: "Confirmation", message: "Are you sure you want to join this team?", preferredStyle: .Alert)
+        joinConfirmationAlert.addAction(UIAlertAction(title: "Yes", style: .Default, handler: { (UIAlertAction) -> Void in
+            // request to join
+        }))
+        joinConfirmationAlert.addAction(UIAlertAction(title: "Cancel", style: .Cancel, handler: nil))
+        
+        self.presentViewController(joinConfirmationAlert, animated: true, completion: nil)
     }
 
 
