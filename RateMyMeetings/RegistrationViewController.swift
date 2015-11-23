@@ -85,7 +85,17 @@ extension RegistrationViewController : UITextFieldDelegate {
         }
         else if (textField == domainNameField) {
             
-            self.performSegueWithIdentifier("registreationStep2Segue", sender: self)
+            if (companyNameField.text?.isEmpty == true || domainNameField.text?.isEmpty == true) {
+                
+                let alert = UIAlertController(title: "Error", message: "Fill required information", preferredStyle: .Alert)
+                alert.addAction(UIAlertAction(title: "OK", style: .Default, handler: nil))
+                    
+                self.presentViewController(alert, animated: true, completion: nil)
+            }
+            else {
+                self.performSegueWithIdentifier("registreationStep2Segue", sender: self)
+            }
+
         }
         
         return true
