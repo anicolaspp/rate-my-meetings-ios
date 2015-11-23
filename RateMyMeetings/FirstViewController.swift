@@ -13,6 +13,7 @@ class FirstViewController: UIViewController {
 
     @IBOutlet weak var calendar: UIButton!
     
+    var loggedUser: User?
    
     
     override func viewDidLoad() {

@@ -22,7 +22,7 @@ protocol UserRegistrationCompleteDelegate {
 }
 
 protocol IUserRepository {
-    func longin(username: String!, password: String!) -> Int
+    func longin(username: String!, password: String!) -> User?
     func register(companyName: String, email: String, password: String) -> User?
 }
 
@@ -30,12 +30,12 @@ protocol IUserRepository {
 
 class UserRepositoryStub: IUserRepository {
     
-    func longin(username: String!, password: String!) -> Int {
+    func longin(username: String!, password: String!) -> User? {
         if (username != "" && username == password) {
-            return 1
+            return User(email: "email")
         }
         
-        return 0
+        return nil
     }
     
     func register(companyName: String, email: String, password: String) -> User? {
@@ -47,8 +47,8 @@ class UserRepositoryStub: IUserRepository {
 
 class UserRepository: IUserRepository {
     
-    func longin(username: String!, password: String!) -> Int {
-        return 0
+    func longin(username: String!, password: String!) -> User? {
+        return nil
     }
     
     func register(companyName: String, email: String, password: String) -> User? {

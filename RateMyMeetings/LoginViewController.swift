@@ -13,6 +13,7 @@ class LoginViewController: UIViewController {
     
     var userRepository: IUserRepository! = UserRepositoryStub()
     var userId = 0
+    var loggedUser: User?
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -44,9 +45,8 @@ class LoginViewController: UIViewController {
             let user = login.textFields?[0].text
             let pass = login.textFields?[1].text
             
-            self.userId = self.userRepository!.longin(user, password: pass)
-            
-            if (self.userId > 0) {
+            if let user = self.userRepository!.longin(user, password: pass) {
+                self.loggedUser = user
                 self.performSegueWithIdentifier("loginSegue", sender: self)
             }
             else {
@@ -79,6 +79,12 @@ class LoginViewController: UIViewController {
             print("here\n")
         }
         
+        if (segue.identifier == "loginSegue") {
+            let target = (segue.destinationViewController as! UITabBarController).viewControllers?.first as! UINavigationController
+            let main = target.viewControllers.first as! FirstViewController
+            
+            main.loggedUser = loggedUser
+        }
     }
 
 
@@ -86,6 +92,7 @@ class LoginViewController: UIViewController {
 
 extension LoginViewController : UserRegistrationCompleteDelegate {
     func registrationComplete(user: User?) -> Void {
+        self.loggedUser = user
         self.performSegueWithIdentifier("loginSegue", sender: self)
     }
 }

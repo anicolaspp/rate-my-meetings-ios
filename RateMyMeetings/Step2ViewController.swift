@@ -60,6 +60,9 @@ class Step2ViewController: UIViewController {
     }
     
 
+    @IBAction func registerButton(sender: AnyObject) {
+        registerUser()
+    }
     /*
     // MARK: - Navigation
 

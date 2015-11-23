@@ -290,6 +290,9 @@
                                         </fragment>
                                     </attributedString>
                                 </state>
+                                <connections>
+                                    <action selector="registerButton:" destination="lU9-kS-yKv" eventType="touchUpInside" id="BS9-mC-ocM"/>
+                                </connections>
                             </button>
                         </subviews>
                         <animations/>
