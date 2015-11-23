@@ -17,6 +17,7 @@ class RegistrationViewController: UIViewController {
     
     @IBOutlet var tabRecognizer: UITapGestureRecognizer!
     
+    @IBOutlet weak var cancelButton: UIButton!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -26,6 +27,10 @@ class RegistrationViewController: UIViewController {
         
         tabRecognizer.cancelsTouchesInView = false
         tabRecognizer.addTarget(self, action: Selector("dismissKeyBoard"))
+        
+        cancelButton.layer.cornerRadius = 2
+        cancelButton.layer.borderWidth = 1
+        cancelButton.layer.borderColor = cancelButton.titleColorForState(.Normal)?.CGColor
     }
 
     override func didReceiveMemoryWarning() {

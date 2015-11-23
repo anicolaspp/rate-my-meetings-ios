@@ -17,6 +17,9 @@ class Step2ViewController: UIViewController {
 
     @IBOutlet weak var domainLabel: UILabel!
     @IBOutlet weak var companyLabel: UILabel!
+    @IBOutlet weak var emailLabel: UITextField!
+    @IBOutlet weak var passwordLabel: UITextField!
+    @IBOutlet weak var registerButton: UIButton!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -25,6 +28,15 @@ class Step2ViewController: UIViewController {
         
         self.domainLabel.text = "@" + domainName!
         self.companyLabel.text = companyName
+        
+        self.emailLabel.returnKeyType = .Next
+        self.passwordLabel.returnKeyType = .Go
+        
+        self.registerButton.layer.cornerRadius = 2
+        self.registerButton.layer.borderWidth = 1
+        self.registerButton.layer.borderColor = UIColor.blueColor().CGColor
+        
+        self.emailLabel.becomeFirstResponder()
     }
 
     override func didReceiveMemoryWarning() {
@@ -43,4 +55,22 @@ class Step2ViewController: UIViewController {
     }
     */
 
+}
+
+extension Step2ViewController : UITextFieldDelegate {
+    
+    func textFieldShouldReturn(textField: UITextField) -> Bool {
+        
+        textField.resignFirstResponder()
+        
+        if (textField == emailLabel) {
+            
+            passwordLabel.becomeFirstResponder()
+        }
+        else if (textField == passwordLabel) {
+         // register here
+        }
+        
+        return true
+    }
 }
