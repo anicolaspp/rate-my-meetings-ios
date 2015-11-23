@@ -295,6 +295,46 @@
             </objects>
             <point key="canvasLocation" x="1000.5" y="1743.5"/>
         </scene>
+        <!--Create New Team -->
+        <scene sceneID="7bP-mQ-dsS">
+            <objects>
+                <viewController storyboardIdentifier="newTeamViewController" title="Create New Team " id="LK6-If-YBR" customClass="NewTeamViewController" customModule="RateMyMeetings" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="y3f-0k-w09"/>
+                        <viewControllerLayoutGuide type="bottom" id="R0P-oJ-Nju"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="jSn-ng-SxO">
+                        <rect key="frame" x="0.0" y="64" width="375" height="603"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="iRq-tC-3Cb">
+                                <rect key="frame" x="20" y="553" width="335" height="30"/>
+                                <animations/>
+                                <state key="normal" title="Cancel"/>
+                                <connections>
+                                    <action selector="cancelButton:" destination="LK6-If-YBR" eventType="touchUpInside" id="mdC-NG-TeM"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <animations/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="iRq-tC-3Cb" firstAttribute="leading" secondItem="jSn-ng-SxO" secondAttribute="leadingMargin" id="8Uq-m0-d9m"/>
+                            <constraint firstItem="iRq-tC-3Cb" firstAttribute="centerX" secondItem="jSn-ng-SxO" secondAttribute="centerX" id="Ael-YT-8JB"/>
+                            <constraint firstAttribute="bottom" secondItem="iRq-tC-3Cb" secondAttribute="bottom" constant="20" symbolic="YES" id="Lap-Tm-Hks"/>
+                            <constraint firstItem="iRq-tC-3Cb" firstAttribute="trailing" secondItem="jSn-ng-SxO" secondAttribute="trailingMargin" id="aID-N1-Ytl"/>
+                            <constraint firstItem="R0P-oJ-Nju" firstAttribute="top" secondItem="iRq-tC-3Cb" secondAttribute="bottom" constant="20" id="kVI-Gu-lTv"/>
+                            <constraint firstItem="iRq-tC-3Cb" firstAttribute="leading" secondItem="jSn-ng-SxO" secondAttribute="leadingMargin" constant="4" id="mhM-WC-KwK"/>
+                        </constraints>
+                    </view>
+                    <extendedEdge key="edgesForExtendedLayout" bottom="YES"/>
+                    <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" prompted="NO"/>
+                    <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="CjW-er-OYH" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1000.5" y="2541.5"/>
+        </scene>
         <!--Team Members Table View Controller-->
         <scene sceneID="zg1-Dd-XFj">
             <objects>
@@ -309,7 +349,7 @@
                                 <rect key="frame" x="0.0" y="92" width="375" height="44"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="zRI-5x-44w" id="nSj-pP-pFM">
-                                    <rect key="frame" x="0.0" y="0.0" width="375" height="43.5"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <animations/>
                                 </tableViewCellContentView>

@@ -119,6 +119,7 @@ class FindTeamsTableViewController: UITableViewController {
     }
     
     func addNewTeam() -> Void {
-        
+        let newTeamController = self.storyboard?.instantiateViewControllerWithIdentifier("newTeamViewController")
+        self.presentViewController(newTeamController!, animated: true, completion: nil)
     }
 }
