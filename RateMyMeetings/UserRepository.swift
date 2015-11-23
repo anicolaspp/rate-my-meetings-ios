@@ -37,6 +37,7 @@ protocol IUserRepository {
 
 protocol ICompanyRepository {
     func getTeamsWithDomain(domain: String) -> [Team]
+    func team(teamName: String, shouldBeCreateWithOwner owner: User) -> Team
 }
 
 class CompanyRepositoryStub : ICompanyRepository {
@@ -48,6 +49,13 @@ class CompanyRepositoryStub : ICompanyRepository {
         team2.members = [User(email: "ctriana@gmail.com"), User(email: "nperez@ipcoop.com")]
         
         return [team1, team2]
+    }
+    
+    func team(teamName: String, shouldBeCreateWithOwner owner: User) -> Team {
+        let team = Team(name: teamName)
+        team.members = [owner]
+        
+        return team
     }
 }
 

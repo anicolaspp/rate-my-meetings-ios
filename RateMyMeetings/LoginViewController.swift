@@ -59,16 +59,14 @@ class LoginViewController: UIViewController {
         
         return login
     }
+    
     @IBAction func loginUser(sender: AnyObject) {
        
         let loginForm = getLogingForm()
         self.presentViewController(loginForm, animated: true, completion: nil)
     }
 
-
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-//         Get the new view controller using segue.destinationViewController.
-//         Pass the selected object to the new view controller.
         
         if (segue.identifier == "registrationSegue") {
             let target = segue.destinationViewController as! UINavigationController
@@ -86,8 +84,6 @@ class LoginViewController: UIViewController {
             main.loggedUser = loggedUser
         }
     }
-
-
 }
 
 extension LoginViewController : UserRegistrationCompleteDelegate {
