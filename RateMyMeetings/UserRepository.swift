@@ -8,48 +8,6 @@
 
 import Foundation
 
-extension String {
-    func isValidEmail() -> Bool {
-        let pattern = "^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$"
-        
-        let emailTest = NSPredicate(format:"SELF MATCHES %@", pattern)
-        
-        return emailTest.evaluateWithObject(self)
-    }
-}
-
-class User  {
-    
-    let email: String!
-    
-    init(email: String) {
-        self.email = email
-    }
-}
-
-class Team {
-    let name: String?
-    var members: [User]?
-    
-    init(name: String) {
-        self.name = name
-    }
-}
-
-protocol UserRegistrationCompleteDelegate {
-    func registrationComplete(user: User?) -> Void
-}
-
-protocol IUserRepository {
-    func longin(username: String!, password: String!) -> User?
-    func register(companyName: String, email: String, password: String) -> User?
-}
-
-protocol ICompanyRepository {
-    func getTeamsWithDomain(domain: String) -> [Team]
-    func team(teamName: String, shouldBeCreateWithOwner owner: User) -> Team
-}
-
 class CompanyRepositoryStub : ICompanyRepository {
     func getTeamsWithDomain(domain: String) -> [Team] {
         let team1 = Team(name: "Fusion")

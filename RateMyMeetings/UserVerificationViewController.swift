@@ -47,8 +47,8 @@ class UserVerificationViewController: UIViewController {
         activityIndicator.frame = CGRectMake(0.0, 0.0, 40.0, 40.0);
         activityIndicator.center = uiView.center
         activityIndicator.hidesWhenStopped = true
-        activityIndicator.activityIndicatorViewStyle = .WhiteLarge
-        activityIndicator.backgroundColor = UIColor.grayColor()
+        activityIndicator.activityIndicatorViewStyle = .Gray
+        activityIndicator.backgroundColor = UIColor.whiteColor().colorWithAlphaComponent(0.1)
 
         self.view.userInteractionEnabled = false
         
