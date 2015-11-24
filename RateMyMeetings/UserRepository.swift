@@ -8,6 +8,16 @@
 
 import Foundation
 
+extension String {
+    func isValidEmail() -> Bool {
+        let pattern = "^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$"
+        
+        let emailTest = NSPredicate(format:"SELF MATCHES %@", pattern)
+        
+        return emailTest.evaluateWithObject(self)
+    }
+}
+
 class User  {
     
     let email: String!
@@ -71,7 +81,12 @@ class UserRepositoryStub: IUserRepository {
     }
     
     func register(companyName: String, email: String, password: String) -> User? {
-        return User(email: email)
+        if (email.containsString(".com")) {
+            return User(email: email)
+        }
+        else {
+            return nil
+        }
     }
 }
 

@@ -11,9 +11,10 @@ import UIKit
 class FindTeamsTableViewController: UITableViewController {
 
     
-    var teamName: String?
+    var teamName: String? = "nperez@me.com"
     var companyRepository: ICompanyRepository? = CompanyRepositoryStub()
     var teams: [Team]!
+    var user: User?
     
     
     override func viewDidLoad() {

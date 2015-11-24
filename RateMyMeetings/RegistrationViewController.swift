@@ -58,19 +58,14 @@ class RegistrationViewController: UIViewController {
         companyNameField.resignFirstResponder()
     }
     
-    func isValidEmail(email: String) -> Bool {
-        let pattern = "^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$"
-        
-        let emailTest = NSPredicate(format:"SELF MATCHES %@", pattern)
-        return emailTest.evaluateWithObject(email)
-    }
+   
     
     override func shouldPerformSegueWithIdentifier(identifier: String, sender: AnyObject?) -> Bool {
        
         if (identifier == "findTeamsSegue") {
             let teamToFiend = self.companyNameField.text
             
-            if (teamToFiend?.isEmpty == true || isValidEmail(teamToFiend!) == false) {
+            if (teamToFiend?.isEmpty == true || teamToFiend!.isValidEmail() == false) {
                 
                 let alert = UIAlertController(title: "Error", message: "Check email entered", preferredStyle: .Alert)
                 alert.addAction(UIAlertAction(title: "Ok", style: .Default, handler: nil))
@@ -100,6 +95,8 @@ class RegistrationViewController: UIViewController {
 
 
 }
+
+
 
 extension RegistrationViewController : UITextFieldDelegate {
     
