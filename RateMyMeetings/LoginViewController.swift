@@ -10,7 +10,6 @@ import UIKit
 
 class LoginViewController: UIViewController {
     
-    
     var userRepository = UserRepositoryStub()
     var userId = 0
     var loggedUser: User?
@@ -53,7 +52,7 @@ class LoginViewController: UIViewController {
                 self.showAlert("Error", message: "Invalid user or password", handler: nil)
             }
         }
-
+        
         login.addAction(UIAlertAction(title: "Cancel", style: .Cancel, handler: nil))
         login.addAction(ok)
         
@@ -100,5 +99,38 @@ extension UIViewController {
         alert.addAction(UIAlertAction(title: "Close", style: UIAlertActionStyle.Default, handler: handler))
         
         self.presentViewController(alert, animated: true, completion: nil)
+    }
+}
+
+extension UIViewController {
+
+    func executeAsyncWithIndicator(activityIndicator: UIActivityIndicatorView, action: () -> AnyObject?, completition: (result: AnyObject?) -> Void) {
+        showActivityIndicatory(activityIndicator, uiView: self.view)
+        
+        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), { () -> Void in
+          
+            let result = action()
+            
+            dispatch_async(dispatch_get_main_queue(), { () -> Void in
+                activityIndicator.stopAnimating()
+                self.view.userInteractionEnabled = true
+                
+                completition(result: result)
+            })
+        })
+    }
+    
+    func showActivityIndicatory(activityIndicator: UIActivityIndicatorView, uiView: UIView) {
+        
+        activityIndicator.frame = CGRectMake(0.0, 0.0, 40.0, 40.0);
+        activityIndicator.center = uiView.center
+        activityIndicator.hidesWhenStopped = true
+        activityIndicator.activityIndicatorViewStyle = .Gray
+        activityIndicator.backgroundColor = UIColor.whiteColor().colorWithAlphaComponent(0.1)
+        
+        self.view.userInteractionEnabled = false
+        
+        activityIndicator.startAnimating()
+        uiView.addSubview(activityIndicator)
     }
 }
