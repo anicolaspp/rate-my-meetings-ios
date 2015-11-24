@@ -50,6 +50,25 @@ class LoginViewController: UIViewController {
         self.presentViewController(tabController!, animated: true, completion: nil)
     }
     
+    func loginUserAsync(userName: String?, password: String?) {
+        self.executeAsyncWithIndicator(UIActivityIndicatorView(),
+            action: { () -> AnyObject? in
+                
+                let user = self.userRepository.longin(userName, password: password)
+                
+                return user
+                
+            }, completion: { (result) -> Void in
+                
+                if let user = result as? User {
+                    self.loadMainAppPageFor(user)
+                }
+                else {
+                    self.showAlert("Error", message: "Invalid user or password", handler: nil)
+                }
+        })
+    }
+    
     func getLoginForm() -> UIAlertController {
         
         let login = UIAlertController(title: "Login", message: "Enter Credentials", preferredStyle: .Alert)
@@ -69,22 +88,7 @@ class LoginViewController: UIViewController {
             let user = login.textFields?[0].text
             let pass = login.textFields?[1].text
             
-            self.executeAsyncWithIndicator(UIActivityIndicatorView(),
-                action: { () -> AnyObject? in
-                    
-                    let user = self.userRepository.longin(user, password: pass)
-                    
-                    return user
-
-                }, completion: { (result) -> Void in
-                    
-                    if let user = result as? User {
-                        self.loadMainAppPageFor(user)
-                    }
-                    else {
-                        self.showAlert("Error", message: "Invalid user or password", handler: nil)
-                    }
-            })
+            self.loginUserAsync(user, password: pass)
         }
         
         login.addAction(UIAlertAction(title: "Cancel", style: .Cancel, handler: nil))
