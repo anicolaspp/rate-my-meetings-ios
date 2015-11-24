@@ -18,6 +18,8 @@ class UserVerificationViewController: UIViewController {
     var userRepository: IUserRepository = UserRepositoryStub()
     let activityIndicator = UIActivityIndicatorView()
     
+    var delegate: UserRegistrationCompleteDelegate?
+    
     override func viewDidLoad() {
 
         super.viewDidLoad()
@@ -108,6 +110,7 @@ class UserVerificationViewController: UIViewController {
             let fiendTeamController = self.storyboard?.instantiateViewControllerWithIdentifier("findTeamsController") as! FindTeamsTableViewController
             fiendTeamController.user = newUser
 
+            fiendTeamController.delegate = self
             self.navigationController?.pushViewController(fiendTeamController, animated: true)
         }
     }
@@ -138,7 +141,7 @@ class UserVerificationViewController: UIViewController {
     func validateUser() -> Bool {
         let newUser = self.newUser
             
-        if  newUser != nil {
+        if  newUser == nil {
             registrationFailed()
 
             return false
@@ -165,5 +168,12 @@ extension UserVerificationViewController : UITextFieldDelegate {
         }
         
         return true
+    }
+}
+
+extension UserVerificationViewController : TeamDelegate {
+    func didCreateTeam(team: Team?) {
+        self.delegate?.registrationComplete(self.newUser)
+        self.removeFromParentViewController()
     }
 }

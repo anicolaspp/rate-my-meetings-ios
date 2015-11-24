@@ -12,6 +12,10 @@ protocol UserRegistrationCompleteDelegate {
     func registrationComplete(user: User?) -> Void
 }
 
+protocol TeamDelegate {
+    func didCreateTeam(team: Team?) -> Void
+}
+
 protocol IUserRepository {
     func longin(username: String!, password: String!) -> User?
     func register(companyName: String, email: String, password: String) -> User?

@@ -167,7 +167,7 @@
                                 </constraints>
                                 <state key="normal" title="Register"/>
                                 <connections>
-                                    <segue destination="TOn-pZ-meA" kind="show" id="e1j-YC-rDO"/>
+                                    <segue destination="TOn-pZ-meA" kind="show" identifier="registrationSegue" id="e1j-YC-rDO"/>
                                 </connections>
                             </button>
                         </subviews>
@@ -394,6 +394,11 @@
                     </view>
                     <extendedEdge key="edgesForExtendedLayout" bottom="YES"/>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
+                    <connections>
+                        <outlet property="domainLabel" destination="gTS-lq-PLU" id="9Lc-gW-Sfg"/>
+                        <outlet property="ownerLabel" destination="f2v-Qi-dT9" id="nAi-g9-vvk"/>
+                        <outlet property="teamNameField" destination="lge-Zq-dJK" id="1XM-IX-NHX"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="CjW-er-OYH" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>

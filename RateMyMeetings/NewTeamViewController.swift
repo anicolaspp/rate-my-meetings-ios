@@ -10,12 +10,23 @@ import UIKit
 
 class NewTeamViewController: UIViewController {
 
-    var userRepository: IUserRepository?
-    var teamRepository: ICompanyRepository?
+    let teamRepository: ICompanyRepository = CompanyRepositoryStub()
     
+    var user: User?
+    
+    @IBOutlet weak var domainLabel: UILabel!
+    @IBOutlet weak var ownerLabel: UILabel!
+    @IBOutlet weak var teamNameField: UITextField!
+    
+    var delegate: TeamDelegate?
+    
+
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        ownerLabel.text = user?.email
+        domainLabel.text = user?.email.componentsSeparatedByString("@")[1]
+        
         // Do any additional setup after loading the view.
     }
 
@@ -31,6 +42,10 @@ class NewTeamViewController: UIViewController {
     @IBAction func createNewTeamButton(sender: AnyObject) {
         // Register user
         // Create new team and login
+        let team = teamRepository.team(teamNameField.text!, shouldBeCreateWithOwner: self.user!)
+        
+        self.delegate?.didCreateTeam(team)
+        
         // Return control to login page to login
         
         // let newUser = userRepository?.register("company", email: "email", password: "password")

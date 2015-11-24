@@ -10,23 +10,21 @@ import UIKit
 
 class FindTeamsTableViewController: UITableViewController {
 
-    
-    var teamName: String? = "nperez@me.com"
     var companyRepository: ICompanyRepository? = CompanyRepositoryStub()
     var teams: [Team]!
     var user: User?
     
+    var delegate: TeamDelegate?
     
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        let domain = teamName?.characters.split(isSeparator: { (Character) -> Bool in
-            return Character == "@"
-        })[1]
+        let domain = user?.email?.componentsSeparatedByString("@")[1]
         
         title = String(domain!)
         
-        teams = companyRepository?.getTeamsWithDomain(title!)
+        // need dispatcher here
+        teams = companyRepository?.getTeamsWithDomain(String(domain!))
       
         self.navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .Add, target: self, action: Selector("addNewTeam"))
     }
@@ -46,7 +44,6 @@ class FindTeamsTableViewController: UITableViewController {
         return teams.count
     }
 
-    
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell: UITableViewCell = tableView.dequeueReusableCellWithIdentifier("teamCell", forIndexPath: indexPath)
 
@@ -75,7 +72,17 @@ class FindTeamsTableViewController: UITableViewController {
     }
     
     func addNewTeam() -> Void {
-        let newTeamController = self.storyboard?.instantiateViewControllerWithIdentifier("newTeamViewController")
-        self.presentViewController(newTeamController!, animated: true, completion: nil)
+        let newTeamController = self.storyboard?.instantiateViewControllerWithIdentifier("newTeamViewController") as! NewTeamViewController
+
+        newTeamController.user = self.user
+        newTeamController.delegate = self
+        self.presentViewController(newTeamController, animated: true, completion: nil)
+    }
+}
+
+extension FindTeamsTableViewController : TeamDelegate {
+    func didCreateTeam(team: Team?) -> Void {
+        self.delegate?.didCreateTeam(team)
+        self.removeFromParentViewController()
     }
 }

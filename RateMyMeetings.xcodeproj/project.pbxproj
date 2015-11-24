@@ -107,9 +107,9 @@
 			isa = PBXGroup;
 			children = (
 				067EC3FB1C03D12D003F420A /* UserVerificationViewController.swift */,
-				067EC3F91C039D98003F420A /* NewTeamViewController.swift */,
 				067EC3FD1C041F93003F420A /* FindTeamsTableViewController.swift */,
 				067EC3F71C038C7C003F420A /* TeamMembersTableViewController.swift */,
+				067EC3F91C039D98003F420A /* NewTeamViewController.swift */,
 			);
 			name = Registration;
 			sourceTree = "<group>";

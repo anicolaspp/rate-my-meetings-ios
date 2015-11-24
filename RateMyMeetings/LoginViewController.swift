@@ -69,10 +69,10 @@ class LoginViewController: UIViewController {
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         
         if (segue.identifier == "registrationSegue") {
-//            let target = segue.destinationViewController as! UINavigationController
-//            let registrationController = target.viewControllers.first as! RegistrationViewController
-//            registrationController.userRepository = self.userRepository
-//            registrationController.delegate = self
+            let target = segue.destinationViewController as! UINavigationController
+            let registrationController = target.viewControllers.first as! UserVerificationViewController
+            registrationController.userRepository = self.userRepository
+            registrationController.delegate = self
         
             print("here\n")
         }
@@ -87,6 +87,7 @@ class LoginViewController: UIViewController {
 }
 
 extension LoginViewController : UserRegistrationCompleteDelegate {
+    
     func registrationComplete(user: User?) -> Void {
         self.loggedUser = user
         self.performSegueWithIdentifier("loginSegue", sender: self)
