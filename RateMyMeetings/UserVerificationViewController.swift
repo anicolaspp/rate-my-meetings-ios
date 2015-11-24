@@ -87,20 +87,18 @@ class UserVerificationViewController: UIViewController {
         
         if (validateEmail()) {
         
-            showActivityIndicatory(self.view)
-        
-            dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), { () -> Void in
-        
-                NSThread.sleepForTimeInterval(NSTimeInterval.init(3))
-            
-                let newUser = self.userRepository.register("", email: self.emailField.text!, password: self.passwordField.text!)
-                self.newUser = newUser
-            
-                dispatch_async(dispatch_get_main_queue(), { () -> Void in
-                    self.activityIndicator.stopAnimating()
+            executeAsyncWithIndicator(UIActivityIndicatorView(), action: { () -> AnyObject? in
+                
+                    NSThread.sleepForTimeInterval(NSTimeInterval.init(3))
+                
+                    let newUser = self.userRepository.register("", email: self.emailField.text!, password: self.passwordField.text!)
+                
+                    return newUser
+                
+                }, completion: { (result) -> Void in
+                    
+                    self.newUser = result as? User
                     self.didRegistrationFinish()
-                    self.view.userInteractionEnabled = true
-                })
             })
         }
     }

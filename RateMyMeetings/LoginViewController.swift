@@ -96,7 +96,7 @@ extension UIViewController {
 
 extension UIViewController {
 
-    func executeAsyncWithIndicator(activityIndicator: UIActivityIndicatorView, action: () -> AnyObject?, completition: (result: AnyObject?) -> Void) {
+    func executeAsyncWithIndicator(activityIndicator: UIActivityIndicatorView, action: () -> AnyObject?, completion: (result: AnyObject?) -> Void) {
         showActivityIndicatory(activityIndicator, uiView: self.view)
         
         dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), { () -> Void in
@@ -107,7 +107,7 @@ extension UIViewController {
                 activityIndicator.stopAnimating()
                 self.view.userInteractionEnabled = true
                 
-                completition(result: result)
+                completion(result: result)
             })
         })
     }
