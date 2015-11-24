@@ -42,11 +42,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "RateMyMeetings/UserVerificationViewController.swift"
-            timestampString = "470066416.761831"
+            timestampString = "470076465.343813"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "113"
-            endingLineNumber = "113"
+            startingLineNumber = "127"
+            endingLineNumber = "127"
             landmarkName = "didRegistrationFinish()"
             landmarkType = "5">
          </BreakpointContent>

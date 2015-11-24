@@ -25,6 +25,30 @@ class LoginViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
     
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        
+        if (segue.identifier == "registrationSegue") {
+            let target = segue.destinationViewController as! UINavigationController
+            let registrationController = target.viewControllers.first as! UserVerificationViewController
+            registrationController.userRepository = self.userRepository
+        
+            print("here\n")
+        }
+        
+        if (segue.identifier == "loginSegue") {
+            let target = (segue.destinationViewController as! UITabBarController).viewControllers?.first as! UINavigationController
+            let main = target.viewControllers.first as! FirstViewController
+            
+            main.loggedUser = loggedUser
+        }
+    }
+    
+    @IBAction func loginUser(sender: AnyObject) {
+        
+        let loginForm = getLoginForm()
+        self.presentViewController(loginForm, animated: true, completion: nil)
+    }
+    
     func getLoginForm() -> UIAlertController {
         
         let login = UIAlertController(title: "Login", message: "Enter Credentials", preferredStyle: .Alert)
@@ -58,40 +82,8 @@ class LoginViewController: UIViewController {
         
         return login
     }
-    
-    @IBAction func loginUser(sender: AnyObject) {
-       
-        let loginForm = getLoginForm()
-        self.presentViewController(loginForm, animated: true, completion: nil)
-    }
-
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        
-        if (segue.identifier == "registrationSegue") {
-            let target = segue.destinationViewController as! UINavigationController
-            let registrationController = target.viewControllers.first as! UserVerificationViewController
-            registrationController.userRepository = self.userRepository
-            registrationController.delegate = self
-        
-            print("here\n")
-        }
-        
-        if (segue.identifier == "loginSegue") {
-            let target = (segue.destinationViewController as! UITabBarController).viewControllers?.first as! UINavigationController
-            let main = target.viewControllers.first as! FirstViewController
-            
-            main.loggedUser = loggedUser
-        }
-    }
 }
 
-extension LoginViewController : UserRegistrationCompleteDelegate {
-    
-    func registrationComplete(user: User?) -> Void {
-        self.loggedUser = user
-        self.performSegueWithIdentifier("loginSegue", sender: self)
-    }
-}
 
 extension UIViewController {
     func showAlert(title: String, message: String, handler: ((UIAlertAction) -> Void)?) -> Void {

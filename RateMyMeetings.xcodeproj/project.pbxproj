@@ -160,13 +160,13 @@
 			isa = PBXGroup;
 			children = (
 				06BF4AAC1BFD19E500BCA228 /* AppDelegate.swift */,
-				067EC4001C0420D6003F420A /* Main */,
 				0679E7961C015EDB0003BABC /* LoginViewController.swift */,
 				06BF4AB51BFD19E500BCA228 /* Assets.xcassets */,
 				06BF4AB21BFD19E500BCA228 /* Main.storyboard */,
 				06BF4AB71BFD19E500BCA228 /* LaunchScreen.storyboard */,
 				06BF4ABA1BFD19E500BCA228 /* Info.plist */,
 				067EC4011C0420F2003F420A /* Services */,
+				067EC4001C0420D6003F420A /* Main */,
 				067EC3FF1C04202A003F420A /* Registration */,
 			);
 			path = RateMyMeetings;
