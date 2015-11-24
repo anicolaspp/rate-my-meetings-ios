@@ -11,7 +11,7 @@ import UIKit
 class LoginViewController: UIViewController {
     
     
-    var userRepository: IUserRepository! = UserRepositoryStub()
+    var userRepository = UserRepositoryStub()
     var userId = 0
     var loggedUser: User?
 
@@ -26,7 +26,7 @@ class LoginViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
     
-    func getLogingForm() -> UIAlertController {
+    func getLoginForm() -> UIAlertController {
         
         let login = UIAlertController(title: "Login", message: "Enter Credentials", preferredStyle: .Alert)
         
@@ -45,7 +45,7 @@ class LoginViewController: UIViewController {
             let user = login.textFields?[0].text
             let pass = login.textFields?[1].text
             
-            if let user = self.userRepository!.longin(user, password: pass) {
+            if let user = self.userRepository.longin(user, password: pass) {
                 self.loggedUser = user
                 self.performSegueWithIdentifier("loginSegue", sender: self)
             }
@@ -62,7 +62,7 @@ class LoginViewController: UIViewController {
     
     @IBAction func loginUser(sender: AnyObject) {
        
-        let loginForm = getLogingForm()
+        let loginForm = getLoginForm()
         self.presentViewController(loginForm, animated: true, completion: nil)
     }
 

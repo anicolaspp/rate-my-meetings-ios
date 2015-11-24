@@ -39,28 +39,10 @@ class UserVerificationViewController: UIViewController {
         super.didReceiveMemoryWarning()
     }
     
-    func dismissKeyBoard() {
-        emailField.resignFirstResponder()
-        passwordField.resignFirstResponder()
-    }
-    
-    func showActivityIndicatory(uiView: UIView) {
-
-        activityIndicator.frame = CGRectMake(0.0, 0.0, 40.0, 40.0);
-        activityIndicator.center = uiView.center
-        activityIndicator.hidesWhenStopped = true
-        activityIndicator.activityIndicatorViewStyle = .Gray
-        activityIndicator.backgroundColor = UIColor.whiteColor().colorWithAlphaComponent(0.1)
-
-        self.view.userInteractionEnabled = false
-        
-        activityIndicator.startAnimating()
-        uiView.addSubview(activityIndicator)
-    }
-
     @IBAction func createAccountButton(sender: AnyObject) {
         runRegistration()
     }
+    
     @IBAction func cancelButton(sender: AnyObject) {
         
         if (emailField.text?.isEmpty == false || passwordField.text?.isEmpty == false) {
@@ -81,6 +63,25 @@ class UserVerificationViewController: UIViewController {
     }
     
     var newUser: User?
+    
+    func dismissKeyBoard() {
+        emailField.resignFirstResponder()
+        passwordField.resignFirstResponder()
+    }
+    
+    func showActivityIndicatory(uiView: UIView) {
+        
+        activityIndicator.frame = CGRectMake(0.0, 0.0, 40.0, 40.0);
+        activityIndicator.center = uiView.center
+        activityIndicator.hidesWhenStopped = true
+        activityIndicator.activityIndicatorViewStyle = .Gray
+        activityIndicator.backgroundColor = UIColor.whiteColor().colorWithAlphaComponent(0.1)
+        
+        self.view.userInteractionEnabled = false
+        
+        activityIndicator.startAnimating()
+        uiView.addSubview(activityIndicator)
+    }
     
     func runRegistration() {
         
@@ -107,11 +108,15 @@ class UserVerificationViewController: UIViewController {
     func didRegistrationFinish() {
         if (validateUser()) {
             
-            let fiendTeamController = self.storyboard?.instantiateViewControllerWithIdentifier("findTeamsController") as! FindTeamsTableViewController
-            fiendTeamController.user = newUser
-
-            fiendTeamController.delegate = self
-            self.navigationController?.pushViewController(fiendTeamController, animated: true)
+            // At this point an email has been sent to the new user
+            
+            let registrationDoneAlert = UIAlertController(title: "Registration Completed", message: "Check your email to verify your account.", preferredStyle: .Alert)
+            
+            registrationDoneAlert.addAction(UIAlertAction(title: "OK", style: .Default, handler: { (action) -> Void in
+                self.dismissViewControllerAnimated(true, completion: nil)
+            }))
+            
+            self.presentViewController(registrationDoneAlert, animated: true, completion: nil)
         }
     }
     
@@ -168,12 +173,5 @@ extension UserVerificationViewController : UITextFieldDelegate {
         }
         
         return true
-    }
-}
-
-extension UserVerificationViewController : TeamDelegate {
-    func didCreateTeam(team: Team?) {
-        self.delegate?.registrationComplete(self.newUser)
-        self.removeFromParentViewController()
     }
 }
