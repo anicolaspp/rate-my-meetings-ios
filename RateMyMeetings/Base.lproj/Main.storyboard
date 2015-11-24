@@ -217,14 +217,17 @@
                                 <rect key="frame" x="20" y="221" width="335" height="30"/>
                                 <animations/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits" returnKeyType="go" enablesReturnKeyAutomatically="YES" secureTextEntry="YES"/>
+                                <textInputTraits key="textInputTraits" returnKeyType="go" secureTextEntry="YES"/>
+                                <connections>
+                                    <outlet property="delegate" destination="XGe-Du-7bM" id="Hvp-Z9-9TR"/>
+                                </connections>
                             </textField>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="EK4-j4-JSF">
                                 <rect key="frame" x="20" y="305" width="335" height="30"/>
                                 <animations/>
                                 <state key="normal" title="Create Account"/>
                                 <connections>
-                                    <segue destination="cLf-EM-4bh" kind="show" identifier="createAccountSegue" id="9jV-4q-weX"/>
+                                    <action selector="createAccountButton:" destination="XGe-Du-7bM" eventType="touchUpInside" id="RW1-bG-FJv"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1Vs-yH-3vP">
@@ -353,7 +356,7 @@
         <!--Find Teams Table View Controller-->
         <scene sceneID="Kuq-2c-8uf">
             <objects>
-                <tableViewController id="cLf-EM-4bh" customClass="FindTeamsTableViewController" customModule="RateMyMeetings" customModuleProvider="target" sceneMemberID="viewController">
+                <tableViewController storyboardIdentifier="findTeamsController" id="cLf-EM-4bh" customClass="FindTeamsTableViewController" customModule="RateMyMeetings" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" id="6VB-DP-6k1">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -361,7 +364,7 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <prototypes>
                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="blue" accessoryType="disclosureIndicator" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="teamCell" id="gfA-RC-Bdr">
-                                <rect key="frame" x="0.0" y="92" width="375" height="44"/>
+                                <rect key="frame" x="0.0" y="28" width="375" height="44"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="gfA-RC-Bdr" id="vSj-ve-8aK">
                                     <rect key="frame" x="0.0" y="0.0" width="342" height="43.5"/>
@@ -502,7 +505,7 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <prototypes>
                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="teamMemberCell" id="zRI-5x-44w">
-                                <rect key="frame" x="0.0" y="92" width="375" height="44"/>
+                                <rect key="frame" x="0.0" y="28" width="375" height="44"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="zRI-5x-44w" id="nSj-pP-pFM">
                                     <rect key="frame" x="0.0" y="0.0" width="375" height="43.5"/>

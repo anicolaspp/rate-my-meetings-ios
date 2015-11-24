@@ -16,8 +16,10 @@ class UserVerificationViewController: UIViewController {
     @IBOutlet var tabGesture: UITapGestureRecognizer!
     
     var userRepository: IUserRepository = UserRepositoryStub()
+    let activityIndicator = UIActivityIndicatorView()
     
     override func viewDidLoad() {
+
         super.viewDidLoad()
         
         tabGesture.cancelsTouchesInView = false
@@ -28,17 +30,35 @@ class UserVerificationViewController: UIViewController {
         cancelButton.layer.cornerRadius = 2
         cancelButton.layer.borderWidth = 1
         cancelButton.layer.borderColor = cancelButton.titleColorForState(.Normal)?.CGColor
+        
     }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
     }
     
     func dismissKeyBoard() {
+        emailField.resignFirstResponder()
         passwordField.resignFirstResponder()
     }
+    
+    func showActivityIndicatory(uiView: UIView) {
 
+        activityIndicator.frame = CGRectMake(0.0, 0.0, 40.0, 40.0);
+        activityIndicator.center = uiView.center
+        activityIndicator.hidesWhenStopped = true
+        activityIndicator.activityIndicatorViewStyle = .WhiteLarge
+        activityIndicator.backgroundColor = UIColor.grayColor()
+
+        self.view.userInteractionEnabled = false
+        
+        activityIndicator.startAnimating()
+        uiView.addSubview(activityIndicator)
+    }
+
+    @IBAction func createAccountButton(sender: AnyObject) {
+        runRegistration()
+    }
     @IBAction func cancelButton(sender: AnyObject) {
         
         if (emailField.text?.isEmpty == false || passwordField.text?.isEmpty == false) {
@@ -60,46 +80,74 @@ class UserVerificationViewController: UIViewController {
     
     var newUser: User?
     
-    override func shouldPerformSegueWithIdentifier(identifier: String, sender: AnyObject?) -> Bool {
+    func runRegistration() {
         
-        if (identifier == "createAccountSegue") {
-            if (emailField.text?.isValidEmail() == true && passwordField.text?.isEmpty == false) {
-                
-                let newUser = userRepository.register("", email: emailField.text!, password: passwordField.text!)
-                
-                if  newUser != nil {
-                    let userExistsAlert = UIAlertController(title: "Registration Failed", message: "Seems you have an account already!", preferredStyle: .Alert)
-                    userExistsAlert.addAction(UIAlertAction(title: "OK", style: .Default, handler: nil))
-                    self.presentViewController(userExistsAlert, animated: true, completion: nil)
-                    
-                    return false
-                }
-                
+        if (validateEmail()) {
+        
+            showActivityIndicatory(self.view)
+        
+            dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), { () -> Void in
+        
+                NSThread.sleepForTimeInterval(NSTimeInterval.init(3))
+            
+                let newUser = self.userRepository.register("", email: self.emailField.text!, password: self.passwordField.text!)
                 self.newUser = newUser
-                
-                return true
-            }
-            else
-            {
-                let invalidEmail = UIAlertController(title: "Validation Failed", message: "Check your email and password", preferredStyle: .Alert)
-                invalidEmail.addAction(UIAlertAction(title: "Ok", style: .Default, handler: nil))
-                self.presentViewController(invalidEmail, animated: true, completion: nil)
-                
-                return false
-            }
+            
+                dispatch_async(dispatch_get_main_queue(), { () -> Void in
+                    self.activityIndicator.stopAnimating()
+                    self.didRegistrationFinish()
+                    self.view.userInteractionEnabled = true
+                })
+            })
+        }
+    }
+    
+    func didRegistrationFinish() {
+        if (validateUser()) {
+            
+            let fiendTeamController = self.storyboard?.instantiateViewControllerWithIdentifier("findTeamsController") as! FindTeamsTableViewController
+            fiendTeamController.user = newUser
+
+            self.navigationController?.pushViewController(fiendTeamController, animated: true)
+        }
+    }
+    
+    func validationFailed() {
+        let invalidEmail = UIAlertController(title: "Validation Failed", message: "Check your email and password", preferredStyle: .Alert)
+        invalidEmail.addAction(UIAlertAction(title: "Ok", style: .Default, handler: nil))
+        self.presentViewController(invalidEmail, animated: true, completion: nil)
+    }
+    
+    func registrationFailed() {
+        let userExistsAlert = UIAlertController(title: "Registration Failed", message: "Seems you have an account already!", preferredStyle: .Alert)
+        userExistsAlert.addAction(UIAlertAction(title: "OK", style: .Default, handler: nil))
+        self.presentViewController(userExistsAlert, animated: true, completion: nil)
+    }
+    
+    func validateEmail() -> Bool {
+        
+        if (emailField.text?.isValidEmail() == false || passwordField.text?.isEmpty == true) {
+            validationFailed()
+            
+            return false
         }
         
         return true
     }
-   
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        
-        if (segue.identifier == "createAccountSegue") {
-            let teamLookup = segue.destinationViewController as! FindTeamsTableViewController
-                teamLookup.user = newUser
-            }
-    }
     
+    func validateUser() -> Bool {
+        let newUser = self.newUser
+            
+        if  newUser != nil {
+            registrationFailed()
+
+            return false
+        }
+            
+        self.newUser = newUser
+            
+        return true
+    }
 }
 
 extension UserVerificationViewController : UITextFieldDelegate {
@@ -113,6 +161,7 @@ extension UserVerificationViewController : UITextFieldDelegate {
         }
         else {
             passwordField.resignFirstResponder()
+            runRegistration()
         }
         
         return true
