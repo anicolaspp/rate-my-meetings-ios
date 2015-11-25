@@ -63,4 +63,15 @@ class EventManager {
         
         return events
     }
+    
+    
+    func saveEvents(events: [EKEvent]) {
+        // save on user online profile
+    }
 }
+
+
+
+
+
+

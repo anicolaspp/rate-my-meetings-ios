@@ -67,6 +67,8 @@ class MeetingsTableViewController: UIViewController {
     
     func loadEvents() {
         self.events = self.eventManager.getEventsWithInitialMonth(1, monthsInTheFuture: 1)
+        self.eventManager.saveEvents(events)
+        
         self.tableView.reloadData()
     }
     
@@ -86,12 +88,13 @@ class MeetingsTableViewController: UIViewController {
 }
 
 extension MeetingsTableViewController : EKCalendarChooserDelegate {
+    
     func calendarChooserDidFinish(calendarChooser: EKCalendarChooser) {
         
         if let calendar = calendarChooser.selectedCalendars.first {
         
             self.eventManager.calendar = calendar
-                self.loadEvents()
+            self.loadEvents()
         
             calendarChooser.dismissViewControllerAnimated(true, completion: nil)
         }
