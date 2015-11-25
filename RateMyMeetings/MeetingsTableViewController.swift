@@ -74,7 +74,8 @@ class MeetingsTableViewController: UIViewController {
     {
         let calendarChooser = EKCalendarChooser(selectionStyle: .Single, displayStyle: .AllCalendars, entityType: .Event, eventStore: self.eventManager.eventStore)
         calendarChooser.showsDoneButton = true
-        calendarChooser.showsCancelButton = true
+        
+        calendarChooser.showsCancelButton = self.eventManager.calendar != nil
         calendarChooser.delegate = self
         calendarChooser.modalPresentationStyle = .CurrentContext
       
@@ -101,7 +102,9 @@ extension MeetingsTableViewController : EKCalendarChooserDelegate {
         }
     }
     
-    
+    func calendarChooserDidCancel(calendarChooser: EKCalendarChooser) {
+         calendarChooser.dismissViewControllerAnimated(true, completion: nil)
+    }
 }
 
 extension MeetingsTableViewController :  UITableViewDataSource, UITableViewDelegate {
