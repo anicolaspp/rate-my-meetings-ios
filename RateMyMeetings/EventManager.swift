@@ -16,9 +16,22 @@ class EventManager {
     
     init() {
         self.eventStore = EKEventStore()
-        self.eventStore.sources
+       // self.eventStore.sources
         
         let userDeaults = NSUserDefaults()
+        
+        let calendarToSync = userDeaults.valueForKey("eventkit_events_sync_calendars") as? String
+        
+        if  (calendarToSync != nil) {
+            let calendars = self.eventStore.calendarsForEntityType(.Event)
+        
+            for c in calendars {
+                if (c.title == calendarToSync!) {
+                    self.calendar = c
+                    break
+                }
+            }
+        }
         
         if let key = userDeaults.valueForKey("eventkit_events_access_granted") {
             self.eventsAccessGranted = key as! Bool
@@ -64,6 +77,13 @@ class EventManager {
         return events
     }
     
+    func setCalendar(calendar: EKCalendar) {
+        let userDeaults = NSUserDefaults()
+        
+        userDeaults.setValue(calendar.title, forKey: "eventkit_events_sync_calendars")
+        
+        self.calendar = calendar
+    }
     
     func saveEvents(events: [EKEvent]) {
         // save on user online profile

@@ -37,10 +37,16 @@ class MeetingsTableViewController: UIViewController {
         switch (status) {
         case EKAuthorizationStatus.NotDetermined:
             self.requestAccessToCalendar()
+            self.showCalendarPicker()
             
         case EKAuthorizationStatus.Authorized:
-            self.requestAccessToCalendar()
-//
+            if (self.eventManager.calendar == nil) {
+                self.showCalendarPicker()
+            }
+            else {
+                self.loadEvents()
+            }
+            
             return
         case EKAuthorizationStatus.Restricted, EKAuthorizationStatus.Denied:
             // We need to help them give us permission
@@ -67,7 +73,6 @@ class MeetingsTableViewController: UIViewController {
     
     func loadEvents() {
         self.events = self.eventManager.getEventsWithInitialMonth(1, monthsInTheFuture: 1)
-        self.eventManager.saveEvents(events)
         
         self.tableView.reloadData()
     }
@@ -93,7 +98,7 @@ extension MeetingsTableViewController : EKCalendarChooserDelegate {
         
         if let calendar = calendarChooser.selectedCalendars.first {
         
-            self.eventManager.calendar = calendar
+            self.eventManager.setCalendar(calendar)
             self.loadEvents()
         
             calendarChooser.dismissViewControllerAnimated(true, completion: nil)
