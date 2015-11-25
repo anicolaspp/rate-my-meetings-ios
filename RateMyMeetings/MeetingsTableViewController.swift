@@ -13,22 +13,59 @@ class MeetingsTableViewController: UITableViewController {
 
     var user: User?
     let eventManager = EventManager()
+    var events: [EKEvent] = []
     
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        // Uncomment the following line to preserve selection between presentations
-        // self.clearsSelectionOnViewWillAppear = false
-
-        // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-        // self.navigationItem.rightBarButtonItem = self.editButtonItem()
-        
-        self.requestAccessToEvents()
+        self.checkCalendarAuthorizationStatus()
     }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
+    }
+    
+    func checkCalendarAuthorizationStatus() {
+        let status = EKEventStore.authorizationStatusForEntityType(EKEntityType.Event)
+        
+        switch (status) {
+        case EKAuthorizationStatus.NotDetermined:
+            self.requestAccessToCalendar()
+            
+        case EKAuthorizationStatus.Authorized:
+            self.requestAccessToCalendar()
+//
+            return
+        case EKAuthorizationStatus.Restricted, EKAuthorizationStatus.Denied:
+            // We need to help them give us permission
+//            needPermissionView.fadeIn()
+            return
+        }
+    }
+    
+    func requestAccessToCalendar() {
+        self.eventManager.eventStore.requestAccessToEntityType(EKEntityType.Event, completion: {
+            (accessGranted: Bool, error: NSError?) in
+            
+            if accessGranted == true {
+                dispatch_async(dispatch_get_main_queue(), {
+                    let calendars = self.eventManager.getLocalEventCalendars()
+                    
+                    let calendarsTableController = self.storyboard?.instantiateViewControllerWithIdentifier("calendarsTableController") as! CalendarsTableViewController
+                    
+                    calendarsTableController.calendars = calendars
+                    
+                    self.navigationController?.pushViewController(calendarsTableController, animated: true)
+                    
+                    //self.tableView.refreshTableView()
+                })
+            } else {
+                dispatch_async(dispatch_get_main_queue(), {
+                    //self.needPermissionView.fadeIn()
+                })
+            }
+        })
     }
     
     func requestAccessToEvents() {
@@ -38,69 +75,41 @@ class MeetingsTableViewController: UITableViewController {
                 self.eventManager.eventsAccessGranted = granted
                 self.eventManager.setEventsAccessGranted(granted)
             }
-        }
-        
-    }
-    
-    func accessToCalendar() {
-        let store = EKEventStore()
-        store.requestAccessToEntityType(EKEntityType.Event) { (accessGranted, error) -> Void in
             
-            if (accessGranted) {
-                
-                let calendar = NSCalendar.currentCalendar()
-                
-                let oneDayAgoComponnents = NSDateComponents()
-                oneDayAgoComponnents.day = -1
-                
-                let oneDayAgo = calendar.dateByAddingComponents(oneDayAgoComponnents, toDate: NSDate(), options: NSCalendarOptions.MatchNextTime)
-                
-                let oneYearFromNowComponnent = NSDateComponents()
-                oneYearFromNowComponnent.year = 1
-                
-                let oneYearFromNow = calendar.dateByAddingComponents(oneYearFromNowComponnent, toDate: NSDate(), options: NSCalendarOptions.MatchNextTime)
-                
-                let predicate = store.predicateForEventsWithStartDate(oneDayAgo!, endDate: oneYearFromNow!, calendars:  nil)
-                
-                let events = store.eventsMatchingPredicate(predicate)
-                
-                let firstTittle = events[0].title
-                
-                
-                
-                let alertAction = UIAlertAction(title: "OK", style: UIAlertActionStyle.Default, handler: nil)
-                let alertController = UIAlertController(title: "Alert", message: firstTittle, preferredStyle: UIAlertControllerStyle.Alert)
-                alertController.addAction(alertAction)
-                
-                
-                self.presentViewController(alertController, animated: true, completion: nil)
+            if (granted) {
+                self.loadEvents()
             }
-            
         }
     }
     
+    func loadEvents() {
+        self.events = self.eventManager.getEventsWithInitialMonth(1, monthsInTheFuture: 1)
+        self.tableView.reloadData()
+    }
 
     // MARK: - Table view data source
 
     override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
         // #warning Incomplete implementation, return the number of sections
-        return 0
+        return 1
     }
 
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
-        return 0
+        return events.count
     }
 
-    /*
+    
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCellWithIdentifier("reuseIdentifier", forIndexPath: indexPath)
+        let cell = tableView.dequeueReusableCellWithIdentifier("eventCell", forIndexPath: indexPath)
 
         // Configure the cell...
+        
+        cell.textLabel?.text = self.events[indexPath.row].title
 
         return cell
     }
-    */
+    
 
     /*
     // Override to support conditional editing of the table view.

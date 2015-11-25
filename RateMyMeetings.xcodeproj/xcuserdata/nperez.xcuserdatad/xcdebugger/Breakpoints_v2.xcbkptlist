@@ -70,16 +70,16 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            shouldBeEnabled = "Yes"
+            shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "RateMyMeetings/MeetingsTableViewController.swift"
-            timestampString = "470105506.701477"
+            timestampString = "470114815.000521"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "37"
-            endingLineNumber = "37"
-            landmarkName = "requestAccessToEvents()"
+            startingLineNumber = "34"
+            endingLineNumber = "34"
+            landmarkName = "checkCalendarAuthorizationStatus()"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
