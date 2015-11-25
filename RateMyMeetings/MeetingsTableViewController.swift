@@ -14,6 +14,7 @@ class MeetingsTableViewController: UITableViewController {
     var user: User?
     let eventManager = EventManager()
     var events: [EKEvent] = []
+    var selectedCalendar: EKCalendar?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -55,10 +56,9 @@ class MeetingsTableViewController: UITableViewController {
                     let calendarsTableController = self.storyboard?.instantiateViewControllerWithIdentifier("calendarsTableController") as! CalendarsTableViewController
                     
                     calendarsTableController.calendars = calendars
+                    calendarsTableController.delegate = self
                     
                     self.navigationController?.pushViewController(calendarsTableController, animated: true)
-                    
-                    //self.tableView.refreshTableView()
                 })
             } else {
                 dispatch_async(dispatch_get_main_queue(), {
@@ -66,20 +66,6 @@ class MeetingsTableViewController: UITableViewController {
                 })
             }
         })
-    }
-    
-    func requestAccessToEvents() {
-        self.eventManager.eventStore.requestAccessToEntityType(EKEntityType.Event) { (granted, error) -> Void in
-        
-            if (error == nil) {
-                self.eventManager.eventsAccessGranted = granted
-                self.eventManager.setEventsAccessGranted(granted)
-            }
-            
-            if (granted) {
-                self.loadEvents()
-            }
-        }
     }
     
     func loadEvents() {
@@ -156,4 +142,11 @@ class MeetingsTableViewController: UITableViewController {
     }
     */
 
+}
+
+extension MeetingsTableViewController : CalendarSelectionDelegate {
+    func didSelectCalendar(calendar: EKCalendar) {
+        self.eventManager.calendar = calendar
+        self.loadEvents()
+    }
 }

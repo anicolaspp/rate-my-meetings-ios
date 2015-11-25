@@ -15,16 +15,10 @@ class CalendarsTableViewController: UITableViewController{
     
     var dataLoaded = false
     
+    var delegate: CalendarSelectionDelegate?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        // Uncomment the following line to preserve selection between presentations
-        // self.clearsSelectionOnViewWillAppear = false
-
-        // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-        // self.navigationItem.rightBarButtonItem = self.editButtonItem()
-        
-        
     }
 
     override func didReceiveMemoryWarning() {
@@ -40,7 +34,6 @@ class CalendarsTableViewController: UITableViewController{
     // MARK: - Table view data source
 
     override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
-        // #warning Incomplete implementation, return the number of sections
         
         if (dataLoaded){
             return 1
@@ -52,10 +45,8 @@ class CalendarsTableViewController: UITableViewController{
     }
 
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        // #warning Incomplete implementation, return the number of rows
         return calendars!.count
     }
-
     
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier("calendarCell", forIndexPath: indexPath)
@@ -65,5 +56,12 @@ class CalendarsTableViewController: UITableViewController{
         cell.textLabel?.text = calendars![indexPath.row].title
 
         return cell
+    }
+    
+    override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+        let selectedCalendar = self.calendars![indexPath.row]
+        
+        self.delegate?.didSelectCalendar(selectedCalendar)
+        self.navigationController?.popViewControllerAnimated(true)
     }
 }

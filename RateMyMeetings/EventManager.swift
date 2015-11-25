@@ -12,6 +12,7 @@ import EventKit
 class EventManager {
     let eventStore: EKEventStore
     var eventsAccessGranted: Bool
+    var calendar: EKCalendar?
     
     init() {
         self.eventStore = EKEventStore()
@@ -56,9 +57,7 @@ class EventManager {
         oneMonthFromNowComponnent.month = monthsInTheFuture
         
         let oneMonthFromNow = calendar.dateByAddingComponents(oneMonthFromNowComponnent, toDate: NSDate(), options: NSCalendarOptions.MatchNextTime)
-        
-        let predicate = eventStore.predicateForEventsWithStartDate(oneMonthAgo!, endDate: oneMonthFromNow!, calendars:  nil)
-        
+        let predicate = eventStore.predicateForEventsWithStartDate(oneMonthAgo!, endDate: oneMonthFromNow!, calendars: [self.calendar!])
         let events = eventStore.eventsMatchingPredicate(predicate)
         
         return events

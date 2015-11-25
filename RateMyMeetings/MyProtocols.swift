@@ -7,9 +7,14 @@
 //
 
 import Foundation
+import EventKit
 
 protocol UserRegistrationCompleteDelegate {
     func registrationComplete(user: User?) -> Void
+}
+
+protocol CalendarSelectionDelegate {
+    func didSelectCalendar(calendar: EKCalendar)
 }
 
 protocol TeamDelegate {
