@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0620F3891C04E73B000A233F /* MainTabBarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0620F3881C04E73B000A233F /* MainTabBarViewController.swift */; };
+		0620F38B1C04F19E000A233F /* MeetingsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0620F38A1C04F19E000A233F /* MeetingsTableViewController.swift */; };
+		0620F38D1C04F584000A233F /* EventManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0620F38C1C04F584000A233F /* EventManager.swift */; };
 		0673F5DA1C04E007000E402B /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0673F5D81C04E007000E402B /* Main.storyboard */; };
 		0679E7971C015EDB0003BABC /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0679E7961C015EDB0003BABC /* LoginViewController.swift */; };
 		0679E7981C015EDB0003BABC /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0679E7961C015EDB0003BABC /* LoginViewController.swift */; };
@@ -50,6 +53,9 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		0620F3881C04E73B000A233F /* MainTabBarViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainTabBarViewController.swift; sourceTree = "<group>"; };
+		0620F38A1C04F19E000A233F /* MeetingsTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MeetingsTableViewController.swift; sourceTree = "<group>"; };
+		0620F38C1C04F584000A233F /* EventManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventManager.swift; sourceTree = "<group>"; };
 		0673F5D91C04E007000E402B /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		0679E7961C015EDB0003BABC /* LoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		0679E79A1C0163090003BABC /* UserRepository.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserRepository.swift; sourceTree = "<group>"; };
@@ -119,6 +125,8 @@
 			children = (
 				06BF4AAE1BFD19E500BCA228 /* FirstViewController.swift */,
 				06BF4AB01BFD19E500BCA228 /* SecondViewController.swift */,
+				0620F3881C04E73B000A233F /* MainTabBarViewController.swift */,
+				0620F38A1C04F19E000A233F /* MeetingsTableViewController.swift */,
 			);
 			name = Main;
 			sourceTree = "<group>";
@@ -131,6 +139,7 @@
 				067EC4041C042123003F420A /* Team.swift */,
 				067EC4061C04214D003F420A /* MyProtocols.swift */,
 				067EC4081C04216E003F420A /* Extensions.swift */,
+				0620F38C1C04F584000A233F /* EventManager.swift */,
 			);
 			name = Services;
 			sourceTree = "<group>";
@@ -325,13 +334,16 @@
 				067EC3F81C038C7C003F420A /* TeamMembersTableViewController.swift in Sources */,
 				067EC3FE1C041F93003F420A /* FindTeamsTableViewController.swift in Sources */,
 				0679E7971C015EDB0003BABC /* LoginViewController.swift in Sources */,
+				0620F3891C04E73B000A233F /* MainTabBarViewController.swift in Sources */,
 				06BF4AB11BFD19E500BCA228 /* SecondViewController.swift in Sources */,
 				067EC3FC1C03D12D003F420A /* UserVerificationViewController.swift in Sources */,
 				06BF4AAD1BFD19E500BCA228 /* AppDelegate.swift in Sources */,
 				0679E79B1C0163090003BABC /* UserRepository.swift in Sources */,
 				06BF4AAF1BFD19E500BCA228 /* FirstViewController.swift in Sources */,
 				067EC4091C04216E003F420A /* Extensions.swift in Sources */,
+				0620F38D1C04F584000A233F /* EventManager.swift in Sources */,
 				067EC4051C042123003F420A /* Team.swift in Sources */,
+				0620F38B1C04F19E000A233F /* MeetingsTableViewController.swift in Sources */,
 				067EC4031C04210D003F420A /* User.swift in Sources */,
 				067EC3FA1C039D98003F420A /* NewTeamViewController.swift in Sources */,
 				067EC4071C04214D003F420A /* MyProtocols.swift in Sources */,

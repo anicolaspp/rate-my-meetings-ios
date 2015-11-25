@@ -45,9 +45,10 @@ class LoginViewController: UIViewController {
     
     func loadMainAppPageFor(user: User) {
         
-        let tabController = self.storyboard?.instantiateViewControllerWithIdentifier("mainTabController")
+        let tabController = self.storyboard?.instantiateViewControllerWithIdentifier("mainTabController") as! MainTabBarViewController
+        tabController.user = user
         
-        self.presentViewController(tabController!, animated: true, completion: nil)
+        self.presentViewController(tabController, animated: true, completion: nil)
     }
     
     func loginUserAsync(userName: String?, password: String?) {
