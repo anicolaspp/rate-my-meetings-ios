@@ -32,6 +32,7 @@
 		06BF4AC41BFD19E500BCA228 /* RateMyMeetingsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06BF4AC31BFD19E500BCA228 /* RateMyMeetingsTests.swift */; };
 		06BF4ACF1BFD19E500BCA228 /* RateMyMeetingsUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06BF4ACE1BFD19E500BCA228 /* RateMyMeetingsUITests.swift */; };
 		06BF4ADD1BFD1A9C00BCA228 /* EventKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 06BF4ADC1BFD1A9C00BCA228 /* EventKit.framework */; };
+		A75724A99AD8502D2235BF3F /* Pods_RateMyMeetings.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D4B99933DD02E3E61FBD43FB /* Pods_RateMyMeetings.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -79,6 +80,9 @@
 		06BF4ACE1BFD19E500BCA228 /* RateMyMeetingsUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RateMyMeetingsUITests.swift; sourceTree = "<group>"; };
 		06BF4AD01BFD19E500BCA228 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		06BF4ADC1BFD1A9C00BCA228 /* EventKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = EventKit.framework; path = System/Library/Frameworks/EventKit.framework; sourceTree = SDKROOT; };
+		1BBB6F5FA1BB8F7DA5FB7D25 /* Pods-RateMyMeetings.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RateMyMeetings.debug.xcconfig"; path = "Pods/Target Support Files/Pods-RateMyMeetings/Pods-RateMyMeetings.debug.xcconfig"; sourceTree = "<group>"; };
+		8CA5E14E4DBD040A586875EE /* Pods-RateMyMeetings.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RateMyMeetings.release.xcconfig"; path = "Pods/Target Support Files/Pods-RateMyMeetings/Pods-RateMyMeetings.release.xcconfig"; sourceTree = "<group>"; };
+		D4B99933DD02E3E61FBD43FB /* Pods_RateMyMeetings.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_RateMyMeetings.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -87,6 +91,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				06BF4ADD1BFD1A9C00BCA228 /* EventKit.framework in Frameworks */,
+				A75724A99AD8502D2235BF3F /* Pods_RateMyMeetings.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -149,6 +154,8 @@
 				06BF4AC21BFD19E500BCA228 /* RateMyMeetingsTests */,
 				06BF4ACD1BFD19E500BCA228 /* RateMyMeetingsUITests */,
 				06BF4AAA1BFD19E500BCA228 /* Products */,
+				9287A922C2D04F65985BE0B9 /* Pods */,
+				FC3AF97A1A8847998D3E57CA /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -196,6 +203,23 @@
 			path = RateMyMeetingsUITests;
 			sourceTree = "<group>";
 		};
+		9287A922C2D04F65985BE0B9 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				1BBB6F5FA1BB8F7DA5FB7D25 /* Pods-RateMyMeetings.debug.xcconfig */,
+				8CA5E14E4DBD040A586875EE /* Pods-RateMyMeetings.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
+		FC3AF97A1A8847998D3E57CA /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				D4B99933DD02E3E61FBD43FB /* Pods_RateMyMeetings.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -203,9 +227,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 06BF4AD31BFD19E500BCA228 /* Build configuration list for PBXNativeTarget "RateMyMeetings" */;
 			buildPhases = (
+				B91A5C39446296D0AC8AA090 /* Check Pods Manifest.lock */,
 				06BF4AA51BFD19E500BCA228 /* Sources */,
 				06BF4AA61BFD19E500BCA228 /* Frameworks */,
 				06BF4AA71BFD19E500BCA228 /* Resources */,
+				92414B99FBA829B5A1B37CD2 /* Embed Pods Frameworks */,
+				3822A14A89530AE3C6F2BCAD /* Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -322,6 +349,54 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		3822A14A89530AE3C6F2BCAD /* Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-RateMyMeetings/Pods-RateMyMeetings-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		92414B99FBA829B5A1B37CD2 /* Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-RateMyMeetings/Pods-RateMyMeetings-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		B91A5C39446296D0AC8AA090 /* Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		06BF4AA51BFD19E500BCA228 /* Sources */ = {
@@ -484,6 +559,7 @@
 		};
 		06BF4AD41BFD19E500BCA228 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 1BBB6F5FA1BB8F7DA5FB7D25 /* Pods-RateMyMeetings.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
@@ -496,6 +572,7 @@
 		};
 		06BF4AD51BFD19E500BCA228 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 8CA5E14E4DBD040A586875EE /* Pods-RateMyMeetings.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
