@@ -20,6 +20,7 @@ class MeetingsTableViewController: UITableViewController {
         super.viewDidLoad()
 
         self.checkCalendarAuthorizationStatus()
+        self.navigationController?.toolbarItems?.append(UIBarButtonItem(barButtonSystemItem: .Add, target: self, action: Selector("showCalendarPicker")))
     }
 
     override func didReceiveMemoryWarning() {
@@ -45,20 +46,15 @@ class MeetingsTableViewController: UITableViewController {
         }
     }
     
+    
+    
     func requestAccessToCalendar() {
         self.eventManager.eventStore.requestAccessToEntityType(EKEntityType.Event, completion: {
             (accessGranted: Bool, error: NSError?) in
             
             if accessGranted == true {
                 dispatch_async(dispatch_get_main_queue(), {
-                    let calendars = self.eventManager.getLocalEventCalendars()
-                    
-                    let calendarsTableController = self.storyboard?.instantiateViewControllerWithIdentifier("calendarsTableController") as! CalendarsTableViewController
-                    
-                    calendarsTableController.calendars = calendars
-                    calendarsTableController.delegate = self
-                    
-                    self.navigationController?.pushViewController(calendarsTableController, animated: true)
+                   self.showCalendarPicker()
                 })
             } else {
                 dispatch_async(dispatch_get_main_queue(), {
@@ -72,16 +68,23 @@ class MeetingsTableViewController: UITableViewController {
         self.events = self.eventManager.getEventsWithInitialMonth(1, monthsInTheFuture: 1)
         self.tableView.reloadData()
     }
+    
+    func showCalendarPicker()
+    {
+        let calendarChooser = EKCalendarChooser(selectionStyle: .Single, displayStyle: .AllCalendars, entityType: .Event, eventStore: self.eventManager.eventStore)
+        calendarChooser.showsDoneButton = true
+        calendarChooser.delegate = self
+    
+        self.navigationController?.pushViewController(calendarChooser, animated: true)
+    }
 
     // MARK: - Table view data source
 
     override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
-        // #warning Incomplete implementation, return the number of sections
         return 1
     }
 
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        // #warning Incomplete implementation, return the number of rows
         return events.count
     }
 
@@ -144,9 +147,13 @@ class MeetingsTableViewController: UITableViewController {
 
 }
 
-extension MeetingsTableViewController : CalendarSelectionDelegate {
-    func didSelectCalendar(calendar: EKCalendar) {
-        self.eventManager.calendar = calendar
+extension MeetingsTableViewController : EKCalendarChooserDelegate {
+    func calendarChooserDidFinish(calendarChooser: EKCalendarChooser) {
+        self.eventManager.calendar = calendarChooser.selectedCalendars.first
         self.loadEvents()
+        
+        calendarChooser.navigationController?.popViewControllerAnimated(true)
     }
 }
+
+

@@ -10,7 +10,6 @@
 		0620F3891C04E73B000A233F /* MainTabBarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0620F3881C04E73B000A233F /* MainTabBarViewController.swift */; };
 		0620F38B1C04F19E000A233F /* MeetingsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0620F38A1C04F19E000A233F /* MeetingsTableViewController.swift */; };
 		0620F38D1C04F584000A233F /* EventManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0620F38C1C04F584000A233F /* EventManager.swift */; };
-		0620F3911C055DF1000A233F /* CalendarsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0620F3901C055DF1000A233F /* CalendarsTableViewController.swift */; };
 		0673F5DA1C04E007000E402B /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0673F5D81C04E007000E402B /* Main.storyboard */; };
 		0679E7971C015EDB0003BABC /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0679E7961C015EDB0003BABC /* LoginViewController.swift */; };
 		0679E7981C015EDB0003BABC /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0679E7961C015EDB0003BABC /* LoginViewController.swift */; };
@@ -57,7 +56,6 @@
 		0620F3881C04E73B000A233F /* MainTabBarViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainTabBarViewController.swift; sourceTree = "<group>"; };
 		0620F38A1C04F19E000A233F /* MeetingsTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MeetingsTableViewController.swift; sourceTree = "<group>"; };
 		0620F38C1C04F584000A233F /* EventManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventManager.swift; sourceTree = "<group>"; };
-		0620F3901C055DF1000A233F /* CalendarsTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CalendarsTableViewController.swift; sourceTree = "<group>"; };
 		0673F5D91C04E007000E402B /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		0679E7961C015EDB0003BABC /* LoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		0679E79A1C0163090003BABC /* UserRepository.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserRepository.swift; sourceTree = "<group>"; };
@@ -129,7 +127,6 @@
 				06BF4AB01BFD19E500BCA228 /* SecondViewController.swift */,
 				0620F3881C04E73B000A233F /* MainTabBarViewController.swift */,
 				0620F38A1C04F19E000A233F /* MeetingsTableViewController.swift */,
-				0620F3901C055DF1000A233F /* CalendarsTableViewController.swift */,
 			);
 			name = Main;
 			sourceTree = "<group>";
@@ -337,7 +334,6 @@
 				067EC3F81C038C7C003F420A /* TeamMembersTableViewController.swift in Sources */,
 				067EC3FE1C041F93003F420A /* FindTeamsTableViewController.swift in Sources */,
 				0679E7971C015EDB0003BABC /* LoginViewController.swift in Sources */,
-				0620F3911C055DF1000A233F /* CalendarsTableViewController.swift in Sources */,
 				0620F3891C04E73B000A233F /* MainTabBarViewController.swift in Sources */,
 				06BF4AB11BFD19E500BCA228 /* SecondViewController.swift in Sources */,
 				067EC3FC1C03D12D003F420A /* UserVerificationViewController.swift in Sources */,

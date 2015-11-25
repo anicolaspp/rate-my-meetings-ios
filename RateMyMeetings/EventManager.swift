@@ -16,6 +16,7 @@ class EventManager {
     
     init() {
         self.eventStore = EKEventStore()
+        self.eventStore.sources
         
         let userDeaults = NSUserDefaults()
         
