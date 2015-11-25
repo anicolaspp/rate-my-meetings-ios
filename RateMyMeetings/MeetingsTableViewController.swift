@@ -9,7 +9,7 @@
 import UIKit
 import EventKitUI
 
-class MeetingsTableViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
+class MeetingsTableViewController: UIViewController {
 
     @IBOutlet weak var tableView: UITableView!
     var user: User?
@@ -49,8 +49,6 @@ class MeetingsTableViewController: UIViewController, UITableViewDataSource, UITa
         }
     }
     
-    
-    
     func requestAccessToCalendar() {
         self.eventManager.eventStore.requestAccessToEntityType(EKEntityType.Event, completion: {
             (accessGranted: Bool, error: NSError?) in
@@ -76,87 +74,103 @@ class MeetingsTableViewController: UIViewController, UITableViewDataSource, UITa
     {
         let calendarChooser = EKCalendarChooser(selectionStyle: .Single, displayStyle: .AllCalendars, entityType: .Event, eventStore: self.eventManager.eventStore)
         calendarChooser.showsDoneButton = true
+        calendarChooser.showsCancelButton = true
         calendarChooser.delegate = self
-    
-        self.navigationController?.pushViewController(calendarChooser, animated: true)
-    }
-
-    // MARK: - Table view data source
-
-    func numberOfSectionsInTableView(tableView: UITableView) -> Int {
-        return 1
-    }
-
-    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return events.count
-    }
-
-    
-    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCellWithIdentifier("eventCell", forIndexPath: indexPath)
-
-        // Configure the cell...
+        calendarChooser.modalPresentationStyle = .CurrentContext
+      
+        let navControllerForCalendarChooser = UINavigationController(rootViewController: calendarChooser)
         
-        cell.textLabel?.text = self.events[indexPath.row].title
-
-        return cell
+        self.navigationController?.presentViewController(navControllerForCalendarChooser, animated: true, completion: nil)
     }
-    
-
-    /*
-    // Override to support conditional editing of the table view.
-    override func tableView(tableView: UITableView, canEditRowAtIndexPath indexPath: NSIndexPath) -> Bool {
-        // Return false if you do not want the specified item to be editable.
-        return true
-    }
-    */
-
-    /*
-    // Override to support editing the table view.
-    override func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
-        if editingStyle == .Delete {
-            // Delete the row from the data source
-            tableView.deleteRowsAtIndexPaths([indexPath], withRowAnimation: .Fade)
-        } else if editingStyle == .Insert {
-            // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
-        }    
-    }
-    */
-
-    /*
-    // Override to support rearranging the table view.
-    override func tableView(tableView: UITableView, moveRowAtIndexPath fromIndexPath: NSIndexPath, toIndexPath: NSIndexPath) {
-
-    }
-    */
-
-    /*
-    // Override to support conditional rearranging of the table view.
-    override func tableView(tableView: UITableView, canMoveRowAtIndexPath indexPath: NSIndexPath) -> Bool {
-        // Return false if you do not want the item to be re-orderable.
-        return true
-    }
-    */
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
-    }
-    */
-
 }
 
 extension MeetingsTableViewController : EKCalendarChooserDelegate {
     func calendarChooserDidFinish(calendarChooser: EKCalendarChooser) {
-        self.eventManager.calendar = calendarChooser.selectedCalendars.first
-        self.loadEvents()
         
-        calendarChooser.navigationController?.popViewControllerAnimated(true)
+        if let calendar = calendarChooser.selectedCalendars.first {
+        
+            self.eventManager.calendar = calendar
+                self.loadEvents()
+        
+            calendarChooser.dismissViewControllerAnimated(true, completion: nil)
+        }
+        else {
+            let calendarSelectionAlert = UIAlertController(title: "Selection Error", message: "Please, select a calendar", preferredStyle: .Alert)
+            calendarSelectionAlert.addAction(UIAlertAction(title: "Ok", style: .Default, handler: nil))
+            calendarChooser.presentViewController(calendarSelectionAlert, animated: true, completion: nil)
+        }
     }
+    
+    
+}
+
+extension MeetingsTableViewController :  UITableViewDataSource, UITableViewDelegate {
+    // MARK: - Table view data source
+    
+    func numberOfSectionsInTableView(tableView: UITableView) -> Int {
+        return 1
+    }
+    
+    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return events.count
+    }
+    
+    
+    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCellWithIdentifier("eventCell", forIndexPath: indexPath)
+        
+        // Configure the cell...
+        
+        cell.textLabel?.text = self.events[indexPath.row].title
+        
+        return cell
+    }
+    
+    
+    /*
+    // Override to support conditional editing of the table view.
+    override func tableView(tableView: UITableView, canEditRowAtIndexPath indexPath: NSIndexPath) -> Bool {
+    // Return false if you do not want the specified item to be editable.
+    return true
+    }
+    */
+    
+    /*
+    // Override to support editing the table view.
+    override func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
+    if editingStyle == .Delete {
+    // Delete the row from the data source
+    tableView.deleteRowsAtIndexPaths([indexPath], withRowAnimation: .Fade)
+    } else if editingStyle == .Insert {
+    // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
+    }
+    }
+    */
+    
+    /*
+    // Override to support rearranging the table view.
+    override func tableView(tableView: UITableView, moveRowAtIndexPath fromIndexPath: NSIndexPath, toIndexPath: NSIndexPath) {
+    
+    }
+    */
+    
+    /*
+    // Override to support conditional rearranging of the table view.
+    override func tableView(tableView: UITableView, canMoveRowAtIndexPath indexPath: NSIndexPath) -> Bool {
+    // Return false if you do not want the item to be re-orderable.
+    return true
+    }
+    */
+    
+    /*
+    // MARK: - Navigation
+    
+    // In a storyboard-based application, you will often want to do a little preparation before navigation
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+    // Get the new view controller using segue.destinationViewController.
+    // Pass the selected object to the new view controller.
+    }
+    */
 }
 
 
