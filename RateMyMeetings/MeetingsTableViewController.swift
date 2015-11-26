@@ -28,16 +28,7 @@ class MeetingsTableViewController: UIViewController {
 
         self.checkCalendarAuthorizationStatus()
         
-        
-//        
-//        self._calendarView = CVCalendarView(frame: self.calendarView.frame)
-//        self._calendarView?.calendarDelegate = self
-//        
-//        self.calendarView.addSubview(_calendarView!)
-        
-      //  calendarView.calendarDelegate = self
-        
-
+        self.title = CVDate(date: NSDate()).globalDescription
      }
 
     override func didReceiveMemoryWarning() {
@@ -64,7 +55,7 @@ class MeetingsTableViewController: UIViewController {
         switch (status) {
         case EKAuthorizationStatus.NotDetermined:
             self.requestAccessToCalendar()
-            self.showCalendarPicker()
+            
             
         case EKAuthorizationStatus.Authorized:
             if (self.eventManager.calendar == nil) {
@@ -73,12 +64,9 @@ class MeetingsTableViewController: UIViewController {
             else {
                 self.loadEvents()
             }
-            
-            return
         case EKAuthorizationStatus.Restricted, EKAuthorizationStatus.Denied:
-            // We need to help them give us permission
-//            needPermissionView.fadeIn()
-            return
+            self.requestAccessToCalendar()
+
         }
     }
     
@@ -92,7 +80,7 @@ class MeetingsTableViewController: UIViewController {
                 })
             } else {
                 dispatch_async(dispatch_get_main_queue(), {
-                    //self.needPermissionView.fadeIn()
+                    //self.showCalendarPicker()
                 })
             }
         })
@@ -156,6 +144,10 @@ extension MeetingsTableViewController : CVCalendarViewDelegate, CVCalendarMenuVi
     
     func weekdaySymbolType() -> WeekdaySymbolType {
         return .Short
+    }
+    
+    func presentedDateUpdated(date: CVDate) {
+        self.title = date.globalDescription
     }
 }
 

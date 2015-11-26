@@ -6,7 +6,7 @@
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <scenes>
-        <!--Calendar Delegate-->
+        <!--Calendar Appearance Delegate-->
         <scene sceneID="KQg-zX-Qxv">
             <objects>
                 <viewController id="Q4c-7T-I8a" customClass="MeetingsTableViewController" customModule="RateMyMeetings" customModuleProvider="target" sceneMemberID="viewController">
@@ -18,10 +18,13 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="JJk-jF-0Eq">
-                                <rect key="frame" x="0.0" y="379" width="375" height="288"/>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="JJk-jF-0Eq">
+                                <rect key="frame" x="0.0" y="408" width="375" height="259"/>
                                 <animations/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="259" id="N7f-Sl-8HY"/>
+                                </constraints>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="blue" accessoryType="disclosureIndicator" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="eventCell" id="baY-Uq-bTc">
                                         <rect key="frame" x="0.0" y="92" width="375" height="44"/>
@@ -43,18 +46,18 @@
                                     <outlet property="delegate" destination="Q4c-7T-I8a" id="d5x-48-She"/>
                                 </connections>
                             </tableView>
-                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="vyg-Ri-qkN" customClass="CVCalendarView" customModule="CVCalendar">
-                                <rect key="frame" x="0.0" y="115" width="375" height="227"/>
+                            <view contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="vyg-Ri-qkN" customClass="CVCalendarView" customModule="CVCalendar">
+                                <rect key="frame" x="0.0" y="115" width="375" height="285"/>
                                 <animations/>
-                                <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <connections>
+                                    <outlet property="calendarAppearanceDelegate" destination="Q4c-7T-I8a" id="EkR-lz-Zsg"/>
                                     <outlet property="calendarDelegate" destination="Q4c-7T-I8a" id="SJE-qw-6SR"/>
                                 </connections>
                             </view>
-                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="rOp-n8-vXb" customClass="CVCalendarMenuView" customModule="CVCalendar">
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="rOp-n8-vXb" customClass="CVCalendarMenuView" customModule="CVCalendar">
                                 <rect key="frame" x="0.0" y="64" width="375" height="43"/>
                                 <animations/>
-                                <color key="backgroundColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                 <connections>
                                     <outlet property="menuViewDelegate" destination="Q4c-7T-I8a" id="98v-Z4-hG4"/>
                                 </connections>
@@ -62,6 +65,28 @@
                         </subviews>
                         <animations/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="vyg-Ri-qkN" firstAttribute="top" secondItem="rOp-n8-vXb" secondAttribute="bottom" constant="8" symbolic="YES" id="25J-3B-rtK"/>
+                            <constraint firstItem="rOp-n8-vXb" firstAttribute="top" secondItem="Fll-aM-PWd" secondAttribute="bottom" id="2iu-Nx-enR"/>
+                            <constraint firstItem="JJk-jF-0Eq" firstAttribute="trailing" secondItem="vyg-Ri-qkN" secondAttribute="trailing" id="5cL-hZ-u35"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="rOp-n8-vXb" secondAttribute="trailing" constant="-20" id="8N9-to-pJG"/>
+                            <constraint firstAttribute="trailing" secondItem="vyg-Ri-qkN" secondAttribute="trailing" id="Cmp-YW-eQB"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="vyg-Ri-qkN" secondAttribute="trailing" constant="-20" id="IQg-TX-CkX"/>
+                            <constraint firstItem="vyg-Ri-qkN" firstAttribute="top" secondItem="Mbl-5G-EHm" secondAttribute="top" constant="115" id="VFH-px-J2G"/>
+                            <constraint firstItem="JJk-jF-0Eq" firstAttribute="leading" secondItem="Mbl-5G-EHm" secondAttribute="leadingMargin" constant="-20" id="XhX-px-2NM"/>
+                            <constraint firstItem="vyg-Ri-qkN" firstAttribute="leading" secondItem="Mbl-5G-EHm" secondAttribute="leading" id="c4r-9U-8Ex"/>
+                            <constraint firstAttribute="bottom" secondItem="JJk-jF-0Eq" secondAttribute="bottom" id="dWa-Z0-ACA"/>
+                            <constraint firstItem="rOp-n8-vXb" firstAttribute="trailing" secondItem="vyg-Ri-qkN" secondAttribute="trailing" id="dt5-NF-QLx"/>
+                            <constraint firstItem="JJk-jF-0Eq" firstAttribute="top" secondItem="vyg-Ri-qkN" secondAttribute="bottom" constant="37" id="hQR-dS-Sso"/>
+                            <constraint firstItem="vyg-Ri-qkN" firstAttribute="leading" secondItem="JJk-jF-0Eq" secondAttribute="leading" id="ie4-9k-oj9"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="JJk-jF-0Eq" secondAttribute="trailing" constant="-20" id="mDe-hL-zXf"/>
+                            <constraint firstItem="vyg-Ri-qkN" firstAttribute="top" secondItem="rOp-n8-vXb" secondAttribute="bottom" constant="8" id="pv7-4Q-fAS"/>
+                            <constraint firstItem="vyg-Ri-qkN" firstAttribute="leading" secondItem="rOp-n8-vXb" secondAttribute="leading" id="pyH-Tb-old"/>
+                            <constraint firstItem="rOp-n8-vXb" firstAttribute="leading" secondItem="Mbl-5G-EHm" secondAttribute="leadingMargin" constant="-20" id="rMx-sn-l5Q"/>
+                            <constraint firstItem="rOp-n8-vXb" firstAttribute="top" secondItem="Fll-aM-PWd" secondAttribute="bottom" id="sX2-PV-mch"/>
+                            <constraint firstItem="vyg-Ri-qkN" firstAttribute="leading" secondItem="Mbl-5G-EHm" secondAttribute="leadingMargin" constant="-20" id="tcn-iw-7Os"/>
+                            <constraint firstItem="JJk-jF-0Eq" firstAttribute="top" secondItem="vyg-Ri-qkN" secondAttribute="bottom" constant="37" id="yhd-XP-gov"/>
+                        </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="cMc-Pu-IvX">
                         <barButtonItem key="rightBarButtonItem" style="plain" systemItem="add" id="GYr-VL-9gs">
@@ -299,7 +324,7 @@
                                 <rect key="frame" x="0.0" y="28" width="375" height="44"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="gfA-RC-Bdr" id="vSj-ve-8aK">
-                                    <rect key="frame" x="0.0" y="0.0" width="342" height="44"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="342" height="43.5"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <animations/>
                                 </tableViewCellContentView>
@@ -445,7 +470,7 @@
                                 <rect key="frame" x="0.0" y="28" width="375" height="44"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="zRI-5x-44w" id="nSj-pP-pFM">
-                                    <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="375" height="43.5"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <animations/>
                                 </tableViewCellContentView>
@@ -463,11 +488,11 @@
             </objects>
             <point key="canvasLocation" x="980.5" y="1776.5"/>
         </scene>
-        <!--First-->
+        <!--Navigation Controller-->
         <scene sceneID="V3U-8N-sce">
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="XaL-z5-9Jy" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="First" image="first" id="acW-dT-cKf"/>
+                    <tabBarItem key="tabBarItem" systemItem="featured" id="acW-dT-cKf"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="7xQ-c1-IXp">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
@@ -566,7 +591,6 @@
         </scene>
     </scenes>
     <resources>
-        <image name="first" width="30" height="30"/>
         <image name="second" width="30" height="30"/>
     </resources>
 </document>
