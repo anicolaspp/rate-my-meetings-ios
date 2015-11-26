@@ -19,6 +19,15 @@ extension String {
     }
 }
 
+extension NSDate {
+    func atMidnight() -> NSDate {
+        let calendar = NSCalendar.currentCalendar().copy() as! NSCalendar
+        calendar.timeZone = NSTimeZone.systemTimeZone()
+        
+       return calendar.startOfDayForDate(self)
+    }
+}
+
 extension UIViewController {
     func showAlert(title: String, message: String, handler: ((UIAlertAction) -> Void)?) -> Void {
         let alert = UIAlertController(title: title, message: message, preferredStyle: .Alert)

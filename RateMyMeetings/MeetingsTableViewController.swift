@@ -76,7 +76,7 @@ class MeetingsTableViewController: UIViewController {
                 self.showCalendarPicker()
             }
             else {
-                self.loadEvents()
+                self.loadEvents(NSDate())
             }
         case EKAuthorizationStatus.Restricted, EKAuthorizationStatus.Denied:
             self.requestAccessToCalendar()
@@ -100,8 +100,8 @@ class MeetingsTableViewController: UIViewController {
         })
     }
     
-    func loadEvents() {
-        self.events = self.eventManager.getEventsWithInitialMonth(1, monthsInTheFuture: 1)
+    func loadEvents(currentDay: NSDate) {
+        self.events = self.eventManager.getEventForDay(currentDay)
         
         self.tableView.reloadData()
     }
@@ -128,7 +128,7 @@ extension MeetingsTableViewController : EKCalendarChooserDelegate {
         if let calendar = calendarChooser.selectedCalendars.first {
         
             self.eventManager.setCalendar(calendar)
-            self.loadEvents()
+            self.loadEvents(NSDate())
         
             calendarChooser.dismissViewControllerAnimated(true, completion: nil)
         }
@@ -162,6 +162,12 @@ extension MeetingsTableViewController : CVCalendarViewDelegate, CVCalendarMenuVi
     
     func presentedDateUpdated(date: CVDate) {
         self.title = date.globalDescription
+        
+        let currentDate = date.convertedDate()?.atMidnight()
+        
+        print(currentDate)
+        
+        self.loadEvents(currentDate!)
     }
 }
 

@@ -63,15 +63,36 @@ class EventManager {
         let calendar = NSCalendar.currentCalendar()
         
         let oneMonthAgoComponnents = NSDateComponents()
-        oneMonthAgoComponnents.month = monthsAgo * -1
+//        oneMonthAgoComponnents. = monthsAgo * -1
         
         let oneMonthAgo = calendar.dateByAddingComponents(oneMonthAgoComponnents, toDate: NSDate(), options: NSCalendarOptions.MatchNextTime)
         
         let oneMonthFromNowComponnent = NSDateComponents()
-        oneMonthFromNowComponnent.month = monthsInTheFuture
+        oneMonthFromNowComponnent.day = monthsInTheFuture
         
         let oneMonthFromNow = calendar.dateByAddingComponents(oneMonthFromNowComponnent, toDate: NSDate(), options: NSCalendarOptions.MatchNextTime)
         let predicate = eventStore.predicateForEventsWithStartDate(oneMonthAgo!, endDate: oneMonthFromNow!, calendars: [self.calendar!])
+        //let predicate = eventStore.predicateForEventsWithStartDate(NSDate(), endDate: NSDate(), calendars: [self.calendar!])
+        
+        let events = eventStore.eventsMatchingPredicate(predicate)
+        
+        return events
+    }
+    
+    func getEventForDay(day: NSDate) -> [EKEvent] {
+       // let calendar = NSCalendar.currentCalendar()
+        
+        //let todayComponnents = NSDateComponents()
+        //        oneMonthAgoComponnents. = monthsAgo * -1
+        
+        let todayComponnents = day.atMidnight()
+        
+        let tomorrowComponnent = NSDate(timeInterval: NSTimeInterval.init(86400), sinceDate: day)
+        
+        
+        let predicate = eventStore.predicateForEventsWithStartDate(todayComponnents, endDate: tomorrowComponnent, calendars: [self.calendar!])
+        //let predicate = eventStore.predicateForEventsWithStartDate(NSDate(), endDate: NSDate(), calendars: [self.calendar!])
+        
         let events = eventStore.eventsMatchingPredicate(predicate)
         
         return events
