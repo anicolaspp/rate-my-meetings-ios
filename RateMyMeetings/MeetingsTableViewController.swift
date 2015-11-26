@@ -16,6 +16,8 @@ class MeetingsTableViewController: UIViewController {
     @IBOutlet weak var menuView: CVCalendarMenuView!
     @IBOutlet weak var tableView: UITableView!
     
+    @IBOutlet weak var actionButton: UIBarButtonItem!
+    
     var _calendarView: CVCalendarView?
     
     var user: User?
@@ -46,7 +48,19 @@ class MeetingsTableViewController: UIViewController {
     
     
     @IBAction func showCalendars(sender: UIBarButtonItem) {
-        showCalendarPicker()
+        
+        let actionSheet = UIAlertController(title: "Actions", message: "Actions", preferredStyle: .ActionSheet)
+        
+        actionSheet.addAction(UIAlertAction(title: "Change Calendar", style: .Default, handler: { (action) -> Void in
+            self.showCalendarPicker()
+        }))
+        
+        actionSheet.addAction(UIAlertAction(title: "Invite people to this calendar", style: .Default, handler: nil))
+        
+        actionSheet.addAction(UIAlertAction(title: "Cancel", style: .Destructive, handler: nil))
+        
+        self.presentViewController(actionSheet, animated: true, completion: nil)
+//        showCalendarPicker()
     }
     
     func checkCalendarAuthorizationStatus() {

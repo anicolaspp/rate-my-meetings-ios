@@ -30,7 +30,7 @@
                                         <rect key="frame" x="0.0" y="92" width="375" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="baY-Uq-bTc" id="oxF-Kr-MTN">
-                                            <rect key="frame" x="0.0" y="0.0" width="342" height="44"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="342" height="43.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <animations/>
                                         </tableViewCellContentView>
@@ -89,7 +89,7 @@
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="cMc-Pu-IvX">
-                        <barButtonItem key="rightBarButtonItem" style="plain" systemItem="add" id="GYr-VL-9gs">
+                        <barButtonItem key="rightBarButtonItem" style="plain" systemItem="action" id="GYr-VL-9gs">
                             <connections>
                                 <action selector="showCalendars:" destination="Q4c-7T-I8a" id="OF0-Ub-uXb"/>
                             </connections>
@@ -97,6 +97,7 @@
                     </navigationItem>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
                     <connections>
+                        <outlet property="actionButton" destination="GYr-VL-9gs" id="Bao-KT-IbJ"/>
                         <outlet property="calendarView" destination="vyg-Ri-qkN" id="bCZ-RM-95n"/>
                         <outlet property="menuView" destination="rOp-n8-vXb" id="mhj-m0-q22"/>
                         <outlet property="tableView" destination="JJk-jF-0Eq" id="lxu-CB-2Ah"/>
