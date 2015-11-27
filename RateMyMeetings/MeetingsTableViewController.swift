@@ -54,9 +54,16 @@ class MeetingsTableViewController: UIViewController {
         actionSheet.addAction(UIAlertAction(title: "Change Calendar", style: .Default, handler: { (action) -> Void in
             self.showCalendarPicker()
         }))
-        
-        actionSheet.addAction(UIAlertAction(title: "Invite people to this calendar", style: .Default, handler: nil))
-        
+        actionSheet.addAction(UIAlertAction(title: "Invite people to this calendar", style: .Default, handler: {(action) -> Void in
+            
+            let calendarToShare = ["my website", NSURL(string: "http://www.google.com")!]
+            
+            let avc = UIActivityViewController(activityItems: calendarToShare, applicationActivities: nil)
+            avc.setValue("Join my calendar to rate events together", forKey: "subject")
+
+            self.presentViewController(avc, animated: true, completion: nil)
+            
+        }))
         actionSheet.addAction(UIAlertAction(title: "Cancel", style: .Destructive, handler: nil))
         
         self.presentViewController(actionSheet, animated: true, completion: nil)
@@ -206,6 +213,8 @@ extension MeetingsTableViewController :  UITableViewDataSource, UITableViewDeleg
         // Configure the cell...
         
         cell.textLabel?.text = self.events[indexPath.row].title
+        cell.detailTextLabel?.text = self.events[indexPath.row].startDate.formatted()
+        
         
         if (indexPath.row % 2 == 0) {
             cell.backgroundColor = UIColor(white: 0.9, alpha: 0.1)
@@ -214,5 +223,15 @@ extension MeetingsTableViewController :  UITableViewDataSource, UITableViewDeleg
         return cell
     }
 }
+
+
+
+
+
+
+
+
+
+
 
 

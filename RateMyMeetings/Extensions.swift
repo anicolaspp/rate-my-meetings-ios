@@ -26,6 +26,17 @@ extension NSDate {
         
        return calendar.startOfDayForDate(self)
     }
+    
+    func formatted() -> String {
+        let calendar = NSCalendar.currentCalendar()
+        let comp = calendar.components([.Hour, .Minute], fromDate: self)
+        
+        let mins = comp.minute < 10 ? "0" + String(comp.minute) : String(comp.minute)
+        
+        let result = String(comp.hour) + ":" + mins
+        
+        return result
+    }
 }
 
 extension UIViewController {
