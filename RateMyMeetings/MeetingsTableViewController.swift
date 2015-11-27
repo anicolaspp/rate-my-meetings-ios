@@ -190,6 +190,10 @@ extension MeetingsTableViewController :  UITableViewDataSource, UITableViewDeleg
         
         cell.textLabel?.text = self.events[indexPath.row].title
         
+        if (indexPath.row % 2 == 0) {
+            cell.backgroundColor = UIColor(white: 0.9, alpha: 0.1)
+        }
+        
         return cell
     }
 }
