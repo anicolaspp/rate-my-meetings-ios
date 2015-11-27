@@ -89,6 +89,11 @@
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="cMc-Pu-IvX">
+                        <barButtonItem key="leftBarButtonItem" title="Weekly" style="plain" id="Ice-4k-27z">
+                            <connections>
+                                <action selector="changeCalendarViewMode:" destination="Q4c-7T-I8a" id="JQP-Du-BJ6"/>
+                            </connections>
+                        </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" style="plain" systemItem="action" id="GYr-VL-9gs">
                             <connections>
                                 <action selector="showCalendars:" destination="Q4c-7T-I8a" id="OF0-Ub-uXb"/>
@@ -99,6 +104,7 @@
                     <connections>
                         <outlet property="actionButton" destination="GYr-VL-9gs" id="Bao-KT-IbJ"/>
                         <outlet property="calendarView" destination="vyg-Ri-qkN" id="bCZ-RM-95n"/>
+                        <outlet property="changeCalendarModeItemButton" destination="Ice-4k-27z" id="WFt-px-3Xu"/>
                         <outlet property="menuView" destination="rOp-n8-vXb" id="mhj-m0-q22"/>
                         <outlet property="tableView" destination="JJk-jF-0Eq" id="lxu-CB-2Ah"/>
                     </connections>

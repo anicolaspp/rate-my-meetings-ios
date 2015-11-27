@@ -17,6 +17,7 @@ class MeetingsTableViewController: UIViewController {
     @IBOutlet weak var tableView: UITableView!
     
     @IBOutlet weak var actionButton: UIBarButtonItem!
+    @IBOutlet weak var changeCalendarModeItemButton: UIBarButtonItem!
     
     var _calendarView: CVCalendarView?
     
@@ -46,7 +47,6 @@ class MeetingsTableViewController: UIViewController {
         self.menuView.commitMenuViewUpdate()
     }
     
-    
     @IBAction func showCalendars(sender: UIBarButtonItem) {
         
         let actionSheet = UIAlertController(title: "Actions", message: "Actions", preferredStyle: .ActionSheet)
@@ -60,9 +60,12 @@ class MeetingsTableViewController: UIViewController {
         actionSheet.addAction(UIAlertAction(title: "Cancel", style: .Destructive, handler: nil))
         
         self.presentViewController(actionSheet, animated: true, completion: nil)
-//        showCalendarPicker()
     }
     
+    @IBAction func changeCalendarViewMode(sender: AnyObject) {
+        changeCalendarMode()
+    }
+   
     func checkCalendarAuthorizationStatus() {
         let status = EKEventStore.authorizationStatusForEntityType(EKEntityType.Event)
         
@@ -106,25 +109,32 @@ class MeetingsTableViewController: UIViewController {
         self.tableView.reloadData()
     }
     
-    func showCalendarPicker()
-    {
+    func showCalendarPicker() {
         let calendarChooser = EKCalendarChooser(selectionStyle: .Single, displayStyle: .AllCalendars, entityType: .Event, eventStore: self.eventManager.eventStore)
+
         calendarChooser.showsDoneButton = true
-        
-       
         calendarChooser.delegate = self
         calendarChooser.modalPresentationStyle = .CurrentContext
         
         if let c = self.eventManager.calendar {
             calendarChooser.selectedCalendars = [c]
         }
-//        else {
-//            calendarChooser.showsCancelButton = false
-//        }
         
         let navControllerForCalendarChooser = UINavigationController(rootViewController: calendarChooser)
         
         self.navigationController?.presentViewController(navControllerForCalendarChooser, animated: true, completion: nil)
+    }
+    
+    func changeCalendarMode() {
+        switch self.calendarView.calendarMode! {
+        case CVCalendarViewPresentationMode.MonthView:
+            calendarView.changeMode(.WeekView)
+            changeCalendarModeItemButton.title = "Monthly"
+
+        case CVCalendarViewPresentationMode.WeekView:
+            calendarView.changeMode(.MonthView)
+            changeCalendarModeItemButton.title = "Weekly"
+        }
     }
 }
 
