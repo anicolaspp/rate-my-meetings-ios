@@ -111,10 +111,17 @@ class MeetingsTableViewController: UIViewController {
         let calendarChooser = EKCalendarChooser(selectionStyle: .Single, displayStyle: .AllCalendars, entityType: .Event, eventStore: self.eventManager.eventStore)
         calendarChooser.showsDoneButton = true
         
-        calendarChooser.showsCancelButton = self.eventManager.calendar != nil
+       
         calendarChooser.delegate = self
         calendarChooser.modalPresentationStyle = .CurrentContext
-      
+        
+        if let c = self.eventManager.calendar {
+            calendarChooser.selectedCalendars = [c]
+        }
+//        else {
+//            calendarChooser.showsCancelButton = false
+//        }
+        
         let navControllerForCalendarChooser = UINavigationController(rootViewController: calendarChooser)
         
         self.navigationController?.presentViewController(navControllerForCalendarChooser, animated: true, completion: nil)
