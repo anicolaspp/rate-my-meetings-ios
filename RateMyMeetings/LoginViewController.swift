@@ -49,45 +49,7 @@ class LoginViewController: UIViewController {
             let returningUser = NSUserDefaults.standardUserDefaults().boolForKey("logged")
             
             if returningUser == true {
-                
-                let authContext = LAContext()
-                var err: NSError?
-                
-                if authContext.canEvaluatePolicy(.DeviceOwnerAuthenticationWithBiometrics, error: &err) {
-                    authContext.evaluatePolicy(.DeviceOwnerAuthenticationWithBiometrics, localizedReason: "Fast and secure login", reply: { (access, error) -> Void in
-                        if access {
-                            if let userName = NSUserDefaults.standardUserDefaults().stringForKey("username"){
-                                if let pass = KeychainWrapper.stringForKey(kSecValueData as String) {
-                                    self.loginUserAsync(userName, password: pass)
-                                }
-                            }
-                        }
-                        else {
-                            // If authentication failed then show a message to the console with a short description.
-                            // In case that the error is a user fallback, then show the password alert view.
-                            print(error?.localizedDescription)
-                            
-                            switch error!.code {
-                                
-                            case LAError.SystemCancel.rawValue:
-                                print("Authentication was cancelled by the system")
-                                
-                            case LAError.UserCancel.rawValue:
-                                print("Authentication was cancelled by the user")
-                                
-                            case LAError.UserFallback.rawValue:
-                                print("User selected to enter custom password")
-                               
-                                
-                            default:
-                                print("Authentication failed")
-                               
-                            }
-                        }
-                    })
-                    
-                    
-                }
+                self.accessingTouchId()
             }
         }
     }
@@ -118,11 +80,8 @@ class LoginViewController: UIViewController {
             }, completion: { (result) -> Void in
                 
                 if let user = result as? User {
-                    NSUserDefaults.standardUserDefaults().setBool(true, forKey: "logged")
-                    NSUserDefaults.standardUserDefaults().setValue(user.email, forKey: "username")
-                    
-                    KeychainWrapper.setString(password!, forKey: kSecValueData as String)
-                    
+                    self.storeCredentials(user, pass: password!)
+                
                     self.loginViewController?.dismissViewControllerAnimated(true, completion: nil)
                     self.loadMainAppPageFor(user)
                 }
@@ -159,5 +118,57 @@ class LoginViewController: UIViewController {
         login.addAction(ok)
         
         return login
+    }
+    
+    func storeCredentials(user: User, pass: String) {
+        NSUserDefaults.standardUserDefaults().setBool(true, forKey: "logged")
+        NSUserDefaults.standardUserDefaults().setValue(user.email, forKey: "username")
+        
+        KeychainWrapper.setString(pass, forKey: kSecValueData as String)
+    }
+    
+    func accessingTouchId() {
+        let authContext = LAContext()
+        var err: NSError?
+        
+        if authContext.canEvaluatePolicy(.DeviceOwnerAuthenticationWithBiometrics, error: &err) {
+            authContext.evaluatePolicy(.DeviceOwnerAuthenticationWithBiometrics, localizedReason: "Fast and secure login", reply: { (access, error) -> Void in
+                if access {
+                    self.logingWithStoredCredentials()
+                }
+                else {
+                    self.handleTouchIdFailure(error)
+                }
+            })
+        }
+    }
+    
+    func logingWithStoredCredentials() {
+        if let userName = NSUserDefaults.standardUserDefaults().stringForKey("username") {
+            if let pass = KeychainWrapper.stringForKey(kSecValueData as String) {
+                self.loginUserAsync(userName, password: pass)
+            }
+        }
+    }
+    
+    func handleTouchIdFailure(error: NSError?) {
+        print(error?.localizedDescription)
+        
+        switch error!.code {
+            
+        case LAError.SystemCancel.rawValue:
+            print("Authentication was cancelled by the system")
+            
+        case LAError.UserCancel.rawValue:
+            print("Authentication was cancelled by the user")
+            
+        case LAError.UserFallback.rawValue:
+            print("User selected to enter custom password")
+            
+            
+        default:
+            print("Authentication failed")
+            
+        }
     }
 }
