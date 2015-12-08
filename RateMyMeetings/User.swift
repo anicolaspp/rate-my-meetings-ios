@@ -10,7 +10,7 @@ import Foundation
 import Parse
 
 class User : PFUser {
-    //@NSManaged var inUseCalendar: Calendar?
+    @NSManaged var inUseCalendarId: String?
     @NSManaged var calendars: [Calendar]?
     
 }

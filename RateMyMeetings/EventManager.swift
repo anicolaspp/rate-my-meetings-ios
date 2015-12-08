@@ -17,21 +17,6 @@ class EventManager {
     
     init() {
         self.eventStore = EKEventStore()
-       // self.eventStore.sources
-      
-        let user = PFUser.currentUser() as! User
-        let query = PFQuery(className: Calendar.parseClassName())
-        
-        query.whereKey("owner", equalTo: PFUser(withoutDataWithObjectId: user.objectId))
-        
-        do {
-            let result = try query.findObjects().first as? Calendar
-            
-            if let id = result?.localEntity {
-                self.calendar = self.eventStore.calendarWithIdentifier(id)
-            }
-        }
-        catch _ {}
        
         let userDeaults = NSUserDefaults()
         
@@ -40,6 +25,29 @@ class EventManager {
         }
         else {
             self.eventsAccessGranted = false
+        }
+        
+        self.setStoredCalendar()
+    }
+    
+    private func setStoredCalendar() {
+        
+        let user = PFUser.currentUser() as! User
+        
+        if let id = user.inUseCalendarId {
+            let query = PFQuery(className: Calendar.parseClassName())
+            query.whereKey("objectId", equalTo: id)
+            
+            do {
+                let result = try query.findObjects().first as? Calendar
+                
+                if let calendarid = result?.localEntity {
+                    self.calendar = self.eventStore.calendarWithIdentifier(calendarid)
+                }
+            }
+            catch let excep as NSError {
+                print(excep)
+            }
         }
     }
     
@@ -66,8 +74,6 @@ class EventManager {
         let calendar = NSCalendar.currentCalendar()
         
         let oneMonthAgoComponnents = NSDateComponents()
-//        oneMonthAgoComponnents. = monthsAgo * -1
-        
         let oneMonthAgo = calendar.dateByAddingComponents(oneMonthAgoComponnents, toDate: NSDate(), options: NSCalendarOptions.MatchNextTime)
         
         let oneMonthFromNowComponnent = NSDateComponents()
@@ -75,7 +81,6 @@ class EventManager {
         
         let oneMonthFromNow = calendar.dateByAddingComponents(oneMonthFromNowComponnent, toDate: NSDate(), options: NSCalendarOptions.MatchNextTime)
         let predicate = eventStore.predicateForEventsWithStartDate(oneMonthAgo!, endDate: oneMonthFromNow!, calendars: [self.calendar!])
-        //let predicate = eventStore.predicateForEventsWithStartDate(NSDate(), endDate: NSDate(), calendars: [self.calendar!])
         
         let events = eventStore.eventsMatchingPredicate(predicate)
         
@@ -83,19 +88,10 @@ class EventManager {
     }
     
     func getEventForDay(day: NSDate) -> [EKEvent] {
-       // let calendar = NSCalendar.currentCalendar()
-        
-        //let todayComponnents = NSDateComponents()
-        //        oneMonthAgoComponnents. = monthsAgo * -1
-        
+
         let todayComponnents = day.atMidnight()
-        
         let tomorrowComponnent = NSDate(timeInterval: NSTimeInterval.init(86400), sinceDate: day)
-        
-        
         let predicate = eventStore.predicateForEventsWithStartDate(todayComponnents, endDate: tomorrowComponnent, calendars: [self.calendar!])
-        //let predicate = eventStore.predicateForEventsWithStartDate(NSDate(), endDate: NSDate(), calendars: [self.calendar!])
-        
         let events = eventStore.eventsMatchingPredicate(predicate)
         
         return events
@@ -104,16 +100,32 @@ class EventManager {
     func setCalendar(calendar: EKCalendar) {
 
         let user = PFUser.currentUser() as! User
-        let pfcalendar = Calendar()
+        let query = PFQuery(className: Calendar.parseClassName())
         
-        pfcalendar.owner = user
-        pfcalendar.name = calendar.title
-        pfcalendar.localEntity = String( calendar.calendarIdentifier )
+        query
+            .whereKey("owner", equalTo: PFUser(withoutDataWithObjectId: user.objectId))
+            .whereKey("localEntity", equalTo: calendar.calendarIdentifier)
         
-        print(pfcalendar.localEntity)
-        
-        let t = pfcalendar.saveInBackground()
-        t.waitUntilFinished()
+        query.getFirstObjectInBackgroundWithBlock { (rcalendar, error) -> Void in
+            if let remoteCalendar = rcalendar {
+                print("Calendar Found")
+                
+                user.inUseCalendarId = remoteCalendar.objectId
+                user.saveInBackground()
+            }
+            else {
+                let pfcalendar = Calendar()
+                
+                pfcalendar.owner = user
+                pfcalendar.name = calendar.title
+                pfcalendar.localEntity = String( calendar.calendarIdentifier )
+                
+                pfcalendar.saveInBackgroundWithBlock({ (saved, savingError) -> Void in
+                    user.inUseCalendarId = pfcalendar.objectId
+                    user.saveInBackground()
+                })
+            }
+        }
         
         self.calendar = calendar
     }
