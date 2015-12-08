@@ -21,7 +21,6 @@
 		0679E79D1C0163090003BABC /* UserRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0679E79A1C0163090003BABC /* UserRepository.swift */; };
 		067EC3F81C038C7C003F420A /* TeamMembersTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 067EC3F71C038C7C003F420A /* TeamMembersTableViewController.swift */; };
 		067EC3FA1C039D98003F420A /* NewTeamViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 067EC3F91C039D98003F420A /* NewTeamViewController.swift */; };
-		067EC3FC1C03D12D003F420A /* UserVerificationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 067EC3FB1C03D12D003F420A /* UserVerificationViewController.swift */; };
 		067EC3FE1C041F93003F420A /* FindTeamsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 067EC3FD1C041F93003F420A /* FindTeamsTableViewController.swift */; };
 		067EC4031C04210D003F420A /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 067EC4021C04210D003F420A /* User.swift */; };
 		067EC4051C042123003F420A /* Team.swift in Sources */ = {isa = PBXBuildFile; fileRef = 067EC4041C042123003F420A /* Team.swift */; };
@@ -67,7 +66,6 @@
 		0679E79A1C0163090003BABC /* UserRepository.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserRepository.swift; sourceTree = "<group>"; };
 		067EC3F71C038C7C003F420A /* TeamMembersTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TeamMembersTableViewController.swift; sourceTree = "<group>"; };
 		067EC3F91C039D98003F420A /* NewTeamViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NewTeamViewController.swift; sourceTree = "<group>"; };
-		067EC3FB1C03D12D003F420A /* UserVerificationViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserVerificationViewController.swift; sourceTree = "<group>"; };
 		067EC3FD1C041F93003F420A /* FindTeamsTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = FindTeamsTableViewController.swift; path = ../FindTeamsTableViewController.swift; sourceTree = "<group>"; };
 		067EC4021C04210D003F420A /* User.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		067EC4041C042123003F420A /* Team.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Team.swift; sourceTree = "<group>"; };
@@ -123,7 +121,6 @@
 		067EC3FF1C04202A003F420A /* Registration */ = {
 			isa = PBXGroup;
 			children = (
-				067EC3FB1C03D12D003F420A /* UserVerificationViewController.swift */,
 				067EC3FD1C041F93003F420A /* FindTeamsTableViewController.swift */,
 				067EC3F71C038C7C003F420A /* TeamMembersTableViewController.swift */,
 				067EC3F91C039D98003F420A /* NewTeamViewController.swift */,
@@ -427,7 +424,6 @@
 				06FF09371C09478700A80D8D /* RatingViewController.swift in Sources */,
 				0620F3891C04E73B000A233F /* MainTabBarViewController.swift in Sources */,
 				06BF4AB11BFD19E500BCA228 /* SecondViewController.swift in Sources */,
-				067EC3FC1C03D12D003F420A /* UserVerificationViewController.swift in Sources */,
 				06BF4AAD1BFD19E500BCA228 /* AppDelegate.swift in Sources */,
 				0679E79B1C0163090003BABC /* UserRepository.swift in Sources */,
 				067EC4091C04216E003F420A /* Extensions.swift in Sources */,

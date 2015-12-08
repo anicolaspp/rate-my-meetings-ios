@@ -4,12 +4,16 @@ PODS:
   - CVCalendar (1.2.7)
   - Parse (1.10.0):
     - Bolts/Tasks (~> 1.5)
+  - ParseUI (1.1.7):
+    - Bolts/Tasks (~> 1.3)
+    - Parse (~> 1.9)
   - SwiftKeychainWrapper (1.0.11)
 
 DEPENDENCIES:
   - Cosmos (~> 1.1)
   - CVCalendar (~> 1.2.7)
   - Parse
+  - ParseUI
   - SwiftKeychainWrapper
 
 SPEC CHECKSUMS:
@@ -17,6 +21,7 @@ SPEC CHECKSUMS:
   Cosmos: d05465696561ccb50fa8b7574026326bb23d654b
   CVCalendar: 1ae6ee62dd7fd4c6a6703a43c641e11dfd32276e
   Parse: 90b2544822200f84b18bfacc4e8b0a3a6c3584a2
+  ParseUI: c2bcdfbb00330e464b5b773266ae221697a3bb7b
   SwiftKeychainWrapper: 011a6946923948ffa49708014dd691164d7621d1
 
 COCOAPODS: 0.39.0

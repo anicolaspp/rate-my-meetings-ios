@@ -8,6 +8,7 @@
 
 import UIKit
 import Parse
+import ParseUI
 import LocalAuthentication
 
 import SwiftKeychainWrapper
@@ -19,7 +20,9 @@ class LoginViewController: UIViewController {
     var userRepository = UserRepository()
     var userId = 0
     
-    var loginViewController: UIAlertController?
+    var loginViewController: PFLogInViewController?
+    
+    var usePassword: String?
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -32,16 +35,13 @@ class LoginViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
     
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+    @IBAction func registerNewUser(sender: AnyObject) {
+        let registerViewController = PFSignUpViewController()
+        registerViewController.delegate = self
+        registerViewController.emailAsUsername = true
         
-        if (segue.identifier == "registrationSegue") {
-            
-            let target = segue.destinationViewController as! UINavigationController
-            let registrationController = target.viewControllers.first as! UserVerificationViewController
-            registrationController.userRepository = self.userRepository
-        }
+        self.presentViewController(registerViewController, animated: true, completion: nil)
     }
-    
     @IBAction func loginUser(sender: AnyObject) {
         
         self.loginViewController = getLoginForm()
@@ -89,33 +89,14 @@ class LoginViewController: UIViewController {
         })
     }
     
-    func getLoginForm() -> UIAlertController {
+    func getLoginForm() -> PFLogInViewController {
         
-        let login = UIAlertController(title: "Login", message: "Enter Credentials", preferredStyle: .Alert)
+        let logInViewController = PFLogInViewController()
+        logInViewController.delegate = self
+        logInViewController.fields = [.UsernameAndPassword, .LogInButton, .PasswordForgotten, .DismissButton]
+        logInViewController.emailAsUsername = true
         
-        login.addTextFieldWithConfigurationHandler { (field: UITextField) -> Void in
-            
-            field.placeholder = "User Name"
-            field.keyboardType = .EmailAddress
-        }
-        
-        login.addTextFieldWithConfigurationHandler { (field) -> Void in
-            
-            field.placeholder = "Password"
-            field.secureTextEntry = true
-        }
-        
-        let ok = UIAlertAction(title: "Login", style: .Default) { (taction) -> Void in
-            let user = login.textFields?[0].text
-            let pass = login.textFields?[1].text
-            
-            self.loginUserAsync(user, password: pass)
-        }
-        
-        login.addAction(UIAlertAction(title: "Cancel", style: .Cancel, handler: nil))
-        login.addAction(ok)
-        
-        return login
+        return logInViewController
     }
     
     func storeCredentials(user: User, pass: String) {
@@ -144,6 +125,7 @@ class LoginViewController: UIViewController {
     func logingWithStoredCredentials() {
         if let userName = NSUserDefaults.standardUserDefaults().stringForKey("username") {
             if let pass = KeychainWrapper.stringForKey(kSecValueData as String) {
+                
                 self.loginUserAsync(userName, password: pass)
             }
         }
@@ -168,5 +150,49 @@ class LoginViewController: UIViewController {
             print("Authentication failed")
             
         }
+    }
+}
+
+extension LoginViewController : PFLogInViewControllerDelegate {
+    func logInViewController(logInController: PFLogInViewController, shouldBeginLogInWithUsername username: String, password: String) -> Bool {
+        self.usePassword = password
+        return true
+    }
+    
+    func logInViewController(logInController: PFLogInViewController, didLogInUser user: PFUser) {
+        
+        if let loggedUser = user as? User {
+            self.storeCredentials(loggedUser, pass: self.usePassword!)
+            
+            self.dismissViewControllerAnimated(true, completion: nil)
+            self.loadMainAppPageFor(loggedUser)
+        }
+        else {
+            self.showAlert("Error", message: "Invalid user or password", handler: nil)
+        }
+    }
+}
+
+extension LoginViewController : PFSignUpViewControllerDelegate {
+    func signUpViewController(signUpController: PFSignUpViewController, shouldBeginSignUp info: [NSObject : AnyObject]) -> Bool {
+        return true
+    }
+    
+    func signUpViewController(signUpController: PFSignUpViewController, didFailToSignUpWithError error: NSError?) {
+        let userExistsAlert = UIAlertController(title: "Registration Failed", message: "Seems you have an account already!", preferredStyle: .Alert)
+        
+        userExistsAlert.addAction(UIAlertAction(title: "OK", style: .Default, handler: nil))
+        
+        self.presentViewController(userExistsAlert, animated: true, completion: nil)
+    }
+    
+    func signUpViewController(signUpController: PFSignUpViewController, didSignUpUser user: PFUser) {
+        let registrationDoneAlert = UIAlertController(title: "Registration Completed", message: "Check your email to verify your account.", preferredStyle: .Alert)
+        
+        registrationDoneAlert.addAction(UIAlertAction(title: "OK", style: .Default, handler: { (action) -> Void in
+            self.dismissViewControllerAnimated(true, completion: nil)
+        }))
+        
+        signUpController.presentViewController(registrationDoneAlert, animated: true, completion: nil)
     }
 }

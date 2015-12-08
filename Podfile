@@ -7,6 +7,7 @@ target 'RateMyMeetings' do
 pod 'CVCalendar', '~> 1.2.7'
 pod 'Cosmos', '~> 1.1'
 pod ‘Parse’
+pod 'ParseUI'
 pod 'SwiftKeychainWrapper'
 end
 

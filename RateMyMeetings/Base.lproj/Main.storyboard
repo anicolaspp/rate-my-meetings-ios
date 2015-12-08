@@ -38,7 +38,7 @@
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                     <animations/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="16"/>
-                                                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                    <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="Subtitle" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="jQv-jT-4b1">
@@ -46,7 +46,7 @@
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                     <animations/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="11"/>
-                                                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                    <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                             </subviews>
@@ -149,7 +149,7 @@
                                 <string key="text">Overall rating
 </string>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <view contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="IAS-H4-I8m" customClass="CosmosView" customModule="Cosmos">
@@ -179,7 +179,7 @@
                                 <string key="text">My rating
 </string>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="tP3-Bc-bPT">
@@ -330,7 +330,7 @@
                                 </constraints>
                                 <state key="normal" title="Register"/>
                                 <connections>
-                                    <segue destination="TOn-pZ-meA" kind="show" identifier="registrationSegue" id="e1j-YC-rDO"/>
+                                    <action selector="registerNewUser:" destination="ZtA-f4-rOZ" eventType="touchUpInside" id="yRA-1X-E4o"/>
                                 </connections>
                             </button>
                         </subviews>
@@ -354,72 +354,6 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="0hz-IG-EdZ" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-9.5" y="900.5"/>
-        </scene>
-        <!--User Verification View Controller-->
-        <scene sceneID="TNu-yA-gRK">
-            <objects>
-                <viewController id="XGe-Du-7bM" customClass="UserVerificationViewController" customModule="RateMyMeetings" customModuleProvider="target" sceneMemberID="viewController">
-                    <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="zJJ-xe-n9B"/>
-                        <viewControllerLayoutGuide type="bottom" id="iGM-OA-s2w"/>
-                    </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="RBT-II-fiD">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Email Address" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="1eL-xa-yJj">
-                                <rect key="frame" x="20" y="136" width="335" height="30"/>
-                                <animations/>
-                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits" keyboardType="emailAddress" returnKeyType="next" enablesReturnKeyAutomatically="YES"/>
-                                <connections>
-                                    <outlet property="delegate" destination="XGe-Du-7bM" id="Awo-FC-G1w"/>
-                                </connections>
-                            </textField>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Password" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="2fx-XR-QYP">
-                                <rect key="frame" x="20" y="221" width="335" height="30"/>
-                                <animations/>
-                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits" returnKeyType="go" secureTextEntry="YES"/>
-                                <connections>
-                                    <outlet property="delegate" destination="XGe-Du-7bM" id="Hvp-Z9-9TR"/>
-                                </connections>
-                            </textField>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="EK4-j4-JSF">
-                                <rect key="frame" x="20" y="305" width="335" height="30"/>
-                                <animations/>
-                                <state key="normal" title="Create Account"/>
-                                <connections>
-                                    <action selector="createAccountButton:" destination="XGe-Du-7bM" eventType="touchUpInside" id="RW1-bG-FJv"/>
-                                </connections>
-                            </button>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1Vs-yH-3vP">
-                                <rect key="frame" x="20" y="586" width="335" height="30"/>
-                                <animations/>
-                                <state key="normal" title="Cancel">
-                                    <color key="titleColor" red="1" green="0.041046944600000003" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                </state>
-                                <connections>
-                                    <action selector="cancelButton:" destination="XGe-Du-7bM" eventType="touchUpInside" id="op2-m7-CZ7"/>
-                                </connections>
-                            </button>
-                        </subviews>
-                        <animations/>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                    </view>
-                    <navigationItem key="navigationItem" id="Yg2-4p-Pnl"/>
-                    <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
-                    <connections>
-                        <outlet property="cancelButton" destination="1Vs-yH-3vP" id="EtR-1t-7Pa"/>
-                        <outlet property="emailField" destination="1eL-xa-yJj" id="04Y-mI-PSp"/>
-                        <outlet property="passwordField" destination="2fx-XR-QYP" id="FLx-EW-B8z"/>
-                        <outlet property="tabGesture" destination="hWG-0d-GTw" id="u11-FV-XvP"/>
-                    </connections>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="sDB-Lq-NBo" userLabel="First Responder" sceneMemberID="firstResponder"/>
-                <tapGestureRecognizer id="hWG-0d-GTw"/>
-            </objects>
-            <point key="canvasLocation" x="-22.5" y="1776.5"/>
         </scene>
         <!--Find Teams Table View Controller-->
         <scene sceneID="Kuq-2c-8uf">
@@ -680,25 +614,6 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="O7y-ta-mIU" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1732.5" y="1743.5"/>
-        </scene>
-        <!--Navigation Controller-->
-        <scene sceneID="Q3M-hC-UWS">
-            <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="TOn-pZ-meA" sceneMemberID="viewController">
-                    <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="AmR-eJ-Afj">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
-                        <autoresizingMask key="autoresizingMask"/>
-                        <animations/>
-                    </navigationBar>
-                    <nil name="viewControllers"/>
-                    <connections>
-                        <segue destination="XGe-Du-7bM" kind="relationship" relationship="rootViewController" id="ox1-zt-JSK"/>
-                    </connections>
-                </navigationController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="FPI-NM-AiE" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="-609.5" y="1776.5"/>
         </scene>
     </scenes>
     <resources>
