@@ -11,6 +11,7 @@
 		0620F3891C04E73B000A233F /* MainTabBarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0620F3881C04E73B000A233F /* MainTabBarViewController.swift */; };
 		0620F38B1C04F19E000A233F /* MeetingsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0620F38A1C04F19E000A233F /* MeetingsTableViewController.swift */; };
 		0620F38D1C04F584000A233F /* EventManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0620F38C1C04F584000A233F /* EventManager.swift */; };
+		064B78AD1C16926900B6AC26 /* LocalAuthentication.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 064B78AC1C16926800B6AC26 /* LocalAuthentication.framework */; };
 		0673F5DA1C04E007000E402B /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0673F5D81C04E007000E402B /* Main.storyboard */; };
 		0679E7971C015EDB0003BABC /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0679E7961C015EDB0003BABC /* LoginViewController.swift */; };
 		0679E7981C015EDB0003BABC /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0679E7961C015EDB0003BABC /* LoginViewController.swift */; };
@@ -33,6 +34,7 @@
 		06BF4AC41BFD19E500BCA228 /* RateMyMeetingsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06BF4AC31BFD19E500BCA228 /* RateMyMeetingsTests.swift */; };
 		06BF4ACF1BFD19E500BCA228 /* RateMyMeetingsUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06BF4ACE1BFD19E500BCA228 /* RateMyMeetingsUITests.swift */; };
 		06BF4ADD1BFD1A9C00BCA228 /* EventKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 06BF4ADC1BFD1A9C00BCA228 /* EventKit.framework */; };
+		06FF09371C09478700A80D8D /* RatingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06FF09361C09478700A80D8D /* RatingViewController.swift */; };
 		A75724A99AD8502D2235BF3F /* Pods_RateMyMeetings.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D4B99933DD02E3E61FBD43FB /* Pods_RateMyMeetings.framework */; };
 /* End PBXBuildFile section */
 
@@ -58,6 +60,8 @@
 		0620F3881C04E73B000A233F /* MainTabBarViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainTabBarViewController.swift; sourceTree = "<group>"; };
 		0620F38A1C04F19E000A233F /* MeetingsTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MeetingsTableViewController.swift; sourceTree = "<group>"; };
 		0620F38C1C04F584000A233F /* EventManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventManager.swift; sourceTree = "<group>"; };
+		064B78AB1C16923500B6AC26 /* RateMyMeetings.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = RateMyMeetings.entitlements; sourceTree = "<group>"; };
+		064B78AC1C16926800B6AC26 /* LocalAuthentication.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = LocalAuthentication.framework; path = System/Library/Frameworks/LocalAuthentication.framework; sourceTree = SDKROOT; };
 		0673F5D91C04E007000E402B /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		0679E7961C015EDB0003BABC /* LoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		0679E79A1C0163090003BABC /* UserRepository.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserRepository.swift; sourceTree = "<group>"; };
@@ -82,6 +86,7 @@
 		06BF4ACE1BFD19E500BCA228 /* RateMyMeetingsUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RateMyMeetingsUITests.swift; sourceTree = "<group>"; };
 		06BF4AD01BFD19E500BCA228 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		06BF4ADC1BFD1A9C00BCA228 /* EventKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = EventKit.framework; path = System/Library/Frameworks/EventKit.framework; sourceTree = SDKROOT; };
+		06FF09361C09478700A80D8D /* RatingViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RatingViewController.swift; sourceTree = "<group>"; };
 		1BBB6F5FA1BB8F7DA5FB7D25 /* Pods-RateMyMeetings.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RateMyMeetings.debug.xcconfig"; path = "Pods/Target Support Files/Pods-RateMyMeetings/Pods-RateMyMeetings.debug.xcconfig"; sourceTree = "<group>"; };
 		8CA5E14E4DBD040A586875EE /* Pods-RateMyMeetings.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RateMyMeetings.release.xcconfig"; path = "Pods/Target Support Files/Pods-RateMyMeetings/Pods-RateMyMeetings.release.xcconfig"; sourceTree = "<group>"; };
 		D4B99933DD02E3E61FBD43FB /* Pods_RateMyMeetings.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_RateMyMeetings.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -92,6 +97,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				064B78AD1C16926900B6AC26 /* LocalAuthentication.framework in Frameworks */,
 				06BF4ADD1BFD1A9C00BCA228 /* EventKit.framework in Frameworks */,
 				A75724A99AD8502D2235BF3F /* Pods_RateMyMeetings.framework in Frameworks */,
 			);
@@ -131,6 +137,7 @@
 				06BF4AB01BFD19E500BCA228 /* SecondViewController.swift */,
 				0620F3881C04E73B000A233F /* MainTabBarViewController.swift */,
 				0620F38A1C04F19E000A233F /* MeetingsTableViewController.swift */,
+				06FF09361C09478700A80D8D /* RatingViewController.swift */,
 				061C1C0A1C080AED0082CC06 /* MeetingTableViewCell.swift */,
 			);
 			name = Main;
@@ -175,6 +182,7 @@
 		06BF4AAB1BFD19E500BCA228 /* RateMyMeetings */ = {
 			isa = PBXGroup;
 			children = (
+				064B78AB1C16923500B6AC26 /* RateMyMeetings.entitlements */,
 				0673F5D81C04E007000E402B /* Main.storyboard */,
 				06BF4AAC1BFD19E500BCA228 /* AppDelegate.swift */,
 				0679E7961C015EDB0003BABC /* LoginViewController.swift */,
@@ -218,6 +226,7 @@
 		FC3AF97A1A8847998D3E57CA /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				064B78AC1C16926800B6AC26 /* LocalAuthentication.framework */,
 				D4B99933DD02E3E61FBD43FB /* Pods_RateMyMeetings.framework */,
 			);
 			name = Frameworks;
@@ -295,6 +304,11 @@
 					06BF4AA81BFD19E500BCA228 = {
 						CreatedOnToolsVersion = 7.1.1;
 						DevelopmentTeam = G7335L45WL;
+						SystemCapabilities = {
+							com.apple.Keychain = {
+								enabled = 0;
+							};
+						};
 					};
 					06BF4ABE1BFD19E500BCA228 = {
 						CreatedOnToolsVersion = 7.1.1;
@@ -410,6 +424,7 @@
 				061C1C0B1C080AED0082CC06 /* MeetingTableViewCell.swift in Sources */,
 				067EC3FE1C041F93003F420A /* FindTeamsTableViewController.swift in Sources */,
 				0679E7971C015EDB0003BABC /* LoginViewController.swift in Sources */,
+				06FF09371C09478700A80D8D /* RatingViewController.swift in Sources */,
 				0620F3891C04E73B000A233F /* MainTabBarViewController.swift in Sources */,
 				06BF4AB11BFD19E500BCA228 /* SecondViewController.swift in Sources */,
 				067EC3FC1C03D12D003F420A /* UserVerificationViewController.swift in Sources */,

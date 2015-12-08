@@ -84,8 +84,16 @@ strip_invalid_archs() {
 
 
 if [[ "$CONFIGURATION" == "Debug" ]]; then
+  install_framework "Pods-RateMyMeetings/Bolts.framework"
   install_framework "Pods-RateMyMeetings/CVCalendar.framework"
+  install_framework "Pods-RateMyMeetings/Cosmos.framework"
+  install_framework "Pods-RateMyMeetings/Parse.framework"
+  install_framework "Pods-RateMyMeetings/SwiftKeychainWrapper.framework"
 fi
 if [[ "$CONFIGURATION" == "Release" ]]; then
+  install_framework "Pods-RateMyMeetings/Bolts.framework"
   install_framework "Pods-RateMyMeetings/CVCalendar.framework"
+  install_framework "Pods-RateMyMeetings/Cosmos.framework"
+  install_framework "Pods-RateMyMeetings/Parse.framework"
+  install_framework "Pods-RateMyMeetings/SwiftKeychainWrapper.framework"
 fi

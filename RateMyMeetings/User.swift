@@ -7,12 +7,26 @@
 //
 
 import Foundation
+import Parse
 
-class User  {
+class User : PFUser {
+    //@NSManaged var inUseCalendar: Calendar?
+    @NSManaged var calendars: [Calendar]?
     
-    let email: String!
+}
+
+class Calendar : PFObject, PFSubclassing {
     
-    init(email: String) {
-        self.email = email
+    @NSManaged var  owner: User?
+    @NSManaged var  sharedWith : [User]?
+    
+    @NSManaged var  name: String?
+    
+    @NSManaged var localId: String?
+    
+    static func parseClassName() -> String {
+        return "Calendar"
     }
+    
+
 }

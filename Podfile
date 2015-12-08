@@ -5,6 +5,9 @@ use_frameworks!
 
 target 'RateMyMeetings' do
 pod 'CVCalendar', '~> 1.2.7'
+pod 'Cosmos', '~> 1.1'
+pod ‘Parse’
+pod 'SwiftKeychainWrapper'
 end
 
 target 'RateMyMeetingsTests' do

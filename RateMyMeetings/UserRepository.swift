@@ -7,14 +7,23 @@
 //
 
 import Foundation
+import Parse
 
 class CompanyRepositoryStub : ICompanyRepository {
     func getTeamsWithDomain(domain: String) -> [Team] {
         let team1 = Team(name: "Fusion")
-        team1.members = [User(email: "nperez@ipcoop.com")]
+        
+        var user = User()
+        user.email = "anicolaspp@gmail.com"
+        
+        team1.members = [user]
         
         let team2 = Team(name: "BI")
-        team2.members = [User(email: "ctriana@gmail.com"), User(email: "nperez@ipcoop.com")]
+        
+        user = User()
+        user.email = "ctriana@gmail.com"
+        
+        team2.members = [user]
         
         return [team1, team2]
     }
@@ -32,7 +41,7 @@ class UserRepositoryStub: IUserRepository {
     
     func longin(username: String!, password: String!) -> User? {
         if (username != "" && username == password) {
-            return User(email: "email")
+            return User()
         }
         
         return nil
@@ -40,7 +49,10 @@ class UserRepositoryStub: IUserRepository {
     
     func register(companyName: String, email: String, password: String) -> User? {
         if (email.containsString(".com")) {
-            return User(email: email)
+            let user = User()
+            user.email = email
+
+            return user
         }
         else {
             return nil

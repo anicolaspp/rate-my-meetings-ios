@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Parse
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -16,6 +17,16 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
         // Override point for customization after application launch.
+        
+        User.registerSubclass()
+        Calendar.registerSubclass()
+        
+        Parse.enableLocalDatastore()
+        
+        Parse.setApplicationId("YkvXYfyfgGRRtzRJzERKRLPo5gs5Yo6IceaZ4Nqf", clientKey: "HWz2wsfrcbOcp2iL3hJW1DujrweZTH8zoQDZX9Pg")
+        
+        PFAnalytics.trackAppOpenedWithLaunchOptions(launchOptions)
+        
         return true
     }
 

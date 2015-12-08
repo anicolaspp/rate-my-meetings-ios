@@ -8,6 +8,7 @@
 
 import Foundation
 import EventKit
+import Parse
 
 class EventManager {
     let eventStore: EKEventStore
@@ -17,21 +18,43 @@ class EventManager {
     init() {
         self.eventStore = EKEventStore()
        // self.eventStore.sources
+      
+        let user = PFUser.currentUser() as! User
+        let query = PFQuery(className: Calendar.parseClassName())
+        query.whereKey("owner", equalTo: user)
         
-        let userDeaults = NSUserDefaults()
-        
-        let calendarToSync = userDeaults.valueForKey("eventkit_events_sync_calendars") as? String
-        
-        if  (calendarToSync != nil) {
-            let calendars = self.eventStore.calendarsForEntityType(.Event)
-        
-            for c in calendars {
-                if (c.title == calendarToSync!) {
-                    self.calendar = c
-                    break
-                }
+        do {
+            let result = try query.findObjects().first as? Calendar
+            
+            if let id = result?.localId {
+                self.calendar = self.eventStore.calendarWithIdentifier(id)
             }
         }
+        catch _ {}
+
+        
+//        
+//        let user = PFUser.currentUser() as! User
+//        let calendarId = user.inUseCalendar?.localId
+////
+//        
+//        self.calendar = self.eventStore.calendarWithIdentifier(calendarId!)
+//
+//        
+        let userDeaults = NSUserDefaults()
+//
+//        let calendarToSync = userDeaults.valueForKey("eventkit_events_sync_calendars") as? String
+//        
+//        if  (calendarToSync != nil) {
+//            let calendars = self.eventStore.calendarsForEntityType(.Event)
+//        
+//            for c in calendars {
+//                if (c.title == calendarToSync!) {
+//                    self.calendar = c
+//                    break
+//                }
+//            }
+//        }
         
         if let key = userDeaults.valueForKey("eventkit_events_access_granted") {
             self.eventsAccessGranted = key as! Bool
@@ -54,6 +77,7 @@ class EventManager {
     }
     
     func getSyncCalendarNames() -> [String]? {
+        
         let userDeaults = NSUserDefaults()
         
         return userDeaults.valueForKey("eventkit_events_sync_calendars") as? [String]
@@ -99,9 +123,16 @@ class EventManager {
     }
     
     func setCalendar(calendar: EKCalendar) {
-        let userDeaults = NSUserDefaults()
+
+        let user = PFUser.currentUser() as! User
+        let pfcalendar = Calendar()
         
-        userDeaults.setValue(calendar.title, forKey: "eventkit_events_sync_calendars")
+        pfcalendar.owner = user
+        pfcalendar.name = calendar.title
+        pfcalendar.localId = calendar.calendarIdentifier
+        
+        let t = pfcalendar.saveInBackground()
+        t.waitUntilFinished()
         
         self.calendar = calendar
     }

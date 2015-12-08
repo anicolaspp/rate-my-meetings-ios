@@ -7,18 +7,23 @@
 //
 
 import UIKit
+import Parse
+import LocalAuthentication
 
+import SwiftKeychainWrapper
 
 
 class LoginViewController: UIViewController {
     
     var userRepository = UserRepositoryStub()
     var userId = 0
+    
+    var loginViewController: UIAlertController?
 
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        // Do any additional setup after loading the view.
+        PFUser.logOutInBackground()
     }
 
     override func didReceiveMemoryWarning() {
@@ -29,18 +34,62 @@ class LoginViewController: UIViewController {
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         
         if (segue.identifier == "registrationSegue") {
+            
             let target = segue.destinationViewController as! UINavigationController
             let registrationController = target.viewControllers.first as! UserVerificationViewController
             registrationController.userRepository = self.userRepository
-        
-    //        print("here\n")
         }
     }
     
     @IBAction func loginUser(sender: AnyObject) {
         
-       let form = getLoginForm()
-       self.presentViewController(form, animated: true, completion: nil)
+        self.loginViewController = getLoginForm()
+        
+        self.presentViewController(loginViewController!, animated: true) { () -> Void in
+            let returningUser = NSUserDefaults.standardUserDefaults().boolForKey("logged")
+            
+            if returningUser == true {
+                
+                let authContext = LAContext()
+                var err: NSError?
+                
+                if authContext.canEvaluatePolicy(.DeviceOwnerAuthenticationWithBiometrics, error: &err) {
+                    authContext.evaluatePolicy(.DeviceOwnerAuthenticationWithBiometrics, localizedReason: "Fast and secure login", reply: { (access, error) -> Void in
+                        if access {
+                            if let userName = NSUserDefaults.standardUserDefaults().stringForKey("username"){
+                                if let pass = KeychainWrapper.stringForKey(kSecValueData as String) {
+                                    self.loginUserAsync(userName, password: pass)
+                                }
+                            }
+                        }
+                        else {
+                            // If authentication failed then show a message to the console with a short description.
+                            // In case that the error is a user fallback, then show the password alert view.
+                            print(error?.localizedDescription)
+                            
+                            switch error!.code {
+                                
+                            case LAError.SystemCancel.rawValue:
+                                print("Authentication was cancelled by the system")
+                                
+                            case LAError.UserCancel.rawValue:
+                                print("Authentication was cancelled by the user")
+                                
+                            case LAError.UserFallback.rawValue:
+                                print("User selected to enter custom password")
+                               
+                                
+                            default:
+                                print("Authentication failed")
+                               
+                            }
+                        }
+                    })
+                    
+                    
+                }
+            }
+        }
     }
     
     func loadMainAppPageFor(user: User) {
@@ -55,13 +104,26 @@ class LoginViewController: UIViewController {
         self.executeAsyncWithIndicator(UIActivityIndicatorView(),
             action: { () -> AnyObject? in
                 
-                let user = self.userRepository.longin(userName, password: password)
+                let loginTask = PFUser.logInWithUsernameInBackground(userName!, password: password!)
+                loginTask.waitUntilFinished()
                 
-                return user
+                let user = PFUser.currentUser()
+                
+                if let _ = user?.objectId {
+                    return user
+                }
+                
+                return nil
                 
             }, completion: { (result) -> Void in
                 
                 if let user = result as? User {
+                    NSUserDefaults.standardUserDefaults().setBool(true, forKey: "logged")
+                    NSUserDefaults.standardUserDefaults().setValue(user.email, forKey: "username")
+                    
+                    KeychainWrapper.setString(password!, forKey: kSecValueData as String)
+                    
+                    self.loginViewController?.dismissViewControllerAnimated(true, completion: nil)
                     self.loadMainAppPageFor(user)
                 }
                 else {
@@ -77,6 +139,7 @@ class LoginViewController: UIViewController {
         login.addTextFieldWithConfigurationHandler { (field: UITextField) -> Void in
             
             field.placeholder = "User Name"
+            field.keyboardType = .EmailAddress
         }
         
         login.addTextFieldWithConfigurationHandler { (field) -> Void in

@@ -26,7 +26,7 @@
                                     <constraint firstAttribute="height" constant="259" id="N7f-Sl-8HY"/>
                                 </constraints>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="blue" accessoryType="disclosureIndicator" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="eventCell" textLabel="xGS-2L-ZnL" detailTextLabel="jQv-jT-4b1" style="IBUITableViewCellStyleSubtitle" id="baY-Uq-bTc" customClass="MeetingTableViewCell" customModule="RateMyMeetings" customModuleProvider="target">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="blue" accessoryType="disclosureIndicator" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="eventCell" textLabel="xGS-2L-ZnL" detailTextLabel="jQv-jT-4b1" style="IBUITableViewCellStyleSubtitle" id="baY-Uq-bTc">
                                         <rect key="frame" x="0.0" y="92" width="375" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="baY-Uq-bTc" id="oxF-Kr-MTN">
@@ -53,9 +53,6 @@
                                             <animations/>
                                         </tableViewCellContentView>
                                         <animations/>
-                                        <connections>
-                                            <segue destination="syI-H8-JO0" kind="show" trigger="accessoryAction" id="hrC-KW-oMG"/>
-                                        </connections>
                                     </tableViewCell>
                                 </prototypes>
                                 <sections/>
@@ -131,10 +128,10 @@
             </objects>
             <point key="canvasLocation" x="1756.5" y="109.5"/>
         </scene>
-        <!--View Controller-->
+        <!--Event Ratings-->
         <scene sceneID="bh2-F7-TUI">
             <objects>
-                <viewController id="syI-H8-JO0" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="ratingController" title="Event Ratings" id="syI-H8-JO0" customClass="RatingViewController" customModule="RateMyMeetings" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="ZLd-ac-LPI"/>
                         <viewControllerLayoutGuide type="bottom" id="PHn-4h-gQF"/>
@@ -142,14 +139,103 @@
                     <view key="view" contentMode="scaleToFill" id="8FV-tI-dDA">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="VLm-ZX-pcI">
+                                <rect key="frame" x="0.0" y="156" width="375" height="21"/>
+                                <animations/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="21" id="2Qr-d0-QK3"/>
+                                </constraints>
+                                <string key="text">Overall rating
+</string>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <view contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="IAS-H4-I8m" customClass="CosmosView" customModule="Cosmos">
+                                <rect key="frame" x="0.0" y="243" width="375" height="67"/>
+                                <animations/>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="rating">
+                                        <real key="value" value="0.0"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="starSize">
+                                        <real key="value" value="61"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="borderWidthEmpty">
+                                        <real key="value" value="2"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="starMargin">
+                                        <real key="value" value="14"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                            </view>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rv0-XP-8mU">
+                                <rect key="frame" x="0.0" y="318" width="375" height="23"/>
+                                <animations/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="23" id="RhY-wW-91R"/>
+                                </constraints>
+                                <string key="text">My rating
+</string>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="tP3-Bc-bPT">
+                                <rect key="frame" x="20" y="389" width="335" height="30"/>
+                                <animations/>
+                                <state key="normal" title="Submit Rating"/>
+                                <connections>
+                                    <action selector="submitUserRating:" destination="syI-H8-JO0" eventType="touchUpInside" id="eaP-7A-jm8"/>
+                                </connections>
+                            </button>
+                            <view userInteractionEnabled="NO" contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="lcL-Yv-Mw2" customClass="CosmosView" customModule="Cosmos">
+                                <rect key="frame" x="0.0" y="72" width="375" height="67"/>
+                                <animations/>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="rating">
+                                        <real key="value" value="3"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="starSize">
+                                        <real key="value" value="61"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="borderWidthEmpty">
+                                        <real key="value" value="2"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="starMargin">
+                                        <real key="value" value="14"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                            </view>
+                        </subviews>
                         <animations/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="VLm-ZX-pcI" firstAttribute="trailing" secondItem="IAS-H4-I8m" secondAttribute="trailing" id="1Pc-9G-zOd"/>
+                            <constraint firstItem="rv0-XP-8mU" firstAttribute="trailing" secondItem="IAS-H4-I8m" secondAttribute="trailing" id="3uB-vq-l82"/>
+                            <constraint firstItem="lcL-Yv-Mw2" firstAttribute="trailing" secondItem="VLm-ZX-pcI" secondAttribute="trailing" id="Bi5-rH-mTJ"/>
+                            <constraint firstItem="VLm-ZX-pcI" firstAttribute="leading" secondItem="8FV-tI-dDA" secondAttribute="leading" id="IOz-Nd-gGa"/>
+                            <constraint firstItem="rv0-XP-8mU" firstAttribute="leading" secondItem="IAS-H4-I8m" secondAttribute="leading" id="NUE-aD-lZo"/>
+                            <constraint firstItem="VLm-ZX-pcI" firstAttribute="leading" secondItem="lcL-Yv-Mw2" secondAttribute="leading" id="Ry2-dS-HRs"/>
+                            <constraint firstItem="rv0-XP-8mU" firstAttribute="top" secondItem="IAS-H4-I8m" secondAttribute="bottom" constant="8" symbolic="YES" id="UDG-cb-Cxt"/>
+                            <constraint firstItem="lcL-Yv-Mw2" firstAttribute="top" secondItem="ZLd-ac-LPI" secondAttribute="bottom" constant="8" symbolic="YES" id="aJP-z4-Bqa"/>
+                            <constraint firstAttribute="trailing" secondItem="lcL-Yv-Mw2" secondAttribute="trailing" id="cYI-BQ-zWY"/>
+                            <constraint firstItem="VLm-ZX-pcI" firstAttribute="leading" secondItem="IAS-H4-I8m" secondAttribute="leading" id="eBR-kk-QhU"/>
+                            <constraint firstItem="VLm-ZX-pcI" firstAttribute="top" secondItem="lcL-Yv-Mw2" secondAttribute="bottom" constant="17" id="iOd-Vk-DAz"/>
+                            <constraint firstItem="VLm-ZX-pcI" firstAttribute="top" secondItem="8FV-tI-dDA" secondAttribute="top" constant="156" id="lw2-Ya-b2O"/>
+                            <constraint firstItem="IAS-H4-I8m" firstAttribute="top" secondItem="VLm-ZX-pcI" secondAttribute="bottom" constant="66" id="pxA-xk-NRN"/>
+                            <constraint firstItem="PHn-4h-gQF" firstAttribute="top" secondItem="rv0-XP-8mU" secondAttribute="bottom" constant="277" id="zwk-fF-HdS"/>
+                        </constraints>
                     </view>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
+                    <connections>
+                        <outlet property="userRatingControl" destination="IAS-H4-I8m" id="yMs-Ha-r6T"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="DNa-WZ-deI" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2693.5" y="109.5"/>
+            <point key="canvasLocation" x="2401.5" y="109.5"/>
         </scene>
         <!--Second View Controller-->
         <scene sceneID="wg7-f3-ORb">
@@ -349,7 +435,7 @@
                                 <rect key="frame" x="0.0" y="28" width="375" height="44"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="gfA-RC-Bdr" id="vSj-ve-8aK">
-                                    <rect key="frame" x="0.0" y="0.0" width="342" height="43.5"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="342" height="44"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <animations/>
                                 </tableViewCellContentView>
@@ -495,7 +581,7 @@
                                 <rect key="frame" x="0.0" y="28" width="375" height="44"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="zRI-5x-44w" id="nSj-pP-pFM">
-                                    <rect key="frame" x="0.0" y="0.0" width="375" height="43.5"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <animations/>
                                 </tableViewCellContentView>

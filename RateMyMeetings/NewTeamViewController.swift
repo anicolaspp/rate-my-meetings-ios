@@ -25,7 +25,7 @@ class NewTeamViewController: UIViewController {
         super.viewDidLoad()
 
         ownerLabel.text = user?.email
-        domainLabel.text = user?.email.componentsSeparatedByString("@")[1]
+        domainLabel.text = user?.email!.componentsSeparatedByString("@")[1]
         
         // Do any additional setup after loading the view.
     }

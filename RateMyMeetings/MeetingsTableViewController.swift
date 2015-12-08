@@ -9,6 +9,7 @@
 import UIKit
 import EventKitUI
 import CVCalendar
+import Parse
 
 class MeetingsTableViewController: UIViewController {
 
@@ -73,6 +74,7 @@ class MeetingsTableViewController: UIViewController {
         changeCalendarMode()
     }
    
+
     func checkCalendarAuthorizationStatus() {
         let status = EKEventStore.authorizationStatusForEntityType(EKEntityType.Event)
         
@@ -147,6 +149,7 @@ class MeetingsTableViewController: UIViewController {
 
 extension MeetingsTableViewController : EKCalendarChooserDelegate {
     
+    
     func calendarChooserDidFinish(calendarChooser: EKCalendarChooser) {
         
         if let calendar = calendarChooser.selectedCalendars.first {
@@ -206,7 +209,6 @@ extension MeetingsTableViewController :  UITableViewDataSource, UITableViewDeleg
         return events.count
     }
     
-    
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier("eventCell", forIndexPath: indexPath)
         
@@ -221,6 +223,18 @@ extension MeetingsTableViewController :  UITableViewDataSource, UITableViewDeleg
         }
         
         return cell
+    }
+    
+    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+        let selectedEvent = self.events[indexPath.row]
+        let ratingController = self.storyboard?.instantiateViewControllerWithIdentifier("ratingController") as! RatingViewController
+        ratingController.event = selectedEvent
+        
+        let backItem = UIBarButtonItem(title: "", style: .Plain, target: nil, action: nil)
+        self.navigationItem.backBarButtonItem = backItem
+        
+        self.navigationController?.pushViewController(ratingController, animated: true)
+        self.tableView.deselectRowAtIndexPath(indexPath, animated: true)
     }
 }
 
