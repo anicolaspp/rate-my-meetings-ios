@@ -23,7 +23,7 @@ protocol TeamDelegate {
 
 protocol IUserRepository {
     func longin(username: String!, password: String!) -> User?
-    func register(companyName: String, email: String, password: String) -> User?
+    func register(email: String, password: String) -> User?
 }
 
 protocol ICompanyRepository {

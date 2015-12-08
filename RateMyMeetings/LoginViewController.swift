@@ -13,9 +13,10 @@ import LocalAuthentication
 import SwiftKeychainWrapper
 
 
+
 class LoginViewController: UIViewController {
     
-    var userRepository = UserRepositoryStub()
+    var userRepository = UserRepository()
     var userId = 0
     
     var loginViewController: UIAlertController?
@@ -66,10 +67,7 @@ class LoginViewController: UIViewController {
         self.executeAsyncWithIndicator(UIActivityIndicatorView(),
             action: { () -> AnyObject? in
                 
-                let loginTask = PFUser.logInWithUsernameInBackground(userName!, password: password!)
-                loginTask.waitUntilFinished()
-                
-                let user = PFUser.currentUser()
+                let user = self.userRepository.longin(userName, password: password)
                 
                 if let _ = user?.objectId {
                     return user

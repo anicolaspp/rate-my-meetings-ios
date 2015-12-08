@@ -22,7 +22,7 @@ class Calendar : PFObject, PFSubclassing {
     
     @NSManaged var  name: String?
     
-    @NSManaged var localId: String?
+    @NSManaged var localEntity: String
     
     static func parseClassName() -> String {
         return "Calendar"

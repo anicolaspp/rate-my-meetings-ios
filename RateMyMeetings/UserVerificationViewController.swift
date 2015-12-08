@@ -16,7 +16,7 @@ class UserVerificationViewController: UIViewController {
     @IBOutlet weak var passwordField: UITextField!
     @IBOutlet var tabGesture: UITapGestureRecognizer!
     
-    var userRepository: IUserRepository = UserRepositoryStub()
+    var userRepository: IUserRepository = UserRepository()
     let activityIndicator = UIActivityIndicatorView()
     
     var delegate: UserRegistrationCompleteDelegate?
@@ -90,28 +90,9 @@ class UserVerificationViewController: UIViewController {
         
             executeAsyncWithIndicator(UIActivityIndicatorView(), action: { () -> AnyObject? in
                 
-                   // NSThread.sleepForTimeInterval(NSTimeInterval.init(3))
+                    let newUser = self.userRepository.register(self.emailField.text!, password: self.passwordField.text!)
                 
-                    var user = User()
-                    user.username = self.emailField.text!
-                    user.email = self.emailField.text!
-                    user.password = self.passwordField.text!
-                
-                    let task = user.signUpInBackground()
-                    task.waitUntilFinished()
-                
-                    user = PFUser.currentUser() as! User
-            
-                    PFUser.logOutInBackground()
-                
-                    return user
-                
-                
-                
-                    //return user
-//                    let newUser = self.userRepository.register("", email: self.emailField.text!, password: self.passwordField.text!)
-//                
-//                    return newUser
+                    return newUser
                 
                 }, completion: { (result) -> Void in
                     

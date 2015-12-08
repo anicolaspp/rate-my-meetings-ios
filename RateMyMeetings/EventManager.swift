@@ -21,40 +21,19 @@ class EventManager {
       
         let user = PFUser.currentUser() as! User
         let query = PFQuery(className: Calendar.parseClassName())
-        query.whereKey("owner", equalTo: user)
+        
+        query.whereKey("owner", equalTo: PFUser(withoutDataWithObjectId: user.objectId))
         
         do {
             let result = try query.findObjects().first as? Calendar
             
-            if let id = result?.localId {
+            if let id = result?.localEntity {
                 self.calendar = self.eventStore.calendarWithIdentifier(id)
             }
         }
         catch _ {}
-
-        
-//        
-//        let user = PFUser.currentUser() as! User
-//        let calendarId = user.inUseCalendar?.localId
-////
-//        
-//        self.calendar = self.eventStore.calendarWithIdentifier(calendarId!)
-//
-//        
+       
         let userDeaults = NSUserDefaults()
-//
-//        let calendarToSync = userDeaults.valueForKey("eventkit_events_sync_calendars") as? String
-//        
-//        if  (calendarToSync != nil) {
-//            let calendars = self.eventStore.calendarsForEntityType(.Event)
-//        
-//            for c in calendars {
-//                if (c.title == calendarToSync!) {
-//                    self.calendar = c
-//                    break
-//                }
-//            }
-//        }
         
         if let key = userDeaults.valueForKey("eventkit_events_access_granted") {
             self.eventsAccessGranted = key as! Bool
@@ -129,7 +108,9 @@ class EventManager {
         
         pfcalendar.owner = user
         pfcalendar.name = calendar.title
-        pfcalendar.localId = calendar.calendarIdentifier
+        pfcalendar.localEntity = String( calendar.calendarIdentifier )
+        
+        print(pfcalendar.localEntity)
         
         let t = pfcalendar.saveInBackground()
         t.waitUntilFinished()

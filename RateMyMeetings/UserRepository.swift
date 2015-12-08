@@ -37,38 +37,59 @@ class CompanyRepositoryStub : ICompanyRepository {
 }
 
 
-class UserRepositoryStub: IUserRepository {
+//class UserRepositoryStub: IUserRepository {
+//    
+//    func longin(username: String!, password: String!) -> User? {
+//        if (username != "" && username == password) {
+//            return User()
+//        }
+//        
+//        return nil
+//    }
+//    
+//    func register(companyName: String, email: String, password: String) -> User? {
+//        if (email.containsString(".com")) {
+//            let user = User()
+//            user.email = email
+//
+//            return user
+//        }
+//        else {
+//            return nil
+//        }
+//    }
+//}
+
+
+
+class UserRepository: IUserRepository {
     
     func longin(username: String!, password: String!) -> User? {
-        if (username != "" && username == password) {
-            return User()
-        }
+        let loginTask = PFUser.logInWithUsernameInBackground(username, password: password)
+        loginTask.waitUntilFinished()
         
-        return nil
+        let user = PFUser.currentUser()
+        
+        return user as? User
     }
     
-    func register(companyName: String, email: String, password: String) -> User? {
-        if (email.containsString(".com")) {
-            let user = User()
-            user.email = email
+    func register(email: String, password: String) -> User? {
+        var user = User()
+        user.username = email
+        user.email = email
+        user.password = password
+        
+        let task = user.signUpInBackground()
+        task.waitUntilFinished()
+        
+        user = PFUser.currentUser() as! User
+        
+        PFUser.logOutInBackground()
+        
+        return user
 
-            return user
-        }
-        else {
-            return nil
-        }
     }
 }
 
 
 
-//class UserRepository: IUserRepository {
-//    
-//    func longin(username: String!, password: String!) -> User? {
-//        return nil
-//    }
-//    
-//    func register(companyName: String, email: String, password: String) -> User? {
-//        return nil
-//    }
-//}

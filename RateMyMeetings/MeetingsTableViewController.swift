@@ -149,7 +149,6 @@ class MeetingsTableViewController: UIViewController {
 
 extension MeetingsTableViewController : EKCalendarChooserDelegate {
     
-    
     func calendarChooserDidFinish(calendarChooser: EKCalendarChooser) {
         
         if let calendar = calendarChooser.selectedCalendars.first {
