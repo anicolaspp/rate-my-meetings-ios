@@ -97,8 +97,13 @@ class EventManager {
         return events
     }
     
-    func setCalendar(calendar: EKCalendar) {
-
+    private func setInUserCalendarForUser(user: User, calendarId: String) {
+        user.inUseCalendarId = calendarId
+        user.saveInBackground()
+    }
+    
+    private func setInUserCalendarForCurrentUserAsync(calendar: EKCalendar) {
+        
         let user = PFUser.currentUser() as! User
         let query = PFQuery(className: Calendar.parseClassName())
         
@@ -110,8 +115,7 @@ class EventManager {
             if let remoteCalendar = rcalendar {
                 print("Calendar Found")
                 
-                user.inUseCalendarId = remoteCalendar.objectId
-                user.saveInBackground()
+                self.setInUserCalendarForUser(user, calendarId: remoteCalendar.objectId!)
             }
             else {
                 let pfcalendar = Calendar()
@@ -121,11 +125,15 @@ class EventManager {
                 pfcalendar.localEntity = String( calendar.calendarIdentifier )
                 
                 pfcalendar.saveInBackgroundWithBlock({ (saved, savingError) -> Void in
-                    user.inUseCalendarId = pfcalendar.objectId
-                    user.saveInBackground()
+                    self.setInUserCalendarForUser(user, calendarId: pfcalendar.objectId!)
                 })
             }
         }
+
+    }
+    
+    func setCalendar(calendar: EKCalendar) {
+        setInUserCalendarForCurrentUserAsync(calendar)
         
         self.calendar = calendar
     }
