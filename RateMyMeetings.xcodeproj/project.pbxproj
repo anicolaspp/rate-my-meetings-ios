@@ -11,6 +11,10 @@
 		0620F3891C04E73B000A233F /* MainTabBarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0620F3881C04E73B000A233F /* MainTabBarViewController.swift */; };
 		0620F38B1C04F19E000A233F /* MeetingsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0620F38A1C04F19E000A233F /* MeetingsTableViewController.swift */; };
 		0620F38D1C04F584000A233F /* EventManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0620F38C1C04F584000A233F /* EventManager.swift */; };
+		064257961C17CE11000AA590 /* Calendar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 064257951C17CE11000AA590 /* Calendar.swift */; };
+		064257981C17CE7F000AA590 /* ICalendarRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 064257971C17CE7F000AA590 /* ICalendarRepository.swift */; };
+		0642579A1C17CED7000AA590 /* CalendarRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 064257991C17CED7000AA590 /* CalendarRepository.swift */; };
+		0642579C1C17CF0B000AA590 /* Event.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0642579B1C17CF0B000AA590 /* Event.swift */; };
 		064B78AD1C16926900B6AC26 /* LocalAuthentication.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 064B78AC1C16926800B6AC26 /* LocalAuthentication.framework */; };
 		0673F5DA1C04E007000E402B /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0673F5D81C04E007000E402B /* Main.storyboard */; };
 		0679E7971C015EDB0003BABC /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0679E7961C015EDB0003BABC /* LoginViewController.swift */; };
@@ -59,6 +63,10 @@
 		0620F3881C04E73B000A233F /* MainTabBarViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainTabBarViewController.swift; sourceTree = "<group>"; };
 		0620F38A1C04F19E000A233F /* MeetingsTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MeetingsTableViewController.swift; sourceTree = "<group>"; };
 		0620F38C1C04F584000A233F /* EventManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventManager.swift; sourceTree = "<group>"; };
+		064257951C17CE11000AA590 /* Calendar.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Calendar.swift; sourceTree = "<group>"; };
+		064257971C17CE7F000AA590 /* ICalendarRepository.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ICalendarRepository.swift; sourceTree = "<group>"; };
+		064257991C17CED7000AA590 /* CalendarRepository.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CalendarRepository.swift; sourceTree = "<group>"; };
+		0642579B1C17CF0B000AA590 /* Event.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Event.swift; sourceTree = "<group>"; };
 		064B78AB1C16923500B6AC26 /* RateMyMeetings.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = RateMyMeetings.entitlements; sourceTree = "<group>"; };
 		064B78AC1C16926800B6AC26 /* LocalAuthentication.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = LocalAuthentication.framework; path = System/Library/Frameworks/LocalAuthentication.framework; sourceTree = SDKROOT; };
 		0673F5D91C04E007000E402B /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -149,6 +157,10 @@
 				067EC4061C04214D003F420A /* MyProtocols.swift */,
 				067EC4081C04216E003F420A /* Extensions.swift */,
 				0620F38C1C04F584000A233F /* EventManager.swift */,
+				064257951C17CE11000AA590 /* Calendar.swift */,
+				064257971C17CE7F000AA590 /* ICalendarRepository.swift */,
+				064257991C17CED7000AA590 /* CalendarRepository.swift */,
+				0642579B1C17CF0B000AA590 /* Event.swift */,
 			);
 			name = Services;
 			sourceTree = "<group>";
@@ -421,6 +433,7 @@
 				061C1C0B1C080AED0082CC06 /* MeetingTableViewCell.swift in Sources */,
 				067EC3FE1C041F93003F420A /* FindTeamsTableViewController.swift in Sources */,
 				0679E7971C015EDB0003BABC /* LoginViewController.swift in Sources */,
+				0642579C1C17CF0B000AA590 /* Event.swift in Sources */,
 				06FF09371C09478700A80D8D /* RatingViewController.swift in Sources */,
 				0620F3891C04E73B000A233F /* MainTabBarViewController.swift in Sources */,
 				06BF4AB11BFD19E500BCA228 /* SecondViewController.swift in Sources */,
@@ -428,10 +441,13 @@
 				0679E79B1C0163090003BABC /* UserRepository.swift in Sources */,
 				067EC4091C04216E003F420A /* Extensions.swift in Sources */,
 				0620F38D1C04F584000A233F /* EventManager.swift in Sources */,
+				064257981C17CE7F000AA590 /* ICalendarRepository.swift in Sources */,
 				067EC4051C042123003F420A /* Team.swift in Sources */,
 				0620F38B1C04F19E000A233F /* MeetingsTableViewController.swift in Sources */,
 				067EC4031C04210D003F420A /* User.swift in Sources */,
+				064257961C17CE11000AA590 /* Calendar.swift in Sources */,
 				067EC3FA1C039D98003F420A /* NewTeamViewController.swift in Sources */,
+				0642579A1C17CED7000AA590 /* CalendarRepository.swift in Sources */,
 				067EC4071C04214D003F420A /* MyProtocols.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

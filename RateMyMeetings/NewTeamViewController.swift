@@ -10,7 +10,7 @@ import UIKit
 
 class NewTeamViewController: UIViewController {
 
-    let teamRepository: ICompanyRepository = CompanyRepositoryStub()
+    let teamRepository: ICompanyRepository? = nil
     
     var user: User?
     
@@ -42,7 +42,7 @@ class NewTeamViewController: UIViewController {
     @IBAction func createNewTeamButton(sender: AnyObject) {
         // Register user
         // Create new team and login
-        let team = teamRepository.team(teamNameField.text!, shouldBeCreateWithOwner: self.user!)
+        let team = teamRepository!.team(teamNameField.text!, shouldBeCreateWithOwner: self.user!)
         
         self.delegate?.didCreateTeam(team)
         

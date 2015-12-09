@@ -26,6 +26,8 @@ protocol IUserRepository {
     func register(email: String, password: String) -> User?
 }
 
+
+
 protocol ICompanyRepository {
     func getTeamsWithDomain(domain: String) -> [Team]
     func team(teamName: String, shouldBeCreateWithOwner owner: User) -> Team

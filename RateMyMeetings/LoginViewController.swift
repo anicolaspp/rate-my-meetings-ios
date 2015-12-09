@@ -10,10 +10,7 @@ import UIKit
 import Parse
 import ParseUI
 import LocalAuthentication
-
 import SwiftKeychainWrapper
-
-
 
 class LoginViewController: UIViewController {
     
@@ -190,7 +187,7 @@ extension LoginViewController : PFSignUpViewControllerDelegate {
         let registrationDoneAlert = UIAlertController(title: "Registration Completed", message: "Check your email to verify your account.", preferredStyle: .Alert)
         
         registrationDoneAlert.addAction(UIAlertAction(title: "OK", style: .Default, handler: { (action) -> Void in
-            self.dismissViewControllerAnimated(true, completion: nil)
+            signUpController.dismissViewControllerAnimated(true, completion: nil)
         }))
         
         signUpController.presentViewController(registrationDoneAlert, animated: true, completion: nil)

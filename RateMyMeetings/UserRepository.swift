@@ -8,58 +8,8 @@
 
 import Foundation
 import Parse
-
-class CompanyRepositoryStub : ICompanyRepository {
-    func getTeamsWithDomain(domain: String) -> [Team] {
-        let team1 = Team(name: "Fusion")
-        
-        var user = User()
-        user.email = "anicolaspp@gmail.com"
-        
-        team1.members = [user]
-        
-        let team2 = Team(name: "BI")
-        
-        user = User()
-        user.email = "ctriana@gmail.com"
-        
-        team2.members = [user]
-        
-        return [team1, team2]
-    }
-    
-    func team(teamName: String, shouldBeCreateWithOwner owner: User) -> Team {
-        let team = Team(name: teamName)
-        team.members = [owner]
-        
-        return team
-    }
-}
-
-
-//class UserRepositoryStub: IUserRepository {
-//    
-//    func longin(username: String!, password: String!) -> User? {
-//        if (username != "" && username == password) {
-//            return User()
-//        }
-//        
-//        return nil
-//    }
-//    
-//    func register(companyName: String, email: String, password: String) -> User? {
-//        if (email.containsString(".com")) {
-//            let user = User()
-//            user.email = email
-//
-//            return user
-//        }
-//        else {
-//            return nil
-//        }
-//    }
-//}
-
+import EventKit
+import CVCalendar
 
 
 class UserRepository: IUserRepository {
@@ -88,6 +38,42 @@ class UserRepository: IUserRepository {
         
         return user
 
+    }
+    
+    func setCalendar(calendar: EKCalendar, forUser user: User) {
+        self.setInUseCalendarForCurrentUserAsync(calendar, forUser: user)
+    }
+    
+    private func setInUseCalendarForCurrentUserAsync(calendar: EKCalendar, forUser user: User) {
+        let query = PFQuery(className: Calendar.parseClassName())
+        
+        query
+            .whereKey("owner", equalTo: PFUser(withoutDataWithObjectId: user.objectId))
+            .whereKey("localEntity", equalTo: calendar.calendarIdentifier)
+        
+        query.getFirstObjectInBackgroundWithBlock { (rcalendar, error) -> Void in
+            if let remoteCalendar = rcalendar {
+                print("Calendar Found")
+                
+                self.setInUserCalendarForUser(user, calendarId: remoteCalendar.objectId!)
+            }
+            else {
+                let pfcalendar = Calendar()
+                
+                pfcalendar.owner = user
+                pfcalendar.name = calendar.title
+                pfcalendar.localEntity = String( calendar.calendarIdentifier )
+                
+                pfcalendar.saveInBackgroundWithBlock({ (saved, savingError) -> Void in
+                    self.setInUserCalendarForUser(user, calendarId: pfcalendar.objectId!)
+                })
+            }
+        }
+    }
+    
+    private func setInUserCalendarForUser(user: User, calendarId: String) {
+        user.inUseCalendarId = calendarId
+        user.saveInBackground()
     }
 }
 

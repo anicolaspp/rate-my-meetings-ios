@@ -8,6 +8,7 @@
 
 import Foundation
 import Parse
+import EventKit
 
 class User : PFUser {
     @NSManaged var inUseCalendarId: String?
@@ -15,18 +16,3 @@ class User : PFUser {
     
 }
 
-class Calendar : PFObject, PFSubclassing {
-    
-    @NSManaged var  owner: User?
-    @NSManaged var  sharedWith : [User]?
-    
-    @NSManaged var  name: String?
-    
-    @NSManaged var localEntity: String
-    
-    static func parseClassName() -> String {
-        return "Calendar"
-    }
-    
-
-}

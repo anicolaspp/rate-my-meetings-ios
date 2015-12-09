@@ -14,7 +14,7 @@ class RatingViewController: UIViewController {
 
     @IBOutlet weak var userRatingControl: CosmosView!
     
-    var event: EKEvent?
+    var event: Event?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -22,21 +22,15 @@ class RatingViewController: UIViewController {
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
+        
     }
     
     @IBAction func submitUserRating(sender: AnyObject) {
+        let rating = userRatingControl.rating
         
+        self.event?.rating = rating
+        self.event?.saveInBackground()
+        
+        self.navigationController?.popToRootViewControllerAnimated(true)
     }
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
-    }
-    */
-
 }

@@ -10,7 +10,7 @@ import UIKit
 
 class FindTeamsTableViewController: UITableViewController {
 
-    var companyRepository: ICompanyRepository? = CompanyRepositoryStub()
+    var companyRepository: ICompanyRepository? 
     var teams: [Team]!
     var user: User?
     

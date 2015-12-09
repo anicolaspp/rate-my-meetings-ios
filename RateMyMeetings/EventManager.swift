@@ -15,8 +15,13 @@ class EventManager {
     var eventsAccessGranted: Bool
     var calendar: EKCalendar?
     
-    init() {
+    let user: User?
+    let calendarRepository: CalendarRepository?
+    
+    init(user: User, withCalendarRepository: CalendarRepository) {
         self.eventStore = EKEventStore()
+        self.user = user
+        self.calendarRepository = withCalendarRepository
        
         let userDeaults = NSUserDefaults()
         
@@ -31,23 +36,8 @@ class EventManager {
     }
     
     private func setStoredCalendar() {
-        
-        let user = PFUser.currentUser() as! User
-        
-        if let id = user.inUseCalendarId {
-            let query = PFQuery(className: Calendar.parseClassName())
-            query.whereKey("objectId", equalTo: id)
-            
-            do {
-                let result = try query.findObjects().first as? Calendar
-                
-                if let calendarid = result?.localEntity {
-                    self.calendar = self.eventStore.calendarWithIdentifier(calendarid)
-                }
-            }
-            catch let excep as NSError {
-                print(excep)
-            }
+        if let inUseCalendar = self.calendarRepository?.getInUseCalendarFor(self.user!) {
+            self.calendar = self.eventStore.calendarWithIdentifier(inUseCalendar.localEntity)
         }
     }
     
@@ -61,13 +51,6 @@ class EventManager {
         let calendars = eventStore.calendarsForEntityType(.Event) 
         
         return calendars
-    }
-    
-    func getSyncCalendarNames() -> [String]? {
-        
-        let userDeaults = NSUserDefaults()
-        
-        return userDeaults.valueForKey("eventkit_events_sync_calendars") as? [String]
     }
     
     func getEventsWithInitialMonth(monthsAgo: Int, monthsInTheFuture: Int) -> [EKEvent] {
@@ -95,51 +78,6 @@ class EventManager {
         let events = eventStore.eventsMatchingPredicate(predicate)
         
         return events
-    }
-    
-    private func setInUserCalendarForUser(user: User, calendarId: String) {
-        user.inUseCalendarId = calendarId
-        user.saveInBackground()
-    }
-    
-    private func setInUserCalendarForCurrentUserAsync(calendar: EKCalendar) {
-        
-        let user = PFUser.currentUser() as! User
-        let query = PFQuery(className: Calendar.parseClassName())
-        
-        query
-            .whereKey("owner", equalTo: PFUser(withoutDataWithObjectId: user.objectId))
-            .whereKey("localEntity", equalTo: calendar.calendarIdentifier)
-        
-        query.getFirstObjectInBackgroundWithBlock { (rcalendar, error) -> Void in
-            if let remoteCalendar = rcalendar {
-                print("Calendar Found")
-                
-                self.setInUserCalendarForUser(user, calendarId: remoteCalendar.objectId!)
-            }
-            else {
-                let pfcalendar = Calendar()
-                
-                pfcalendar.owner = user
-                pfcalendar.name = calendar.title
-                pfcalendar.localEntity = String( calendar.calendarIdentifier )
-                
-                pfcalendar.saveInBackgroundWithBlock({ (saved, savingError) -> Void in
-                    self.setInUserCalendarForUser(user, calendarId: pfcalendar.objectId!)
-                })
-            }
-        }
-
-    }
-    
-    func setCalendar(calendar: EKCalendar) {
-        setInUserCalendarForCurrentUserAsync(calendar)
-        
-        self.calendar = calendar
-    }
-    
-    func saveEvents(events: [EKEvent]) {
-        // save on user online profile
     }
 }
 

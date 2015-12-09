@@ -23,16 +23,21 @@ class MeetingsTableViewController: UIViewController {
     var _calendarView: CVCalendarView?
     
     var user: User?
-    let eventManager = EventManager()
+    var eventManager: EventManager?
     var events: [EKEvent] = []
+    var onlineEvents: [Event]? = []
     var selectedCalendar: EKCalendar?
+    
+    var calendarRepository = CalendarRepository()
+    var userRepository = UserRepository()
     
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        self.eventManager = EventManager(user: self.user!, withCalendarRepository: self.calendarRepository)
         self.checkCalendarAuthorizationStatus()
-        
         self.title = CVDate(date: NSDate()).globalDescription
+
      }
 
     override func didReceiveMemoryWarning() {
@@ -55,6 +60,7 @@ class MeetingsTableViewController: UIViewController {
         actionSheet.addAction(UIAlertAction(title: "Change Calendar", style: .Default, handler: { (action) -> Void in
             self.showCalendarPicker()
         }))
+        
         actionSheet.addAction(UIAlertAction(title: "Invite people to this calendar", style: .Default, handler: {(action) -> Void in
             
             let calendarToShare = ["my website", NSURL(string: "http://www.google.com")!]
@@ -65,6 +71,7 @@ class MeetingsTableViewController: UIViewController {
             self.presentViewController(avc, animated: true, completion: nil)
             
         }))
+        
         actionSheet.addAction(UIAlertAction(title: "Cancel", style: .Destructive, handler: nil))
         
         self.presentViewController(actionSheet, animated: true, completion: nil)
@@ -74,7 +81,6 @@ class MeetingsTableViewController: UIViewController {
         changeCalendarMode()
     }
    
-
     func checkCalendarAuthorizationStatus() {
         let status = EKEventStore.authorizationStatusForEntityType(EKEntityType.Event)
         
@@ -84,7 +90,7 @@ class MeetingsTableViewController: UIViewController {
             
             
         case EKAuthorizationStatus.Authorized:
-            if (self.eventManager.calendar == nil) {
+            if (self.eventManager!.calendar == nil) {
                 self.showCalendarPicker()
             }
             else {
@@ -97,7 +103,7 @@ class MeetingsTableViewController: UIViewController {
     }
     
     func requestAccessToCalendar() {
-        self.eventManager.eventStore.requestAccessToEntityType(EKEntityType.Event, completion: {
+        self.eventManager!.eventStore.requestAccessToEntityType(EKEntityType.Event, completion: {
             (accessGranted: Bool, error: NSError?) in
             
             if accessGranted == true {
@@ -113,19 +119,19 @@ class MeetingsTableViewController: UIViewController {
     }
     
     func loadEvents(currentDay: NSDate) {
-        self.events = self.eventManager.getEventForDay(currentDay)
-        
+        self.events = self.eventManager!.getEventForDay(currentDay)
+               
         self.tableView.reloadData()
     }
     
     func showCalendarPicker() {
-        let calendarChooser = EKCalendarChooser(selectionStyle: .Single, displayStyle: .AllCalendars, entityType: .Event, eventStore: self.eventManager.eventStore)
+        let calendarChooser = EKCalendarChooser(selectionStyle: .Single, displayStyle: .AllCalendars, entityType: .Event, eventStore: self.eventManager!.eventStore)
 
         calendarChooser.showsDoneButton = true
         calendarChooser.delegate = self
         calendarChooser.modalPresentationStyle = .CurrentContext
         
-        if let c = self.eventManager.calendar {
+        if let c = self.eventManager!.calendar {
             calendarChooser.selectedCalendars = [c]
         }
         
@@ -153,7 +159,7 @@ extension MeetingsTableViewController : EKCalendarChooserDelegate {
         
         if let calendar = calendarChooser.selectedCalendars.first {
         
-            self.eventManager.setCalendar(calendar)
+            self.userRepository.setCalendar(calendar, forUser: self.user!)
             self.loadEvents(NSDate())
         
             calendarChooser.dismissViewControllerAnimated(true, completion: nil)
@@ -194,6 +200,15 @@ extension MeetingsTableViewController : CVCalendarViewDelegate, CVCalendarMenuVi
         print(currentDate)
         
         self.loadEvents(currentDate!)
+        self.onlineEvents = self.calendarRepository.getEventForUser(self.user!, usingData: currentDate!)
+    }
+    
+    func didShowNextMonthView(date: NSDate) {
+        self.onlineEvents = self.calendarRepository.getEventForUser(self.user!, usingData: date)
+    }
+    
+    func didShowPreviousMonthView(date: NSDate) {
+        self.onlineEvents = self.calendarRepository.getEventForUser(self.user!, usingData: date)
     }
 }
 
@@ -227,7 +242,13 @@ extension MeetingsTableViewController :  UITableViewDataSource, UITableViewDeleg
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         let selectedEvent = self.events[indexPath.row]
         let ratingController = self.storyboard?.instantiateViewControllerWithIdentifier("ratingController") as! RatingViewController
-        ratingController.event = selectedEvent
+        
+        let event = Event()
+        
+        
+        event.setEvent(selectedEvent, inCalendar: self.calendarRepository.getInUseCalendarFor(self.user!))
+
+        ratingController.event = event
         
         let backItem = UIBarButtonItem(title: "", style: .Plain, target: nil, action: nil)
         self.navigationItem.backBarButtonItem = backItem
