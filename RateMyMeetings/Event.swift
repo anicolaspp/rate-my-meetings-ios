@@ -26,6 +26,7 @@ class Event: PFObject, PFSubclassing {
         self.eventName = event.title
         self.eventDate = event.startDate
         self.calendar = calendar
+        self.rating = -1
     }
     
     static func parseClassName() -> String {

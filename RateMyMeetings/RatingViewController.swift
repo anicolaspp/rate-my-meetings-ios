@@ -13,11 +13,18 @@ import EventKit
 class RatingViewController: UIViewController {
 
     @IBOutlet weak var userRatingControl: CosmosView!
+    @IBOutlet weak var rateButton: UIButton!
     
     var event: Event?
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        if event?.rating > 0 {
+            self.userRatingControl.rating = event!.rating
+            self.userRatingControl.userInteractionEnabled = false
+            self.rateButton.enabled = false
+        }
     }
 
     override func didReceiveMemoryWarning() {

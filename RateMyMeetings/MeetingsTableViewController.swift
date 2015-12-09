@@ -273,6 +273,8 @@ extension MeetingsTableViewController :  UITableViewDataSource, UITableViewDeleg
             event!.setEvent(selectedEvent, inCalendar: self.calendarRepository.getInUseCalendarFor(self.user!))
         }
 
+        print(selectedEvent)
+        
         ratingController.event = event
         
         let backItem = UIBarButtonItem(title: "", style: .Plain, target: nil, action: nil)
