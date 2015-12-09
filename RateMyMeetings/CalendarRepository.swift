@@ -11,9 +11,13 @@ import Parse
 import EventKit
 import CVCalendar
 
-
+protocol CalendarRepositoryDelegate {
+    func user(user: User, didEventFetchComplete events: [Event]?) -> Void
+}
 
 class CalendarRepository: ICalendarRepository {
+    
+    var delegate: CalendarRepositoryDelegate?
     
     func getInUseCalendarFor(user: User) -> Calendar? {
         
@@ -33,12 +37,16 @@ class CalendarRepository: ICalendarRepository {
         return nil
     }
     
-    func getEventForUser(user: User, usingData date: NSDate) -> [Event]? {
+    func getEventForUser(user: User, usingData date: NSDate) {
         
         let today = NSDate()
         
         if today.compare(date) == .OrderedAscending {
-            return nil
+            
+            dispatch_async(dispatch_get_main_queue(), { () -> Void in
+                self.delegate?.user(user, didEventFetchComplete: nil)
+            })
+
         }
         
         let calendar = NSCalendar.currentCalendar()
@@ -65,8 +73,11 @@ class CalendarRepository: ICalendarRepository {
         query.findObjectsInBackgroundWithBlock { (events, error) -> Void in
             print(error)
             print(events)
+            
+            dispatch_async(dispatch_get_main_queue(), { () -> Void in
+                self.delegate?.user(user, didEventFetchComplete: events as? [Event])
+            })
+
         }
-        
-        return nil
     }
 }

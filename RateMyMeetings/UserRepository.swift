@@ -38,7 +38,7 @@ class UserRepository: IUserRepository {
         
         return user
 
-    }
+    } 
     
     func setCalendar(calendar: EKCalendar, forUser user: User) {
         self.setInUseCalendarForCurrentUserAsync(calendar, forUser: user)

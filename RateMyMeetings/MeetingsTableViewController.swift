@@ -37,6 +37,7 @@ class MeetingsTableViewController: UIViewController {
         self.eventManager = EventManager(user: self.user!, withCalendarRepository: self.calendarRepository)
         self.checkCalendarAuthorizationStatus()
         self.title = CVDate(date: NSDate()).globalDescription
+        self.calendarRepository.delegate = self
 
      }
 
@@ -160,6 +161,7 @@ extension MeetingsTableViewController : EKCalendarChooserDelegate {
         if let calendar = calendarChooser.selectedCalendars.first {
         
             self.userRepository.setCalendar(calendar, forUser: self.user!)
+            self.eventManager?.calendar = calendar
             self.loadEvents(NSDate())
         
             calendarChooser.dismissViewControllerAnimated(true, completion: nil)
@@ -200,15 +202,21 @@ extension MeetingsTableViewController : CVCalendarViewDelegate, CVCalendarMenuVi
         print(currentDate)
         
         self.loadEvents(currentDate!)
-        self.onlineEvents = self.calendarRepository.getEventForUser(self.user!, usingData: currentDate!)
+        self.calendarRepository.getEventForUser(self.user!, usingData: currentDate!)
     }
-    
-    func didShowNextMonthView(date: NSDate) {
-        self.onlineEvents = self.calendarRepository.getEventForUser(self.user!, usingData: date)
-    }
-    
-    func didShowPreviousMonthView(date: NSDate) {
-        self.onlineEvents = self.calendarRepository.getEventForUser(self.user!, usingData: date)
+//    
+//    func didShowNextMonthView(date: NSDate) {
+//        self.onlineEvents = self.calendarRepository.getEventForUser(self.user!, usingData: date)
+//    }
+//    
+//    func didShowPreviousMonthView(date: NSDate) {
+//        self.onlineEvents = self.calendarRepository.getEventForUser(self.user!, usingData: date)
+//    }
+}
+
+extension MeetingsTableViewController : CalendarRepositoryDelegate {
+    func user(user: User, didEventFetchComplete events: [Event]?) {
+        self.onlineEvents = events
     }
 }
 
@@ -243,10 +251,27 @@ extension MeetingsTableViewController :  UITableViewDataSource, UITableViewDeleg
         let selectedEvent = self.events[indexPath.row]
         let ratingController = self.storyboard?.instantiateViewControllerWithIdentifier("ratingController") as! RatingViewController
         
-        let event = Event()
+        var event: Event?
         
+        print(self.onlineEvents)
         
-        event.setEvent(selectedEvent, inCalendar: self.calendarRepository.getInUseCalendarFor(self.user!))
+        if let matchedEvent = self.onlineEvents?.filter({ (x: Event) -> Bool in
+            print(x.eventName)
+            print(x.eventDate)
+            
+            print("=========")
+            
+            print(selectedEvent.title)
+            print(selectedEvent.startDate)
+            
+            return(x.eventName == selectedEvent.title && x.eventDate == selectedEvent.startDate)
+        }).first {
+            event = matchedEvent
+        }
+        else {
+            event = Event()
+            event!.setEvent(selectedEvent, inCalendar: self.calendarRepository.getInUseCalendarFor(self.user!))
+        }
 
         ratingController.event = event
         
