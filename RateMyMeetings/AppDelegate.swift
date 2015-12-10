@@ -21,6 +21,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         User.registerSubclass()
         Calendar.registerSubclass()
         Event.registerSubclass()
+        Invite.registerSubclass()
         
         Parse.enableLocalDatastore()
         

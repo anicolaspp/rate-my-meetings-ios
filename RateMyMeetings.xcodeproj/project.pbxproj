@@ -11,6 +11,7 @@
 		0620F3891C04E73B000A233F /* MainTabBarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0620F3881C04E73B000A233F /* MainTabBarViewController.swift */; };
 		0620F38B1C04F19E000A233F /* MeetingsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0620F38A1C04F19E000A233F /* MeetingsTableViewController.swift */; };
 		0620F38D1C04F584000A233F /* EventManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0620F38C1C04F584000A233F /* EventManager.swift */; };
+		062184471C18EF1500894C7F /* Invite.swift in Sources */ = {isa = PBXBuildFile; fileRef = 062184461C18EF1500894C7F /* Invite.swift */; };
 		064257961C17CE11000AA590 /* Calendar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 064257951C17CE11000AA590 /* Calendar.swift */; };
 		064257981C17CE7F000AA590 /* ICalendarRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 064257971C17CE7F000AA590 /* ICalendarRepository.swift */; };
 		0642579A1C17CED7000AA590 /* CalendarRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 064257991C17CED7000AA590 /* CalendarRepository.swift */; };
@@ -63,6 +64,7 @@
 		0620F3881C04E73B000A233F /* MainTabBarViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainTabBarViewController.swift; sourceTree = "<group>"; };
 		0620F38A1C04F19E000A233F /* MeetingsTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MeetingsTableViewController.swift; sourceTree = "<group>"; };
 		0620F38C1C04F584000A233F /* EventManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventManager.swift; sourceTree = "<group>"; };
+		062184461C18EF1500894C7F /* Invite.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Invite.swift; sourceTree = "<group>"; };
 		064257951C17CE11000AA590 /* Calendar.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Calendar.swift; sourceTree = "<group>"; };
 		064257971C17CE7F000AA590 /* ICalendarRepository.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ICalendarRepository.swift; sourceTree = "<group>"; };
 		064257991C17CED7000AA590 /* CalendarRepository.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CalendarRepository.swift; sourceTree = "<group>"; };
@@ -161,6 +163,7 @@
 				064257971C17CE7F000AA590 /* ICalendarRepository.swift */,
 				064257991C17CED7000AA590 /* CalendarRepository.swift */,
 				0642579B1C17CF0B000AA590 /* Event.swift */,
+				062184461C18EF1500894C7F /* Invite.swift */,
 			);
 			name = Services;
 			sourceTree = "<group>";
@@ -437,6 +440,7 @@
 				06FF09371C09478700A80D8D /* RatingViewController.swift in Sources */,
 				0620F3891C04E73B000A233F /* MainTabBarViewController.swift in Sources */,
 				06BF4AB11BFD19E500BCA228 /* SecondViewController.swift in Sources */,
+				062184471C18EF1500894C7F /* Invite.swift in Sources */,
 				06BF4AAD1BFD19E500BCA228 /* AppDelegate.swift in Sources */,
 				0679E79B1C0163090003BABC /* UserRepository.swift in Sources */,
 				067EC4091C04216E003F420A /* Extensions.swift in Sources */,
