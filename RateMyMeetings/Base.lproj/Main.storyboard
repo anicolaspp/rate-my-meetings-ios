@@ -216,6 +216,7 @@
                     </view>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
                     <connections>
+                        <outlet property="allRatings" destination="lcL-Yv-Mw2" id="gtY-6N-RPK"/>
                         <outlet property="rateButton" destination="tP3-Bc-bPT" id="h3S-b8-0UW"/>
                         <outlet property="userRatingControl" destination="IAS-H4-I8m" id="yMs-Ha-r6T"/>
                     </connections>

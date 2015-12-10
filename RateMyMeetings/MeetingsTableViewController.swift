@@ -277,11 +277,12 @@ extension MeetingsTableViewController :  UITableViewDataSource, UITableViewDeleg
             self.onlineEvents?.append(event!)
         }
 
-        print(selectedEvent)
+        let rating = self.calendarRepository.getRatingForEvent(event!)
         
         ratingController.event = event
+        ratingController.overallRating = rating!
         
-        self.calendarRepository.getRatingForEvent(event!)
+        
         
         let backItem = UIBarButtonItem(title: "", style: .Plain, target: nil, action: nil)
         self.navigationItem.backBarButtonItem = backItem

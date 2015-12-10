@@ -12,10 +12,12 @@ import EventKit
 
 class RatingViewController: UIViewController {
 
+    @IBOutlet weak var allRatings: CosmosView!
     @IBOutlet weak var userRatingControl: CosmosView!
     @IBOutlet weak var rateButton: UIButton!
     
     var event: Event?
+    var overallRating = Double(0)
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -25,6 +27,8 @@ class RatingViewController: UIViewController {
             self.userRatingControl.userInteractionEnabled = false
             self.rateButton.enabled = false
         }
+        
+        self.allRatings.rating = self.overallRating
     }
 
     override func didReceiveMemoryWarning() {

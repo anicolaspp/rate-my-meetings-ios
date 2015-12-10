@@ -64,29 +64,36 @@ class CalendarRepository: ICalendarRepository {
                 return i["to"] as? User
             })
             
-            if let events = users.flatMap({ (u) -> [Event]? in
-                return self.a(user!, startingAt: event.eventDate!, endingDate: event.eventDate!)
-            }) {
+            print(users)
+        
+            var events = [Event]()
+            events.append(event)
             
-                print(events)
+            users?.forEach({ (u) -> () in
+                let ev = self.a(u!, startingAt: event.eventDate!, endingDate: event.eventDate!)
                 
-                let sum = events.map({ (x) -> Double in
-                    return x.rating
-                })
-                    .reduce(0, combine: { (x, y) -> Double in
-                        return x + y
-                    })
+                print(ev)
                 
-                return sum / Double(events.count)
-            }
+                if let _ = ev {
+                    events.appendContentsOf(ev!)
+                }
+            })
+            
+            events = events.filter({(e) -> Bool in event.eventName == e.eventName})
+            
+            print("Events" + String(events.count))
+            print(events)
+          
+            let sum = events
+                .map({ (x) -> Double in x.rating })
+                .reduce(0, combine: { (x, y) -> Double in x + y })
+
+            return sum / Double((events.count))
+
         }
         catch let exception as NSError {
             print(exception)
         }
-        
-        
-        
-       
         
         return 0
     }
